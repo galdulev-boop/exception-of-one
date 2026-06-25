@@ -110,7 +110,6 @@
   .comments .chead h2{margin:0;font-size:1.18rem;font-weight:600;letter-spacing:.01em;color:var(--ink);}
   .comments .prompt{margin:0 0 1.4rem;font-size:.95rem;line-height:1.55;color:var(--ink-soft);}
   .comments .prompt b{color:var(--flame);font-weight:600;}
-  #cusdis_thread{background:var(--paper-2);border:1px solid var(--rule);border-radius:14px;padding:.5rem .9rem;}
 
   @media print{
     #progress,.topbar,#toc,#backdrop,.comments{display:none !important;}
@@ -160,27 +159,23 @@
   </footer>
 
   <!--
-    Comments — powered by Cusdis (https://cusdis.com): free, open-source, ~5 KB.
-    Readers comment with just a name + message. No account, no sign-up, no email.
-    Connected via data-app-id below; moderate at https://cusdis.com/dashboard.
+    Inline comments — powered by Hypothesis (https://hypothes.is): free, open-source.
+    Readers SELECT any passage to leave a margin note or highlight, like a Google Doc.
+    Annotations anchor to the exact text + this page's URL. Posting needs a free
+    Hypothesis account; reading public notes does not. The script below injects the
+    annotation layer — the small tab on the right edge of the screen.
   -->
   <section class="comments" id="comments">
     <div class="chead">
       <span class="ic">✶</span>
-      <h2>Talk back</h2>
+      <h2>Talk back — in the margins</h2>
     </div>
-    <p class="prompt">What's <b>your</b> wrong orange? Leave it below — no sign-up, no account, just a name and a thought.</p>
-    <div id="cusdis_thread"
-      data-host="https://cusdis.com"
-      data-app-id="37f215d6-0a93-478c-a888-ab8a401145ad"
-      data-page-id="exception-of-one"
-      data-page-url="https://galdulev-boop.github.io/exception-of-one/"
-      data-page-title="The Part of You AI Can't Copy"
-      data-theme="light">
-    </div>
+    <p class="prompt"><b>Select any sentence</b> in this talk to leave a note or a highlight right beside it — like marking up a doc. Look for the tab on the <b>right edge</b> of your screen. What's <b>your</b> wrong orange? Mark the line that got you.</p>
   </section>
-  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 </main>
+
+<!-- Hypothesis annotation layer — https://hypothes.is -->
+<script src="https://hypothes.is/embed.js" async></script>
 
 <script>
 const RAW = `The Optimizer|section
