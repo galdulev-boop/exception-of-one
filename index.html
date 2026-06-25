@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Part of You AI Can't Copy</title>
+<style>
+  :root{
+    --paper:#f7f2ea;
+    --paper-2:#fffdf8;
+    --ink:#241f1c;
+    --ink-soft:#534a43;
+    --muted:#b1a596;
+    --flame:#e6602b;
+    --flame-pink:#ef5c4b;
+    --pause:#c4856c;
+    --rule:rgba(36,31,28,.10);
+    --reading:1.42rem;
+    --maxw:660px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .serif{font-family:Georgia,"Iowan Old Style","Palatino Linotype",Palatino,Charter,"Times New Roman",serif;}
+
+  /* scroll progress */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--flame),var(--flame-pink));z-index:60;transition:width .08s linear;}
+
+  /* top bar */
+  .topbar{
+    position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    padding:.7rem clamp(1rem,4vw,2rem);
+    background:rgba(247,242,234,.82);backdrop-filter:saturate(140%) blur(10px);-webkit-backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--rule);flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:.55rem;min-width:0;}
+  .brand svg{flex:0 0 auto}
+  .brand span{font-size:.84rem;font-weight:600;letter-spacing:.01em;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw;}
+  .controls{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;}
+  button{
+    font:inherit;font-size:.74rem;letter-spacing:.02em;color:var(--ink-soft);
+    background:var(--paper-2);border:1px solid var(--rule);border-radius:999px;
+    padding:.42rem .7rem;cursor:pointer;transition:all .15s ease;white-space:nowrap;
+  }
+  button:hover{border-color:var(--flame);color:var(--flame);}
+  button:active{transform:translateY(1px);}
+  #btnNotes[aria-pressed="false"]{color:var(--muted);}
+  .sizer{display:inline-flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--paper-2);}
+  .sizer button{border:0;border-radius:0;background:transparent;padding:.42rem .6rem;}
+  .sizer button:first-child{border-right:1px solid var(--rule);}
+
+  /* contents panel */
+  #backdrop{position:fixed;inset:0;background:rgba(36,31,28,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:55;}
+  #backdrop.open{opacity:1;pointer-events:auto;}
+  #toc{
+    position:fixed;top:0;right:0;height:100%;width:min(340px,86vw);z-index:56;
+    background:var(--paper-2);border-left:1px solid var(--rule);box-shadow:-20px 0 50px rgba(36,31,28,.12);
+    transform:translateX(102%);transition:transform .26s cubic-bezier(.4,0,.2,1);
+    padding:1.6rem 1.4rem;overflow-y:auto;
+  }
+  #toc.open{transform:translateX(0);}
+  #toc h3{margin:.2rem 0 1.1rem;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--flame);}
+  #tocList{list-style:none;margin:0;padding:0;counter-reset:t;}
+  #tocList li{margin:0;}
+  #tocList a{display:flex;gap:.7rem;align-items:baseline;padding:.6rem .2rem;color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule);font-size:.95rem;}
+  #tocList a:hover{color:var(--flame);}
+  #tocList a .n{font-size:.7rem;color:var(--muted);min-width:1.4rem;font-variant-numeric:tabular-nums;}
+
+  /* layout */
+  main{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.1rem,5vw,1.6rem) 5rem;}
+
+  .hero{text-align:center;padding:clamp(2.4rem,8vw,4.2rem) 0 1.4rem;}
+  .hero .flame{margin:0 auto .9rem;width:54px;height:54px;}
+  .hero h1{margin:.2rem 0 .5rem;font-size:clamp(2rem,7vw,3rem);line-height:1.08;font-weight:600;letter-spacing:-.01em;}
+  .hero .kicker{margin:.2rem 0 1rem;font-style:italic;color:var(--flame);font-size:1.02rem;}
+  .hero .meta{margin:0;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+  .hero .rule{width:42px;height:2px;background:linear-gradient(90deg,var(--flame),var(--flame-pink));margin:1.7rem auto 0;border-radius:2px;}
+
+  section.bit{margin-top:3.4rem;}
+  .sechead{display:flex;align-items:baseline;gap:.7rem;margin-bottom:1.4rem;}
+  .sechead .n{font-size:.74rem;font-weight:700;color:var(--flame);font-variant-numeric:tabular-nums;letter-spacing:.05em;}
+  .sechead h2{margin:0;font-size:1.18rem;font-weight:600;letter-spacing:.01em;color:var(--ink);}
+  .sechead::after{content:"";flex:1;height:1px;background:var(--rule);transform:translateY(-2px);}
+
+  p.line{margin:.92em 0;font-size:var(--reading);line-height:1.62;color:var(--ink);}
+  p.punch{margin:1.3em 0;text-align:center;color:var(--flame);font-size:calc(var(--reading) * 1.12);line-height:1.45;font-weight:600;letter-spacing:.005em;}
+
+  .stage{
+    margin:.55em 0;padding:.15rem 0 .15rem .85rem;border-left:2px solid rgba(230,96,43,.32);
+    font-size:.8rem;font-style:italic;letter-spacing:.02em;color:var(--muted);
+  }
+  body.hide-notes .stage{display:none;}
+
+  .pause{margin:2.5rem 0;text-align:center;}
+  .pause .ic{display:inline-block;color:var(--flame);font-size:1rem;line-height:1;}
+  .pause .txt{display:block;margin-top:.5rem;font-size:.69rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pause);}
+
+  footer.end{margin-top:4.5rem;padding-top:2rem;border-top:1px solid var(--rule);text-align:center;}
+  footer.end .sig{font-family:Georgia,serif;color:var(--flame);font-size:1.04rem;line-height:1.5;}
+  footer.end .sig b{color:var(--flame-pink);font-weight:600;}
+
+  /* comments */
+  .comments{margin-top:4rem;padding-top:2.2rem;border-top:1px solid var(--rule);}
+  .comments .chead{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.7rem;}
+  .comments .chead .ic{color:var(--flame);font-size:1.05rem;line-height:1;}
+  .comments .chead h2{margin:0;font-size:1.18rem;font-weight:600;letter-spacing:.01em;color:var(--ink);}
+  .comments .prompt{margin:0 0 1.4rem;font-size:.95rem;line-height:1.55;color:var(--ink-soft);}
+  .comments .prompt b{color:var(--flame);font-weight:600;}
+  #cusdis_thread{background:var(--paper-2);border:1px solid var(--rule);border-radius:14px;padding:.5rem .9rem;}
+
+  @media print{
+    #progress,.topbar,#toc,#backdrop,.comments{display:none !important;}
+    body{background:#fff;}
+    .stage{display:block !important;}
+    main{max-width:none;}
+    p.line{font-size:13pt;}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 3.2-1.4 4.2-1.4 7 0 1.6 1 2.6 1 2.6s.6-1 .5-2.6c1.7 1.3 3.4 3.4 3.4 6.1A5.5 5.5 0 0 1 6.6 15c0-1.7.9-2.9.9-2.9s.5 1 1.4 1.2C8 10.5 9.5 6.7 12 2z" fill="#ef5c4b"/></svg>
+    <span>The Part of You AI Can't Copy</span>
+  </div>
+  <div class="controls">
+    <button id="btnContents">Contents</button>
+    <span class="sizer"><button id="dec" aria-label="Smaller text">A−</button><button id="inc" aria-label="Larger text">A+</button></span>
+    <button id="btnNotes" aria-pressed="true">Notes: On</button>
+  </div>
+</header>
+
+<div id="backdrop"></div>
+<nav id="toc" aria-hidden="true"><h3>Contents</h3><ol id="tocList"></ol></nav>
+
+<main>
+  <section class="hero">
+    <div class="flame">
+      <svg width="54" height="54" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 1.5c1.4 4.3-2 5.6-2 9.4 0 2.2 1.4 3.6 1.4 3.6s.8-1.4.7-3.6c2.3 1.8 4.6 4.6 4.6 8.2A7 7 0 0 1 5 16.8c0-2.3 1.2-3.9 1.2-3.9s.7 1.4 1.9 1.7C6.6 10.9 8.7 5.8 12 1.5z" fill="#e6602b"/>
+        <path d="M12 6c.9 2.6-1.2 3.4-1.2 5.7 0 1.3.8 2.2.8 2.2s2.2-1.6 2.2-4c0-1.2-.6-2.6-1.8-3.9z" fill="#ef5c4b"/>
+      </svg>
+    </div>
+    <h1 class="serif">The Part of You<br>AI Can't Copy</h1>
+    <p class="kicker">the wrong orange, on purpose</p>
+    <p class="meta">A talk · ~15–18 min · Gal Dulev</p>
+    <div class="rule"></div>
+  </section>
+
+  <div id="script"></div>
+
+  <footer class="end">
+    <p class="sig">AI is the average of everyone.<br><b>You are the exception of one.</b></p>
+  </footer>
+
+  <!--
+    Comments — powered by Cusdis (https://cusdis.com): free, open-source, ~5 KB.
+    Readers comment with just a name + message. No account, no sign-up, no email.
+
+    ONE-TIME SETUP (~1 min): create a free account at https://cusdis.com,
+    add a website, copy the App ID it shows you, and paste it below in place of
+    YOUR_CUSDIS_APP_ID. That's the only step — nothing else changes.
+  -->
+  <section class="comments" id="comments">
+    <div class="chead">
+      <span class="ic">✶</span>
+      <h2>Talk back</h2>
+    </div>
+    <p class="prompt">What's <b>your</b> wrong orange? Leave it below — no sign-up, no account, just a name and a thought.</p>
+    <div id="cusdis_thread"
+      data-host="https://cusdis.com"
+      data-app-id="YOUR_CUSDIS_APP_ID"
+      data-page-id="exception-of-one"
+      data-page-title="The Part of You AI Can't Copy"
+      data-theme="light">
+    </div>
+  </section>
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+</main>
+
+<script>
+const RAW = `The Optimizer|section
+Direct. Matter-of-fact. A little proud. No warmth yet.|stage
+Every day, my job is to make your life easier.
+I design the systems. I tune the algorithms - all to take the friction out of your day.
+If something makes you think too hard, I failed.
+If it makes you stop, or pause, or struggle - I failed.
+And I want you to know: I am very good at my job.
+⏸ Beat.|pause
+A few months ago, that started to scare me.
+Beat. Quieter.|stage
+In my world, we have a flattering word for what I do all day. We call it optimization.
+I've started calling it something else.
+⏸ Beat.|pause
+But to tell you why - I can't start here. I have to start at midnight. When I was eleven.
+===
+Midnight|section
+A small smile. The warmth arrives now. Slower.|stage
+It's past midnight. The whole house is asleep - and the only light in my room is the blue glow of a screen.
+I'm building a website. A fan site. For Phoebe. From Charmed.
+Small smile.|stage
+The HTML was terrible.
+The colors were -
+Stops. Looks up.|stage
+Okay. i think i'll skip this awkward description…
+A small laugh from the room.|stage
+But here's what I remember, all these years later. It's two in the morning. Nobody asked me to do this. It's not for school. Not for a grade. It's not going in some portfolio. No one - and I mean no one on Earth - is ever going to see this website.
+And I am spending an entire hour getting a tiny animated flame to flicker, just right, next to her name.
+And I made the orange wrong. On purpose.
+Beat.|stage
+Because the correct orange - the one you're supposed to use for fire - looked like everyone else's fire. And mine had to be a little bit wrong. A little too pink. A little sick. Like it was burning something it shouldn't.
+Beat.|stage
+I wasn't learning a skill that night. I wasn't being productive. I wasn't building my future.
+I was playing. I was deciding this goes here - for no good reason - just because it felt right.
+Looks at the room. Warmly.|stage
+And I think you know this feeling.
+I think every single person in this room has a version of that night. Maybe you were eleven. Maybe seventeen. Maybe it was a song. A treehouse. A spreadsheet you secretly loved. A story you never showed anyone.
+But you made something out of nothing. You fell all the way into it. Hours disappeared. And you came back up holding something that felt like a piece of you.
+⏸ Pause. Two full seconds.|pause
+Hold onto that. Hold onto your version of that flame. Because we're coming back for it - and by the end, I think it's going to mean something very different than it does right now.
+===
+The Sanding|section
+Energy shifts. Still warm. More direct.|stage
+Because here's what happened to that girl.
+She grew up.
+And somewhere along the way - slowly, with the best intentions, by people who loved her - she got sanded down.
+The daydreaming? We learned to call that distraction.
+The gut feeling? Unprofessional.
+The playing? Not serious.
+The strange idea - the one that didn't fit the plan? Off-strategy.
+Beat.|stage
+So she got smoother. More reliable. More consistent. More - and I want you to feel this word - more on-brand.
+For about a hundred years, that was the whole deal. The entire project of modern work was to make us a little more like machines. Predictable. Efficient. Average.
+Because average was safe. Average kept your job.
+⏸ Pause.|pause
+And then, a couple of years ago, we built a machine that is flawless at average.
+===
+The Question|section
+So let me ask you the question you actually carried into this room. The real one. The one underneath the badge and the coffee.
+If the machine can write, and design, and analyze, and build, and create -
+if it can do, honestly, most of what you do -
+why would anyone hire you in 2030?
+⏸ Beat. Let it sit. Don't rescue them.|pause
+I'm going to give you a real answer to that. Not a pep talk. Not "believe in yourself."
+But to get there, I have to tell you something I'm not proud of. I have to tell you how I almost lost the answer myself - and never felt it leave.
+===
+The Loss|section
+Energy drops. More intimate.|stage
+I make things for a living. And I fell in love, years ago, with the exact moment a blank, terrifying nothing turns into a real thing that people use.
+And a few years ago - like all of you - I started making things with AI.
+And at first, it was a love story.
+Beat.|stage
+It started so small I'm almost embarrassed to tell you.
+I had an idea one night. A real one - I felt it in my gut, this thing about how to make something feel human. But it was late. And I was tired. And I didn't have it in me to sit and shape it.
+So I gave it to the machine. And I said: make this a strong post.
+And it came back - perfect. Beautifully structured. Confident. It sounded like someone who absolutely knew what they were talking about.
+So I posted it.
+⏸ Beat.|pause
+A few days later, I'm scrolling, and I see a post from a stranger. Same structure. Same metaphor. Almost the same words.
+Looks directly at the room.|stage
+And it hit me. I hadn't written anything. I had run an algorithm. And the algorithm wasn't mine. It was everyone's. The average of everyone.
+I had traded my own voice - to save myself thirty minutes of thinking.
+Beat.|stage
+And here's the thing: it came from such a human place. It wasn't laziness. It was convenience. And convenience is so, so comfortable.
+So I did it again. And again.
+Slower.|stage
+And without my ever deciding it - without one single moment where I chose - the machine stopped doing my busywork. And it started doing my thinking.
+The automation didn't stop at the tasks. It crept into the ideas. Into the judgment. Into the part of me that used to wrestle with a problem at two in the morning.
+⏸ Beat.|pause
+And slowly, the muscle just... stopped working. I didn't burn out. I didn't crash. I went quiet. It was like eating food with no taste.
+⏸ Short pause.|pause
+I remember the exact moment I noticed.
+I had shipped something. Good numbers. And in the review, my boss said, "Amazing work."
+And I thought... "Cool."
+And I moved on to the next thing.
+Beat.|stage
+I didn't feel proud. I didn't feel anything. I had forgotten how to feel anything about the work.
+⏸ Long pause.|pause
+And that girl - the one who stayed up till midnight because losing herself in the making was the best feeling she knew -
+she got quieter. And quieter.
+Until one day I realized I couldn't remember the last time I'd heard from her at all.
+⏸ Pause. Real.|pause
+I didn't lose her in some dramatic way. There was no villain.
+I handed her over. One easy answer at a time. For convenience.
+===
+The Flattening|section
+Turns fully to the room. This is for them now.|stage
+Now - before you decide this is my problem and not yours -
+let me describe four things. And I just want you to notice, quietly, if you recognize any of them.
+Beat.|stage
+The first is a kind of rust. When was the last time you had an idea that was actually yours? Not edited. Not "polished up." Not "AI, make this better." Yours.
+Beat.|stage
+The second is quieter, and a little scary. You look at your own work - and you genuinely can't tell anymore. Is this mine? Or did I just approve it?
+The third is the flatness. Something good happens. "Great work." And you feel... fine. And you move on.
+And the fourth - this is the strangest one - you start to miss the hard way. The struggle you used to complain about. The version of you that had to figure it out alone.
+⏸ Pause.|pause
+We have a word for all of this. We call it burnout. We tell ourselves we're just tired.
+It is not burnout.
+Beat.|stage
+And here's the part I haven't told you. This isn't bad luck. It isn't happening to you by accident.
+Remember what I said my job is? Taking the friction out of your life.
+⏸ Beat.|pause
+This is the friction.
+Beat. Let it land.|stage
+The frictionless world I'm helping to build isn't just saving you time. It's smoothing you out. It's taking the rough, weird, deeply human edges of how you see things - and running a giant digital iron over them, until everything looks, and sounds, and feels exactly the same.
+I've built this for years. I'm good at it. I've also sat across a table from people it made redundant. Both chairs - the one that builds it, and the one it breaks.
+So when I tell you it's taking something from you, I'm not warning you from the outside. I'm confessing.
+I let it take me first.
+Beat.|stage
+In my world, we call it optimization.
+I call it the Flattening.
+⏸ Pause. This is the word. Let it sit.|pause
+Burnout is when there's too much on you. The Flattening is when there's less and less of you - in the room, in the work, in your own life.
+It doesn't come from working too hard. It comes from handing yourself over. One easy answer at a time.
+And it doesn't feel like losing. That's the whole trap.
+It feels like relief.
+===
+The Reframe|section
+Energy lifts slightly. Inviting.|stage
+So. Is it going to take your job?
+I won't lie to you. Some jobs, yes.
+But watch what every wave of technology has actually done. There was no such thing as a web developer - until there was a web. There was no such thing as a UX designer - until software got complicated enough to need one.
+The machine doesn't only erase work. It opens a gap. And the most valuable new work forms inside that gap - around the thing the machine still can't do.
+Beat.|stage
+So here's the reframe. The one that changed everything for me.
+The fight was never you versus the machine. You'll lose that one. It was never fair, and it was never meant to be.
+The real fight - the only one that matters - is between two versions of you.
+The version that flattens itself to match the average. Because it's safe.
+And the version that dares to be the exception.
+AI is not taking your job. It's accelerating a Flattening you already started.
+===
+The Exception of One|section
+Here's the one thing you need to understand about how this machine actually works.
+It can only give you the average of what already exists. It learned from everything that was ever written down - and it answers with the most likely, the most reasonable, the most expected thing. The exact center of everything everyone has already said.
+That's not a flaw. That is the design.
+But the two things that make you worth hiring were never the average. And - this is the key - they were never in the data at all.
+Beat.|stage
+We spent a century trying to be more like machines. And the machines just won that race. They will out-machine us forever.
+So the only way forward... is back.
+The most advanced technology in human history just made the most ancient part of you the valuable one. Not your competence - it has that now.
+Your weirdness. Your wrong orange. Your standard deviation.
+⏸ Pause.|pause
+AI is the average of everyone.
+You are the exception of one.
+So stop averaging yourself.
+===
+Place One: What Was Never Made|section
+There are exactly two places that "exception of one" lives. And they happen to be the two places the machine has no data. Let me show you both.
+The first: the machine can only remix what already exists. It cannot make the thing that has never been made.
+You can.
+Beat.|stage
+There's a name for what happens in your head when you stop concentrating. When you're driving. In the shower. Staring out a window. A network in your brain switches on.
+And what it does is a little wild. It reaches into your memory and pulls out things that have nothing to do with each other - holds a dozen of them in the air at once - and grabs the three that have no business together, and holds on, until something connects.
+It looks like you're doing nothing. That wandering is the work. That's where the leap comes from.
+The machine doesn't have one. It cannot wander. It only goes where the data already points. The center. The average. The most likely next word.
+Beat.|stage
+Let me make it real. Ask AI to design an app that reminds you to take your medication. What do you get?
+A notification. With a button that says "confirm." Sensible. Correct. And basically what every other reminder app on Earth already does.
+Now - you. You're driving home. And out of nowhere, a memory floats up: the fight you had this morning, because your partner forgot to buy the milk. Again.
+And it hits you. What's missing isn't a reminder. It's that nobody's watching. It's shared responsibility.
+And you invent the thing the machine never could: something that quietly alerts someone who loves them - but only if they didn't take the pill.
+⏸ Beat.|pause
+The machine will never get there. Because it wasn't in the car. It didn't have the fight about the milk.
+That leap - from a fight about milk to a feature that protects a life - that's not logic. That's your entire life, every unrelated piece of it, colliding into something that didn't exist a second ago.
+And here's the cruel part. That wandering goes dark the moment you stop letting it wander. The moment you fill every gap - every drive, every shower, every blank minute - with a prompt.
+===
+Place Two: What Was Never Said|section
+Energy concentrates. The deep part. Raises a hand.|stage
+Quick - who knows this one. You ask a friend, "Hey - what's wrong?" Because something just feels off. And they say: "Nothing. I'm fine."
+⏸ Beat.|pause
+And you know. You just know. You can't prove it. You couldn't write it down if I paid you. But your whole body knows they're not fine.
+Beat.|stage
+Something like that happened to me at work.
+I was reviewing a user interview. And I'd done the smart, modern thing first - I fed the transcript to the AI and asked it to tell me what the user thought.
+And it told me: the user found the prototype "really interesting."
+Then I actually watched the tape.
+And there's this man, and he says the words - "wow, that's... interesting" - while he shifts in his chair. And looks away. Doing the exact thing every one of us does when we're trying to be polite to the person who built the thing.
+He hated it. Every cell in my body knew he hated it.
+And the AI had written it down as a win.
+Beat.|stage
+It wasn't wrong, exactly. It had the words. "Interesting" was the word. It just wasn't in the room.
+⏸ Beat.|pause
+There's a line from a philosopher named Michael Polanyi. Six words. Write them somewhere you'll see them:
+"We know more than we can tell."
+You can find one friend's face in a crowd of a thousand - and never explain how. You can feel, in your gut, that something is wrong - long before you can say why.
+You have spent your whole life building this. Every conversation. Every room you read in half a second. Every face you ever watched. It is the most expensive thing you own - and it lives in your body, and it was never, ever written down. Not by anyone. Not even by you.
+You could not hand it to the machine if you tried.
+Beat.|stage
+The machine has read every word ever written about being human.
+You've been one.
+That's the whole game.
+===
+There's No One Home|section
+Quiet now.|stage
+And this - this is the thing I'm actually afraid of. And it was never that the machine becomes too human.
+It has read every word ever written about love. And grief. And courage. And it has felt - not one of them. It is the ultimate secondhand mind. It knows everything. And it has lived nothing.
+You are the opposite. You are a firsthand life. The one dataset it will never, ever have.
+Beat.|stage
+So the danger was never that the machine rises up to meet us.
+It's that we - quietly, for convenience, one easy answer at a time - sink down to meet it.
+We hand over the busywork. Then the thinking. And then, without ever noticing - we hand over the inner life.
+Until one day, someone you love shows you something they made. And you say, "wow - that's interesting."
+And you feel nothing.
+The Flattening. All the way down.
+You're right there. And there's no one home.
+⏸ Silence. Hold it. Four seconds. Do not fill it.|pause
+===
+Go Find Her|section
+Gentle. But certain.|stage
+Every time you take the average answer because it's easy - you are not losing to the machine.
+You are turning yourself into one.
+Beat.|stage
+So don't.
+I don't mean your job. The market will do what the market does. I mean the other thing. The flame. The wrong orange. The part of you that was never written down.
+Beat.|stage
+And I'm not going to pretend the way back is comfortable. It isn't.
+Remember the first thing I told you tonight? That my whole job is to make sure you never have to pause. Never have to struggle. Never sit in the not-knowing.
+Beat.|stage
+That was never friction to be removed. It was the last place you were still you.
+So stay in it. The blank page. The problem you can't solve yet. The not-knowing - when every instinct in you is screaming to fill it with a prompt and make the discomfort stop.
+The medicine is the thing they trained out of you when you were small. It's playing. Making something just because. With no idea whether it's any good. Being brave enough to not care whether it's good. Brave enough to come off a little weird.
+Because your weirdness - your standard deviation - was never the flaw.
+It was the whole point.
+Beat.|stage
+You are not competing with AI.
+You're competing with the version of yourself that acts like it.
+⏸ Pause.|pause
+That girl at midnight wasn't being productive. She wasn't building her future. She was awake. Making a flame the wrong shade of orange - for no one - because it felt right.
+Beat.|stage
+AI is the average of everyone.
+You are the exception of one.
+Beat.|stage
+She's still in there. She's still up.
+Go find her.
+Out.|stage`;
+
+const PUNCH = new Set([
+  "AI is the average of everyone.",
+  "You are the exception of one.",
+  "So stop averaging yourself.",
+  "I call it the Flattening.",
+  "Go find her.",
+  "That's the whole game."
+]);
+
+// ---- parse ----
+const sections = [];
+let cur = null;
+RAW.split("\n").forEach(raw => {
+  const line = raw.replace(/\r$/,"");
+  const t = line.trim();
+  if (!t || t === "===") return;
+  if (line.endsWith("|section")) {
+    cur = { title: line.slice(0, -8).trim(), items: [] };
+    sections.push(cur);
+  } else if (line.endsWith("|stage")) {
+    cur.items.push({ type:"stage", text: line.slice(0, -6).trim() });
+  } else if (line.endsWith("|pause")) {
+    cur.items.push({ type:"pause", text: line.slice(0, -6).replace(/^⏸/,"").trim() });
+  } else {
+    cur.items.push({ type:"line", text: t });
+  }
+});
+
+// ---- render ----
+const scriptEl = document.getElementById("script");
+const tocList = document.getElementById("tocList");
+const PAGE_TITLE = "The Part of You AI Can't Copy";
+
+sections.forEach((sec, i) => {
+  const sectionEl = document.createElement("section");
+  sectionEl.className = "bit";
+  sectionEl.id = "sec-" + i;
+
+  const isOpening = (i === 0 && sec.title === PAGE_TITLE);
+  const name = isOpening ? "Opening" : sec.title;
+
+  const head = document.createElement("div");
+  head.className = "sechead";
+  const n = document.createElement("span");
+  n.className = "n";
+  n.textContent = String(i+1).padStart(2,"0");
+  const h2 = document.createElement("h2");
+  h2.textContent = name;
+  head.append(n, h2);
+  sectionEl.append(head);
+
+  sec.items.forEach(it => {
+    if (it.type === "line") {
+      const p = document.createElement("p");
+      p.className = PUNCH.has(it.text) ? "line punch serif" : "line serif";
+      p.textContent = it.text;
+      sectionEl.append(p);
+    } else if (it.type === "stage") {
+      const d = document.createElement("p");
+      d.className = "stage";
+      d.textContent = it.text;
+      sectionEl.append(d);
+    } else if (it.type === "pause") {
+      const d = document.createElement("div");
+      d.className = "pause";
+      const ic = document.createElement("span");
+      ic.className = "ic";
+      ic.textContent = "⏸";
+      const tx = document.createElement("span");
+      tx.className = "txt";
+      tx.textContent = it.text;
+      d.append(ic, tx);
+      sectionEl.append(d);
+    }
+  });
+
+  scriptEl.append(sectionEl);
+
+  // toc
+  const li = document.createElement("li");
+  const a = document.createElement("a");
+  a.href = "#sec-" + i;
+  a.innerHTML = '<span class="n">' + String(i+1).padStart(2,"0") + '</span>';
+  const label = document.createElement("span");
+  label.textContent = name;
+  a.append(label);
+  a.addEventListener("click", closeToc);
+  li.append(a);
+  tocList.append(li);
+});
+
+// ---- contents: "Talk back" link to comments ----
+const cLi = document.createElement("li");
+const cA = document.createElement("a");
+cA.href = "#comments";
+cA.innerHTML = '<span class="n">✶</span>';
+const cLabel = document.createElement("span");
+cLabel.textContent = "Talk back";
+cA.append(cLabel);
+cA.addEventListener("click", closeToc);
+cLi.append(cA);
+tocList.append(cLi);
+
+// ---- controls ----
+const body = document.body;
+const btnNotes = document.getElementById("btnNotes");
+btnNotes.addEventListener("click", () => {
+  const on = body.classList.toggle("hide-notes");
+  btnNotes.setAttribute("aria-pressed", on ? "false" : "true");
+  btnNotes.textContent = on ? "Notes: Off" : "Notes: On";
+});
+
+let size = 1.42;
+function setSize(){ document.documentElement.style.setProperty("--reading", size.toFixed(2)+"rem"); }
+document.getElementById("inc").addEventListener("click", ()=>{ size = Math.min(2.0, size+0.09); setSize(); });
+document.getElementById("dec").addEventListener("click", ()=>{ size = Math.max(1.05, size-0.09); setSize(); });
+
+const toc = document.getElementById("toc");
+const backdrop = document.getElementById("backdrop");
+function openToc(){ toc.classList.add("open"); backdrop.classList.add("open"); toc.setAttribute("aria-hidden","false"); }
+function closeToc(){ toc.classList.remove("open"); backdrop.classList.remove("open"); toc.setAttribute("aria-hidden","true"); }
+document.getElementById("btnContents").addEventListener("click", openToc);
+backdrop.addEventListener("click", closeToc);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeToc(); });
+
+// ---- scroll progress ----
+const prog = document.getElementById("progress");
+function onScroll(){
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = h > 0 ? (window.scrollY / h * 100) + "%" : "0%";
+}
+window.addEventListener("scroll", onScroll, {passive:true});
+window.addEventListener("resize", onScroll);
+onScroll();
+</script>
+</body>
+</html>
