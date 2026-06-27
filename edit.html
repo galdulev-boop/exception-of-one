@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edit · The Exception of One</title>
+<link rel="stylesheet" href="talk.css">
+<style>
+  :root{ --bar:#2a2420; }
+  html,body{height:100%;}
+  body{margin:0;display:flex;flex-direction:column;}
+  /* top bar */
+  .bar{
+    flex:0 0 auto;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+    padding:.55rem .8rem;background:var(--paper-2);border-bottom:1px solid var(--rule);
+    position:sticky;top:0;z-index:10;
+  }
+  .bar .title{font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--flame);margin-right:.4rem;}
+  .bar input[type=password]{
+    flex:1 1 220px;min-width:160px;font:inherit;font-size:.82rem;padding:.4rem .55rem;
+    border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink);
+  }
+  .bar button{
+    font:inherit;font-size:.78rem;padding:.42rem .7rem;border-radius:999px;cursor:pointer;
+    border:1px solid var(--rule);background:var(--paper);color:var(--ink-soft);white-space:nowrap;
+  }
+  .bar button:hover{border-color:var(--flame);color:var(--flame);}
+  .bar button.primary{background:var(--flame);border-color:var(--flame);color:#fff;font-weight:600;}
+  .bar button.primary:hover{filter:brightness(1.05);color:#fff;}
+  .bar .status{font-size:.78rem;color:var(--ink-soft);margin-left:.2rem;min-height:1em;}
+  .bar .status.err{color:var(--flame-pink);}
+  .bar .status.ok{color:#3b7a4b;}
+  /* tools row */
+  .tools{flex:0 0 auto;display:flex;gap:.35rem;flex-wrap:wrap;align-items:center;
+    padding:.4rem .8rem;background:var(--paper);border-bottom:1px solid var(--rule);}
+  .tools .lg{font-size:.72rem;color:var(--muted);margin-right:.3rem;}
+  .tools button{font:inherit;font-size:.72rem;padding:.3rem .55rem;border:1px solid var(--rule);
+    border-radius:6px;background:var(--paper-2);color:var(--ink-soft);cursor:pointer;}
+  .tools button:hover{border-color:var(--flame);color:var(--flame);}
+  /* split */
+  .split{flex:1 1 auto;display:flex;min-height:0;}
+  .pane{flex:1 1 50%;min-width:0;overflow:auto;}
+  .pane.edit{border-right:1px solid var(--rule);background:var(--paper-2);}
+  #src{
+    width:100%;height:100%;box-sizing:border-box;border:0;outline:0;resize:none;
+    padding:1rem 1.1rem;background:transparent;color:var(--ink);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem;line-height:1.6;
+  }
+  .pane.preview{background:var(--paper);}
+  .preview-inner{max-width:var(--maxw);margin:0 auto;padding:1.4rem clamp(1rem,4vw,1.6rem) 4rem;}
+  .preview-inner .bit:first-child{margin-top:.5rem;}
+  .hint{font-size:.7rem;color:var(--muted);padding:.5rem .8rem;border-top:1px solid var(--rule);background:var(--paper-2);flex:0 0 auto;}
+  @media (max-width:760px){
+    .split{flex-direction:column;}
+    .pane{flex:1 1 auto;height:50vh;}
+    .pane.edit{border-right:0;border-bottom:1px solid var(--rule);}
+  }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <span class="title">Edit talk</span>
+    <input id="token" type="password" placeholder="GitHub fine-grained token (Contents: read & write)" autocomplete="off" spellcheck="false">
+    <button id="save" class="primary">Save → publish</button>
+    <button id="reload">Reload</button>
+    <button id="clear">Clear token</button>
+    <span id="status" class="status"></span>
+  </div>
+
+  <div class="tools">
+    <span class="lg">Mark the current line:</span>
+    <button data-mark="section">Section</button>
+    <button data-mark="stage">Stage note</button>
+    <button data-mark="pause">Pause ⏸</button>
+    <button data-mark="punch">Punch</button>
+    <button data-mark="">Plain line</button>
+  </div>
+
+  <div class="split">
+    <div class="pane edit"><textarea id="src" spellcheck="true" placeholder="Loading…"></textarea></div>
+    <div class="pane preview"><div class="preview-inner" id="preview"></div></div>
+  </div>
+
+  <div class="hint">
+    Markers: <b>Title|section</b> · <b>note|stage</b> · <b>⏸ caption|pause</b> · <b>line|punch</b> (centered) · plain text = spoken line · <b>===</b> = separator.
+    Save commits <b>content.txt</b> to your repo; the live site updates in ~1 min. Your token is stored only in this browser.
+  </div>
+
+<script src="talk.js"></script>
+<script>
+const OWNER = "galdulev-boop", REPO = "exception-of-one", PATH = "content.txt", BRANCH = "main";
+const API = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/contents/" + PATH;
+const TKEY = "eo_gh_token";
+
+const el = {
+  token: document.getElementById("token"),
+  save: document.getElementById("save"),
+  reload: document.getElementById("reload"),
+  clear: document.getElementById("clear"),
+  status: document.getElementById("status"),
+  src: document.getElementById("src"),
+  preview: document.getElementById("preview"),
+};
+let sha = null;
+
+function setStatus(msg, kind){ el.status.textContent = msg; el.status.className = "status" + (kind ? " " + kind : ""); }
+function getToken(){ return (el.token.value || "").trim(); }
+
+// UTF-8 safe base64
+function utf8ToB64(str){
+  const bytes = new TextEncoder().encode(str);
+  let bin = "";
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+  return btoa(bin);
+}
+function b64ToUtf8(b64){
+  const bin = atob(String(b64).replace(/\s/g, ""));
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
+function headers(){
+  const h = { "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" };
+  const t = getToken();
+  if (t) h["Authorization"] = "Bearer " + t;
+  return h;
+}
+
+// preview (debounced)
+let pvTimer = null;
+function renderPreview(){
+  try { renderTalk(parseTalk(el.src.value), el.preview, { pageTitle: "The Exception of One" }); }
+  catch (e) { el.preview.innerHTML = '<p class="line serif">Preview error: ' + e.message + "</p>"; }
+}
+function schedulePreview(){ clearTimeout(pvTimer); pvTimer = setTimeout(renderPreview, 200); }
+
+async function load(){
+  setStatus("Loading…");
+  try {
+    const r = await fetch(API + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: headers() });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const j = await r.json();
+    sha = j.sha;
+    el.src.value = b64ToUtf8(j.content);
+    renderPreview();
+    setStatus("Loaded. Edit, then Save → publish.", "ok");
+  } catch (e) {
+    setStatus("Couldn't load content.txt (" + e.message + ").", "err");
+  }
+}
+
+async function save(){
+  const t = getToken();
+  if (!t) { setStatus("Paste a GitHub token first (it stays in this browser).", "err"); el.token.focus(); return; }
+  localStorage.setItem(TKEY, t);
+  setStatus("Saving…");
+  el.save.disabled = true;
+  try {
+    const body = {
+      message: "Edit talk content via in-page editor",
+      content: utf8ToB64(el.src.value),
+      branch: BRANCH,
+    };
+    if (sha) body.sha = sha;
+    const r = await fetch(API, { method: "PUT", headers: Object.assign({ "Content-Type": "application/json" }, headers()), body: JSON.stringify(body) });
+    if (r.status === 401 || r.status === 403) throw new Error("token rejected (check it has Contents: read & write on this repo)");
+    if (r.status === 409 || r.status === 422) {
+      setStatus("Out of date — reloading latest, then re-save.", "err");
+      await load();
+      return;
+    }
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const j = await r.json();
+    sha = j.content && j.content.sha ? j.content.sha : sha;
+    setStatus("Saved ✓ — live in ~1 min.", "ok");
+  } catch (e) {
+    setStatus("Save failed: " + e.message, "err");
+  } finally {
+    el.save.disabled = false;
+  }
+}
+
+function markLine(marker){
+  const ta = el.src, v = ta.value, caret = ta.selectionStart;
+  const ls = v.lastIndexOf("\n", caret - 1) + 1;
+  let le = v.indexOf("\n", caret); if (le === -1) le = v.length;
+  let line = v.slice(ls, le).replace(/\s*\|(section|stage|pause|punch)\s*$/, "").replace(/\s+$/, "");
+  if (marker) line = line + "|" + marker;
+  ta.value = v.slice(0, ls) + line + v.slice(le);
+  ta.focus();
+  ta.selectionStart = ta.selectionEnd = ls + line.length;
+  schedulePreview();
+}
+
+// wire up
+el.src.addEventListener("input", schedulePreview);
+el.save.addEventListener("click", save);
+el.reload.addEventListener("click", () => { if (confirm("Reload from GitHub and discard unsaved edits?")) load(); });
+el.clear.addEventListener("click", () => { localStorage.removeItem(TKEY); el.token.value = ""; setStatus("Token cleared from this browser."); });
+el.token.addEventListener("change", () => { const t = getToken(); if (t) localStorage.setItem(TKEY, t); });
+document.querySelectorAll(".tools button").forEach(b => b.addEventListener("click", () => markLine(b.getAttribute("data-mark"))));
+document.addEventListener("keydown", e => { if ((e.metaKey || e.ctrlKey) && e.key === "s") { e.preventDefault(); save(); } });
+
+el.token.value = localStorage.getItem(TKEY) || "";
+load();
+</script>
+</body>
+</html>
