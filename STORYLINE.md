@@ -17,18 +17,16 @@
 ## 1 · THE OPTIMIZER — *setup (product-insider seed)*
 - **Does:** Establish, lean and matter-of-fact, that she *builds* the frictionless world — the trick-master, not a résumé. Plant "keep you in / best practice." The scare. The tease (a mystery that pays off as *the Flattening*). No name, no title, no thank-you. Don't open on a laugh.
 - **Move:**
-  - *Every day, my job is to make your life easier.*
-  - *I take the friction out of your day. If something makes you stop, or pause, or struggle — I failed.*
-  - *My job is to keep you in. To make sure you never put it down. That's not a conspiracy. It's best practice.*
-  - *And I am very good at my job. I've built this for a decade.*
+  - *For over a decade, I've built apps. I design the systems. I tune the algorithms.*
+  - *A good design tries to reduce friction. The user should never have to struggle.*
+  - *That's not a bad thing. It's best practice. It's the reason you keep using the apps that help you — and why you're hooked on the ones that don't.*
   - ⏸ *Beat.*
-  - *A few months ago, my own job started to scare me.*
-  - *(quieter)* *We have a flattering word for what I do all day. We call it optimization.*
-  - *I've started calling it something else.* ⏸
-  - *But to tell you why, I can't start here. I have to start at midnight. When I was eleven.*
+  - *A few months ago, that started to scare me.*
+  - *We call it optimization. I've started calling it something else.* ⏸
+  - *But to tell you why, I have to start at midnight. When I was eleven.*
 - **Energy:** Direct, matter-of-fact, a little proud. No warmth yet. The TED-voice hasn't arrived. (The AI-insider card is deliberately *held* — it does its real work in Beats 3 & 4.)
 - **→ Turn:** Straight into the bluish light of midnight.
-- **Key lines:** *"My job is to keep you in… that's not a conspiracy. It's best practice." · "And I am very good at my job." · "We call it optimization. I've started calling it something else."*
+- **Key lines:** *"It's the reason you keep using the apps that help you — and why you're hooked on the ones that don't." · "We call it optimization. I've started calling it something else."*
 
 ## 2 · THE GIRL — *Thread 1 (who you are)*
 - **Does:** Warmth + the withheld laugh; aliveness in its purest form; seed *both* uncollectable datasets and the standard-deviation self inside one child, for Beat 4 to call back. **The withheld colors are the un-sanded moment.** Then turn into Thread 1's slow enemy: the century-long sanding.
