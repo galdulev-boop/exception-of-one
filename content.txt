@@ -9,20 +9,28 @@ In my world, we call what we do optimization. I've started calling it something 
 But to tell you why, I have to start at midnight. When I was eleven.
 ===
 The Girl|section
-Energy — warm, lit from inside; the most-loved beat. Two planted laughs, then the smile drops and the temperature crashes.|stage
-Eleven years old. Past midnight. The only light is bluish, off a monitor. She should be asleep.
-She's building a fan-site — a shrine, really — to a witch from a TV show. Phoebe.
-The HTML is terrible. The colors are a crime — and she stops herself, leans in like she's about to hand over the punchline:
-I won't tell you what the colors were. Those are mine.|punch
-The withheld laugh — the room fills it in, and the filling-in is the joke.|stage
-Nobody asked for it. Nobody would ever see it. It was pure not-knowing and pure joy, made for no one.
-Then the odd thing she still can't explain. Every other fan-site she'd seen was a wall of text. She didn't make one of those — she built ways for strangers to find each other. To group up. To leave a mark. Interactive, years before anyone her age would think to.
-She couldn't tell you why. Her hand just went: this goes here. This goes there. Just because it felt right.
-That ugly, useless shrine grew a community of misfits — and two of the people she'd die for today, she met on it.
+Energy — warm, lit from inside; the most-loved beat. The withheld laugh lands on a slide, then the smile drops.|stage
+In my pink-wall bedroom, the only light was the heavy, bluish glare of my computer screen. I should have been asleep — I had middle school the next morning. But I was wide awake, hunched over the keyboard, typing with two fingers as quietly as I could.
+I was building a website. A fan-site — actually, let's be honest, a digital shrine — to a witch from a TV show. Phoebe Halliwell, from Charmed.
+It looked bad. And it was so broken — I think half the links didn't even work. And the colors…
+I don't know if I want to talk about the colors, honestly. I loved lime green, and purple, and — well — every color that ever existed. All at once. Why choose? And the text I wrote there, the cringe, the cringeeee — my god.
+A slide flashes up behind her — not a stock image, the actual gloriously chaotic site, with a giant glittering animated-WordArt header at the top: "THE FIBI SHRINE."|stage
+She glances back at it, smiling, then turns back to the room.|stage
+Yes. "Fibi." F-I-B-I. Because when you're eleven, spelling is strictly optional.
+The room fills in the withheld laugh — the real childhood artifact does the work. Let the amusement settle.|stage
+Nobody asked me to build it. No market research, no SEO strategy, no monetization plan. There was a very real chance that absolutely no one on Earth would ever see it.
+It was pure, useless play. Made for no one.
+But then I did something strange. Something I still can't fully explain.
+Back then, the other fan-sites I knew were just a flat, passive wall of text — episode summaries copied from teen magazines, trivia lists.
+Without a plan — because none of my friends knew the show, and a kid from class had just opened a group chat for everyone — I added a group chat to the site. Years before "social networks" were something anyone in my life would think of.
+That ugly, useless, glitter-soaked shrine grew a whole community of misfits. Lonely kids from all over the world, who didn't fit in at their school lunch tables, found a home in my broken forums.
+Two of the people I would die for today — the ones who know my darkest secrets, who have held me through my deepest griefs — I met on that terrible website twenty-two years ago.
 The most useless thing I ever made gave me the people I'd die for.|punch
-⏸ Two full seconds. Let it sit.|pause
-→ And then she got sanded down. Not by the machine — it wasn't here yet. By a century that trained us to be machine-like: the daydream became distraction, the gut unprofessional, the play not serious, the strange idea off-strategy.|stage
-We made ourselves average because average felt safe — and then we built a machine flawless at average.|punch
+⏸ Two full seconds of heavy silence. Let it sit.|pause
+Let me tell you what happened to that girl.
+She grew up.
+Middle school turned into high school, high school into college, and somewhere along the line those neon-purple walls and glitter-star wands got painted over with "professional" beige. She was taught, very politely, that the daydream was just a distraction. That her gut was "unprofessional." That play wasn't serious — and that getting lost in the wilderness to explore an idea was a waste of time.
+And little by little, without noticing, I lost her.
 ===
 The Loss|section
 Energy — descending into real dark; the held silence is the dark apex. Then the mechanism enters cool and clinical — diagnosis, not lament.|stage
