@@ -2,94 +2,222 @@ The Optimizer|section
 Direct. Matter-of-fact. A little proud. No warmth yet.|stage
 If you've ever opened an app to check a single notification, and looked up forty minutes later with a numb thumb, a dead battery, and a vague sense of regret - there's a very real chance that was my fault.
 For over a decade, I've built the apps that capture your attention.
-In my world, good design removes friction. It's why you use the apps that help you and make your life better - and exactly why you can't put down the ones that make it worse.
+In my world, good design removes friction. It's why you use the apps that make your life better - and can't put down the ones that make it worse.
 ⏸ Beat.|pause
-But a few months ago, looking at where this technology is heading next, the researchers I work with and I realized something much bigger is happening.
-In my world, we call what we do optimization. I've started calling it something else.
+But a few months ago, looking at where this is heading next, the researchers I work with and I realized something much bigger is happening. And it scared me.
+We call what we do optimization. I've started calling it something else.
 But to tell you why, I have to start at midnight. When I was eleven.
 ===
 The Girl|section
-Energy - warm, lit from inside.|stage
-In my pink-wall bedroom, the only light was the heavy, bluish glare of my computer screen. But I was wide awake, hunched over the keyboard, typing with two fingers as quietly as I could.
-I was building a website. It looked bad. And the colors… I loved lime green, and purple, and - well - every color that ever existed.
-A slide flashes up behind her - the actual gloriously chaotic site, with a giant glittering animated-WordArt header at the top: "THE FIBI SHRINE." She glances back at it, smiling, then turns back to the room.|stage
-Yes. "Fibi." F-I-B-I. Because when you're eleven, spelling is strictly optional.
-Nobody asked me to build it. There was a very real chance that absolutely no one on Earth would ever see it. It was pure, useless play.
-But then I did something strange. Without a plan, I added a group chat to the site.
-That ugly, useless, glitter-soaked shrine grew a whole community of misfits. Two of the people I would die for today - the ones who know my darkest secrets, who have held me through my deepest griefs - I met on that terrible website twenty-two years ago.
-⏸ Two full seconds of heavy silence. Let it sit.|pause
-Let me tell you what happened to that girl. She grew up.
-Somewhere along the line those neon-purple walls and glitter-star wands got painted over with "professional" beige. She was taught, very politely, that the daydream was just a distraction.
+Warm, lit from inside. The withheld laugh lands on a slide, then the smile drops.|stage
+In my pink-wall bedroom, the only light was the heavy, bluish glare of my computer screen.
+I was building a website. A fan-site - actually, a digital shrine - to a witch from a TV show. Phoebe Halliwell, from Charmed.
+It looked bad. It was so broken - half the links didn't even work.
+A slide flashes up - not stock, the actual gloriously chaotic site, giant glittering WordArt header: "THE FIBI SHRINE." She glances back, smiling, then turns to the room.|stage
+Yes. "Fibi." F-I-B-I. Because when you're eleven, spelling is optional.
+Let the amusement settle.|stage
+Nobody asked me to build it. There was a real chance no one on Earth would ever see it.
+It was pure, useless play. Made for no one.
+But then I did something strange. Without a plan - none of my friends even knew the show - I added a group chat. Years before "social network" meant anything to us.
+That ugly, glitter-soaked shrine grew a whole community of misfits.
+Two of the people I'd die for today - the ones who've held me through my worst griefs - I met on that terrible website twenty-two years ago.
+The most useless thing I ever made gave me the people I'd die for.|punch
+⏸ Two seconds of silence.|pause
+Let me tell you what happened to that girl.
+She grew up.
+Middle school, high school, college - and somewhere those neon-purple walls got painted over with "professional" beige.
+She was taught, very politely, that the daydream was a distraction.
 And little by little, without noticing, I lost her.
 ===
 The Loss|section
-Energy drops. Quiet, heavy, raw - grounded, dead-still.|stage
-Somewhere in the move into the professional world, the pointless wandering stopped. I became a checkbox-ticker. And I was so, so tired.
-One night, too tired to shape a raw idea I had, I asked an AI to write a strong post for me. Three days later, a friend posted something almost identical.
-I saw it, and I realized: this isn't me. It isn't my voice. I had traded my voice to save thirty minutes of thinking.|punch
-⏸ Slower. The lights dim, a tight spot on her.|pause
-Late one night, in my kitchen, my husband and I were having one of those rare, vulnerable conversations. I said something incredibly deep about how I was feeling. He looked at me, his eyes shining, deeply touched.
-And - honestly, I'm not proud of this - standing there, I realized: I didn't think those words.
-Earlier that morning I'd opened a chatbot and typed in some raw thoughts. I had pocketed its beautiful sentence, carried it home, and - without ever noticing it wasn't mine - handed it to my husband as if it were a piece of my own heart.
-I stood there, looking at the tears in his eyes, and I could not tell: Is it even my thoughts? My feelings?
-⏸ The longest, heaviest silence in the talk. Five full seconds.|pause
+Quiet, heavy, raw - a low, gravelly chest register. Grounded, dead-still.|stage
+Somewhere in the move into the professional world, the wandering stopped.
+I became a checkbox-ticker. And I was so, so tired.
+⏸ Beat. Leans forward.|pause
+One night, too tired to shape a raw idea, I asked an AI to write a strong post for me. It came back polished. Confident. A little smarter than I am before coffee.
+A flicker of wry. Don't lean on it.|stage
+I posted it.
+Three days later, a friend posted something almost identical. Same insight. Same tidy little em-dash - the one I'd been so proud of.
+A small, dark exhale of a laugh - then it drops.|stage
+And I realized: this isn't me. I hadn't written a post - I'd run an algorithm. And the algorithm wasn't mine.
+I'd traded my voice to save thirty minutes of thinking.|punch
+Beat.|stage
+And then I started noticing it everywhere.
+Slower. The lights dim, a tight spot on her.|stage
+Late one night, in my kitchen, my husband and I were having one of those rare, vulnerable conversations.
+I said something deep about how I was feeling.
+He looked at me, eyes shining, deeply touched.
+And - honestly, I'm not proud of this - I realized: I didn't think those words.
+That morning I'd opened a chatbot and typed in some raw thoughts. We'd had an intimate conversation - maybe deeper than the one in the kitchen. It gave me smart answers, so I never had to sit in the ambiguity.
+I had pocketed its beautiful sentence, carried it home, and handed it to my husband as if it were a piece of my own heart.
+I stood there, looking at the tears in his eyes, and I could not tell:
+Are these even my thoughts? My feelings?|punch
+⏸ The longest, heaviest silence so far. Five full seconds.|pause
+At work, I automated everything. My decisions. My creativity. My thinking.
 My job got easier. My life got harder.
-I told you I lost that girl - the one who built the fan-site. I gave her away. One easy answer at a time.|punch
+I wasn't making things anymore - I was just reviewing them. And it left me flat.
+I told you I lost that girl. Nobody stole her.
+I gave her away. One easy answer at a time.|punch
 ===
 The Cure|section
-Energy - practical, intimate, humble; then lifting.|stage
-What I just described - that slow going-flat - I finally gave it a name. The Flattening.|punch
-The cure is two words. Ambiguity. And play.|punch
-Here's the whole move. The not-knowing shows up - the blank page, the hard question, the gap before the answer. And your hand goes for the machine.
-And you don't. You stay.
-Your brain files not-knowing on the same shelf as danger - it reads uncertainty as a threat. But here's what happens if you let it ring.
-There's a network in your brain that only switches on when you stop trying - when you stare out a window, when you let the gap sit.
+Practical, intimate, humble; then lifting. The science is felt, not lectured.|stage
+What I just described - that slow going-flat - I finally gave it a name.
+The Flattening.|punch
+It isn't burnout. It's the opposite - less and less of you. And it feels like relief. That's the whole trap.
+The cure is two words.
+Beat.|stage
+Ambiguity. And play.|punch
+Here's the whole move. The not-knowing shows up - the blank page, the gap before the answer. And your hand goes for the machine.
+And you don't. You stay. One beat longer than is comfortable.
+That's it. That's the rep.
+Beat.|stage
+Here's what your hand is fighting. Your brain files not-knowing on the same shelf as actual danger. It cannot tell the difference between a blank page and a tiger.
+Beat. Light.|stage
+So reaching for the chatbot isn't laziness. It's a tiny animal in your skull, trying to survive a Google Doc.
+Let the laugh come. Then warm.|stage
+Reaching for the machine puts the fire out. Staying in the gap means letting the alarm ring - and not running.
+But here's what happens if you let it ring.
+The machine hands you an answer, and you forget it by lunch - it cost you nothing. Make the thing yourself, and it's yours. It sticks.
 Certainty retrieves. Ambiguity creates.|punch
-The machine hands you an answer you forget by lunch. The gap hands you something you'll remember, because it cost you something to make.
-Turn - play.|stage
-So why the second word. Why play.
-Play is the friction we don't run from - the same difficulty, with the fear taken out. That's the eleven-year-old at midnight.
-Now one true thing, because I won't hand you a tidy bow. You don't practice your way to your weird, specific self. It's already in there.
-But staying in the not-knowing long enough for it to come back - that is a muscle. But a muscle that atrophies is also a muscle that comes back.
-Every single rep hands back exactly what the convenience took. The spark. The taste. The aliveness.
-And every rep, you become a little more of the one thing the average can never be - the exception of one.
+⏸ Beat.|pause
+I didn't have a name yet for why that was true. I just knew the gap gave me something the easy answer never could.
+So - why the second word. Why play.
+Because there are two ways to stay in a hard thing. One is grinding - friction with fear wrapped around it. That's heavy, and you'll flee it every time.
+Play is the same difficulty, with the fear taken out. Still hard. Just not heavy.
+That's the eleven-year-old at midnight. The HTML was hard. It was never a burden.
+So this isn't "struggle more." It's choose your friction.
+Humble.|stage
+Now one true thing, because I won't hand you a tidy bow.
+You don't practice your way to your weird, specific self. That part you don't earn - you remember it.
+But staying in the not-knowing long enough for it to come back - that's a muscle. And mine atrophied.
+So I'm not up here as the master of this. I catch myself maybe one time in five. The other four, I've already typed half my feelings into a chatbot before I notice my hands moved.
+Rueful. A laugh of recognition - she's one of them.|stage
+But a muscle that atrophies is a muscle that comes back. Every rep, the gap gets more bearable.
+And the part nobody tells you -
+Beat.|stage
+It's worth it. Every rep hands back exactly what the convenience took.
+And every rep, you become a little more of the one thing the average can never be -
+the exception of one.
 ===
 The Wall|section
-Energy - the lift. Rises into something clear, even, and grounded.|stage
-I sit on both sides of this thing. I help build it - I work with the labs behind the tools you used this morning.
-I'm not afraid of AI. I love it. Because every one of those leaders asks me the same two questions: Where is this going? And - who do we hire now?
-Why would anyone hire you in 2030?|punch
-Every time a machine took the old work, it grew new work no one could have pictured. There is a wall. And it runs straight through the middle of you.|punch
-Underneath, the machine works one way: it answers by probability. It is built to land on the average - the most likely answer. Give it a closed world with complete data - chess, Go, the folding of a protein - and it beats every human who ever lived. Forever.
-And yes - it will take a lot of what you do. But the average is the floor. Not the ceiling.
+The lift. A wider, steadier stance - the voice of someone who went and looked.|stage
+And once I felt that - really felt it, the no-one-home - I had to know.
+Was there anything left that was only mine?
+Beat.|stage
+So I went looking. And I have a strange advantage: I sit on both sides of this.
+I help build it - I work with the labs behind the tools you used this morning.
+And I sit with the people trying to survive it - I coach the founders and CEOs of products you open every day.
+I'm not afraid of AI. I love it.
+And that is the only reason you should believe me about what comes next.
+Beat.|stage
+Because every one of those leaders asks me the same question.
+Who do we hire now?
+Which is really your question, isn't it. Why would anyone hire you in 2030? In 2050?
+And here's what I found.
+Every time a new technology took the old work, it grew new work no one could have pictured. There was no such thing as a web designer - until there was a web.
+And the new work always grows in the same place: right at the edge of what the machine can't do.
+I'm not guessing where that edge is. I've stood at it.
+Beat. The claim drops.|stage
+There is a wall. And it runs straight through the middle of you.|punch
+She moves with freedom now.|stage
+Underneath, the machine works one way: it answers by probability. It's built to land on the average.
+And for most of the world, that's a gift. Give it a closed world with complete data - chess, Go, the folding of a protein - and it beats every human who ever lived. Forever.
+And yes - it will take a lot of what you do. The market is real. Anyone telling you otherwise is selling you comfort.
+But the average is the floor. Not the ceiling.
 Because two things about you were never written down - and never can be.
-Proof one - the never-made.|stage
-Real ideas don't start with one brilliant thought. There's a moment in your head where everything's in the air at once.
-That's innovation. Not one brilliant idea - three distant things, suddenly in a new relationship. The machine is weak there - because it only has the average, and the leap is the opposite of the average.
-The chaos in you - the non-linear mind, the wild associations - that's the deviation from the average. And in a world where the machine makes the average, your deviation is the most valuable thing on the market.
-Proof two - the never-said.|stage
-The second thing lives in your body. We know more than we can tell.|punch
-You can find one friend's face in a crowd of a thousand - and never explain how. That knowing isn't in your words. It's in your body - built over a whole life of paying attention, of being a person in the world.
-And that's exactly why it's safe: you cannot feed the machine what you can't put into words.
+Proof one - the never-made. Energy lifts, turns playful.|stage
+Remember the gap - the thing I said I couldn't name?
+Beat.|stage
+It has a name.
+There's a network in your brain that only switches on when you stop concentrating - when you stare out a window, when you drive, when you're in the shower.
+Beat.|stage
+Be honest. The best idea you had this year - you had it in the shower. Didn't you.
+Let them laugh - and recognize themselves.|stage
+Naked, dripping, no notebook. Because that's the one place you finally stopped trying to think.
+That network holds everything in the air at once - a conversation, a gut feeling, the fight you had this morning. Long enough for three of them - three things with no business together - to catch fire.
+That's innovation. Not one brilliant idea - three distant things, suddenly in a new relationship. The soul of every leap we remember.
+And the machine is weak there - because it only has the average, and the leap is the opposite of the average.
+Ask it to help someone remember their medication. You get a reminder. Statistically reasonable. Soulless.
+Now you. Driving home, a memory surfaces - the fight this morning, the forgotten milk. And it clicks: what's missing isn't a reminder. It's not having to carry it alone.
+So you build the thing that quietly tells a family member - but only if the dose wasn't taken. You turn a task into "I've got you."
+The machine won't get there. Because it wasn't in the fight this morning.
+Beat.|stage
+That chaos in you - the wild associations - is your deviation from the average. And in a world where the machine makes the average, your deviation is the most valuable thing you own.
+The ultimate twist: the most advanced technology in history just made the most ancient, chaotic part of you the most valuable.
+Proof two - the never-said. The deepest, quietest part.|stage
+The second thing lives in your body.
+A study caught me hard. They gave human experts and AI the same long, messy human conversations to make sense of. On the hard questions - even when the machine was statistically closer to "right" - people trusted the human more.
+Because the human read the room. Things our nervous system catches in a quarter-second and could never spell out.
+There's a line I'd write on a wall:
+We know more than we can tell.|punch
+You can ride a bike - and never write the instructions.
+That knowing isn't in your words. It's in your body - built over a whole life of being a person in the world.
+And that's exactly why it's safe: you cannot feed the machine what you can't put into words. And the machine is only words.
+Beat.|stage
 The never-made. And the never-said.
-It knows everything that was written down.
-You are everything that wasn't.|punch
+It has read everything we ever wrote down. And it never once stayed up past midnight building something nobody asked for.
+Beat.|stage
+It is everything we wrote down.
+You are everything we didn't.|punch
 ===
 The Close|section
-Energy - focus down to the quietest, most urgent point of the night.|stage
-Back to the bluish light of that bedroom. That broken website - the lime green text, the misspelled witch - wasn't the warm-up before my career. It was the peak.
-Because at eleven, I was lonely. And because there was no instant escape, I had to stay in the room and sit in the friction of it.
-If someone had walked into my pink-walled bedroom twenty-two years ago and handed me a screen to autocomplete my loneliness... "The Fibi Shrine" would never have existed.
-Technology is going to take some of what you do. Let it.
-The scary part is that we are willingly becoming more like the algorithms. More average. Flattening out. And the worst part - we are raising our kids to do the exact same thing.|punch
-We are building them a world where they never have to sit in the quiet. We give them a perfect, friction-free stream of other people's thoughts - so they never have to endure the clumsy, painful work of forming their own.
-We are training our own children how to not know who they are. And then we wonder why they grow up feeling replaceable.
-⏸ Five full seconds. Do not rush. Let the heartbreak in the room settle.|pause
-You don't find the girl who loved lime green by reading about her. You find her by staying in the room when you don't know what to say. Remembering without practicing is just nostalgia - a photo of a self you don't live in anymore.
-Next time you're in the gap - sitting in front of a blank screen, trying to write an email, a spec, a post, a message to your team. And your hand goes for the chatbot.
+The focus comes down to the quietest, most urgent point of the night. Then she hands it over.|stage
+Back to the bluish light of that bedroom.
+That broken website - the lime green text, the misspelled witch - wasn't the warm-up before my career. It was the peak.
+Because at eleven, I was lonely. I was bored. But there was no instant escape - so I had to stay in the room and sit in the friction of it. I had to build something to survive it.
+If someone had walked into that bedroom twenty-two years ago and handed me a screen to autocomplete my loneliness… "The Fibi Shrine" would never have existed.
+Technology is going to take some of what you do. Let it. It's welcome to them.
+That is not the scary part.
+The scary part is that we are willingly becoming more like the algorithms. Flattening out.
+And the part that keeps me awake at night -
+We are raising our kids to do the exact same thing.|punch
+Let that sit.|stage
+We are building them a world where they never have to sit in the quiet. Never have to struggle to find a word, or a friend, or a hard emotion. The second they feel a flicker of friction - at the dinner table, in the back seat, in their own bedrooms - we panic.
+So we hand them a screen.
+We autocomplete their boredom. We autocomplete their sadness. We give them a friction-free stream of other people's thoughts - so they never do the clumsy, painful work of forming their own.
+We are training our own children how to not know who they are.|punch
+And then we wonder why they grow up feeling replaceable.
+⏸ Five full seconds. Do not rush. Let the heartbreak settle.|pause
+But the machine can never take who you are.
+Remember what every leader asks me - who do we hire now?
+Beat.|stage
+This. They hire this. Your weird associations, your gut, your clumsy way of seeing a problem - the deviation the average can never reach.
+Don't give it away.
+But we are. Every single day, for thirty minutes of comfort.
+This has to stop.
+⏸ Three seconds of silence.|pause
+You don't find the girl who loved lime green by reading about her. You find her by staying in the room when you don't know what to say.
+By holding the beat.
+Ambiguity is the door. Your self is what walks through it.|punch
+She comes to the very front of the stage. Picks one person and holds their eyes.|stage
+Can I ask you - genuinely. What are you feeling right now?
+Director's note - the live moment. Ask it for real; let the silence sit three to four seconds. Don't rescue it - the awkwardness is the content. Take any real voice and ride it; a clumsy real answer is the best version of this beat. If the room stays dead, one seeded mid-room voice breaks the ice ("…uncomfortable, I guess?") and a real one usually follows; seeded voices go silent the instant anyone real speaks.|stage
+Whatever comes back:
+Yeah.
+Beat.|stage
+That makes sense.
+But that. That right there. That is the friction. That is the gap.
+And all I'm asking you to do… is let the alarm ring.
+Beat.|stage
+Next time you're in the gap - in front of a blank screen, writing an email, a message to your team. Next time you feel something toward someone you love that you have no words for yet.
+And your hand goes for the chatbot.
 Don't.
 Stay.
-Write the first line yourself. Let it be bad. Let it be clumsy. But let it come from your nervous system - not from a dataset.
-So go. Go wander. Go stay in the not-knowing one beat longer than you can stand.
-Because that... is the only place you were ever the exception of one.|punch
-She holds the look one final, silent beat. Then turns and walks off into the dark. Three full seconds of black before the house lights slowly rise.|stage
+Write the first line yourself. Let it be bad. But let it come from your nervous system - not from a dataset.
+She pulls out a worn, battered notebook and opens it to a page of scribbles and cross-outs.|stage
+This is mine. My work notebook.
+The algorithm never crosses out a word.
+But these crossed-out words are the physical trace of my brain actually thinking. I could have generated this page in four seconds. Instead, I spent forty minutes crossing things out.
+Those forty minutes were my reps.
+That is how you train the muscle. That is how you make you stronger.
+She closes the notebook - but stays planted. Forward.|stage
+So go.
+Beat.|stage
+Go waste an afternoon. Go wander.
+Go stay in the not-knowing one beat longer than you can stand.
+Because that… is the only place you were ever the exception of one.|punch
+A beat. Then the button - on her lips, not a slide.|stage
+AI is the average of everyone.
+Beat.|stage
+You are the exception of one.|punch
+She holds the look one final, silent beat. Then turns and walks off into the dark. Three seconds of black before the house lights slowly rise.|stage
