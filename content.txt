@@ -59,26 +59,11 @@ I felt like a vessel. A factory for something that used to create. I wasn't maki
 I told you I lost that girl - the one who built the fan-site. Nobody stole her.
 I gave her away. One easy answer at a time.|punch
 ===
-The Wall|section
-Energy - cold, even-handed concession, then the lift: the talk's one true inhale. Generous, not triumphant.|stage
-She concedes, fully, no flinch - the believer has to. Give the machine a closed world with complete data - chess, Go, the folding of a protein - and it wins. Forever.
-And the honest economic truth most of these talks skip: it will take much of what you do. Tasks. Whole jobs. The market is real - anyone who tells you otherwise is selling comfort.
-The headlines tell you it's coming for everything. I don't work from the headlines - I work with the people building it.
-So let me tell you what we see from the inside: there's a wall - and it runs straight through you.
-I'm not guessing where the machine ends. I've stood at its edge.
-It ends where your one life begins.|punch
-Then the turn the whole talk has been climbing: we spent a century making ourselves average to be safe. And the machine just won average. Forever.
-The most advanced technology in history just made the most ancient part of you the valuable one. Not your competence - it has that. Your chaos. Your weirdness. Your standard deviation.
-The way forward isn't to learn something new. It's to remember something old.|punch
-How do we know that deviation can't be collected? Because two things about you were never written down.
-The never-made - the idea only your one life would ever produce. And the never-said - what you know but can't put into words. We know more than we can tell.
-The callback lands both: her odd interactive build was a never-made idea; her wordless "this goes there" was never-said - tacit, unwritable.
-It has read everything ever written - and never once stayed up till midnight building something nobody asked for.
-AI knows everything that was ever written down. You are everything that wasn't.|punch
-→ Not because it's behind you there. Because it's blind there.|stage
-===
 The Cure|section
 Energy - practical, intimate, humble; then lifting. Not a guru - still learning the thing she's teaching. Plain language; the science is felt, not lectured.|stage
+What I just described - that slow going-flat - I finally gave it a name.
+The Flattening.|punch
+It isn't burnout. Burnout is too much pressing in. The Flattening is the opposite - less and less of you. And it doesn't feel like loss. It feels like relief. That's the whole trap.
 The cure is two words. And they're going to sound far too small for the problem.
 ⏸ Beat.|pause
 Ambiguity. And play.|punch
@@ -114,6 +99,24 @@ And the part nobody tells you -
 It's worth it. Every single rep hands back exactly what the convenience took. The spark. The taste. The aliveness. You don't get those from reading about them. You get them one held beat at a time.
 And every rep, you become a little more of the one thing the average can never be -
 the exception of one.
+===
+The Wall|section
+Energy - cold, even-handed concession, then the lift: the talk's one true inhale. Generous, not triumphant.|stage
+She concedes, fully, no flinch - the believer has to. Give the machine a closed world with complete data - chess, Go, the folding of a protein - and it wins. Forever.
+And the honest economic truth most of these talks skip: it will take much of what you do. Tasks. Whole jobs. The market is real - anyone who tells you otherwise is selling comfort.
+The headlines tell you it's coming for everything. I don't work from the headlines - I work with the people building it.
+So let me tell you what we see from the inside: there's a wall - and it runs straight through you.
+I'm not guessing where the machine ends. I've stood at its edge.
+It ends where your one life begins.|punch
+Then the turn the whole talk has been climbing: we spent a century making ourselves average to be safe. And the machine just won average. Forever.
+The most advanced technology in history just made the most ancient part of you the valuable one. Not your competence - it has that. Your chaos. Your weirdness. Your standard deviation.
+The way forward isn't to learn something new. It's to remember something old.|punch
+How do we know that deviation can't be collected? Because two things about you were never written down.
+The never-made - the idea only your one life would ever produce. And the never-said - what you know but can't put into words. We know more than we can tell.
+The callback lands both: her odd interactive build was a never-made idea; her wordless "this goes there" was never-said - tacit, unwritable.
+It has read everything ever written - and never once stayed up till midnight building something nobody asked for.
+AI knows everything that was ever written down. You are everything that wasn't.|punch
+→ Not because it's behind you there. Because it's blind there.|stage
 ===
 The Close|section
 Energy - quiet, full, resolved; then the lift of the send-off. She under-stays her welcome on purpose - the early exit is the final proof of the thesis.|stage
