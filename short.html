@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Exception of One</title>
+<link rel="stylesheet" href="talk.css">
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <svg width="20" height="20" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="#774A9B" stroke-width="5" stroke-linejoin="round"><circle cx="32" cy="32" r="29"/><path d="M32 32 A17 17 0 0 1 32 5 A17 17 0 0 1 32 32 Z"/><path d="M32 32 A17 17 0 0 1 32 5 A17 17 0 0 1 32 32 Z" transform="rotate(120 32 32)"/><path d="M32 32 A17 17 0 0 1 32 5 A17 17 0 0 1 32 32 Z" transform="rotate(240 32 32)"/></svg>
+    <span>The Exception of One</span>
+  </div>
+  <div class="controls">
+    <button id="btnContents">Contents</button>
+    <span class="sizer"><button id="dec" aria-label="Smaller text">A−</button><button id="inc" aria-label="Larger text">A+</button></span>
+    <button id="btnNotes" aria-pressed="true">Notes: On</button>
+  </div>
+</header>
+
+<div id="backdrop"></div>
+<nav id="toc" aria-hidden="true"><h3>Contents</h3><ol id="tocList"></ol></nav>
+
+<main>
+  <section class="hero">
+    <div class="flame">
+      <svg width="54" height="54" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="#774A9B" stroke-width="3.5" stroke-linejoin="round"><circle cx="32" cy="32" r="29"/><path d="M32 32 A17 17 0 0 1 32 5 A17 17 0 0 1 32 32 Z"/><path d="M32 32 A17 17 0 0 1 32 5 A17 17 0 0 1 32 32 Z" transform="rotate(120 32 32)"/><path d="M32 32 A17 17 0 0 1 32 5 A17 17 0 0 1 32 32 Z" transform="rotate(240 32 32)"/></svg>
+    </div>
+    <h1 class="serif">The Exception<br>of One</h1>
+    <p class="kicker">remember something old</p>
+    <p class="meta">A talk · ~15 min · Gal Dulev</p>
+    <div class="rule"></div>
+  </section>
+
+  <div id="script"></div>
+
+  <footer class="end">
+    <p class="sig">AI is the average of everyone.<br><b>You are the exception of one.</b></p>
+  </footer>
+
+  <!--
+    Inline comments - powered by Hypothesis (https://hypothes.is): free, open-source.
+    Readers SELECT any passage to leave a margin note or highlight, like a Google Doc.
+    Annotations anchor to the exact text + this page's URL. Posting needs a free
+    Hypothesis account; reading public notes does not. The script below injects the
+    annotation layer - the small tab on the right edge of the screen.
+  -->
+  <section class="comments" id="comments">
+    <div class="chead">
+      <span class="ic">✶</span>
+      <h2>Talk back - in the margins</h2>
+    </div>
+    <p class="prompt"><b>Select any sentence</b> in this talk to leave a note or a highlight right beside it - like marking up a doc. Look for the tab on the <b>right edge</b> of your screen. What's the most useless thing <b>you</b> ever made? Mark the line that got you.</p>
+  </section>
+</main>
+
+<!-- Hypothesis annotation layer - https://hypothes.is -->
+<script src="https://hypothes.is/embed.js" async></script>
+
+<script src="talk.js"></script>
+<script>
+const PAGE_TITLE = "The Exception of One";
+const scriptEl = document.getElementById("script");
+const tocList = document.getElementById("tocList");
+
+const body = document.body;
+const btnNotes = document.getElementById("btnNotes");
+btnNotes.addEventListener("click", () => {
+  const on = body.classList.toggle("hide-notes");
+  btnNotes.setAttribute("aria-pressed", on ? "false" : "true");
+  btnNotes.textContent = on ? "Notes: Off" : "Notes: On";
+});
+
+let size = 1.07;
+function setSize(){ document.documentElement.style.setProperty("--reading", size.toFixed(2)+"rem"); }
+document.getElementById("inc").addEventListener("click", ()=>{ size = Math.min(2.0, size+0.09); setSize(); });
+document.getElementById("dec").addEventListener("click", ()=>{ size = Math.max(0.88, size-0.09); setSize(); });
+
+const toc = document.getElementById("toc");
+const backdrop = document.getElementById("backdrop");
+function openToc(){ toc.classList.add("open"); backdrop.classList.add("open"); toc.setAttribute("aria-hidden","false"); }
+function closeToc(){ toc.classList.remove("open"); backdrop.classList.remove("open"); toc.setAttribute("aria-hidden","true"); }
+document.getElementById("btnContents").addEventListener("click", openToc);
+backdrop.addEventListener("click", closeToc);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeToc(); });
+
+const prog = document.getElementById("progress");
+function onScroll(){
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = h > 0 ? (window.scrollY / h * 100) + "%" : "0%";
+}
+window.addEventListener("scroll", onScroll, {passive:true});
+window.addEventListener("resize", onScroll);
+
+fetch("content-short.txt", {cache:"no-store"})
+  .then(r => { if(!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+  .then(raw => {
+    renderTalk(parseTalk(raw), scriptEl, {tocList: tocList, pageTitle: PAGE_TITLE, onTocClick: closeToc});
+    const cLi = document.createElement("li");
+    const cA = document.createElement("a");
+    cA.href = "#comments";
+    cA.innerHTML = '<span class="n">\u2736</span>';
+    const cLabel = document.createElement("span");
+    cLabel.textContent = "Talk back";
+    cA.append(cLabel);
+    cA.addEventListener("click", closeToc);
+    cLi.append(cA);
+    tocList.append(cLi);
+    onScroll();
+  })
+  .catch(err => {
+    scriptEl.innerHTML = '<p class="line serif" style="color:var(--flame)">Could not load the talk (' + err.message + '). If you opened this file directly, serve it over http (GitHub Pages does this automatically).</p>';
+  });
+</script>
+</body>
+</html>
