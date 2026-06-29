@@ -1558,6 +1558,40 @@ body.blacked-out::after {
 .ksquash{transform-origin:center}
 .slide.active .ksquash{animation:kSquash 1.6s var(--ease-out) forwards}
 @keyframes kSquash{0%{transform:scaleY(1.05);opacity:.3}100%{transform:scaleY(.8);opacity:1}}
+
+/* ════════════ KINETIC LAYER 2 — Batch 2 ════════════ */
+/* Revival waveform (exception): the dead flatline springs back to a living signal */
+.vwave.revive{ height:140px; margin-bottom:24px; }
+.vwave.revive .vbar{ background:#4a4642; transform:scaleY(.04); }
+.slide.active .vwave.revive .vbar{
+  animation: barRise 1.3s var(--ease-out) var(--d,0s) both,
+             barEq 1.15s ease-in-out calc(1.35s + var(--d,0s)) infinite alternate;
+}
+@keyframes barRise{ 0%{transform:scaleY(.04);background:#4a4642} 55%{background:var(--coral)} 100%{transform:scaleY(1);background:var(--coral)} }
+@keyframes barEq{ 0%{transform:scaleY(.8)} 100%{transform:scaleY(1.05)} }
+
+/* Drain the flat stretch — the light goes out, slide by slide */
+#grew-up{ filter:brightness(.99) saturate(.9); }
+#beige{ filter:brightness(.95) saturate(.8); }
+#lost-her{ filter:brightness(.9) saturate(.72); }
+#tired{ filter:brightness(.85) saturate(.64); }
+#flat{ filter:brightness(.8) saturate(.58); }
+
+/* Chat assembles one message at a time (group-chat) */
+#group-chat.active .chatroom-body > div{ opacity:0; animation: msgIn .45s var(--ease-out) forwards; }
+#group-chat.active .chatroom-body > div:nth-child(1){ animation-delay:.5s; }
+#group-chat.active .chatroom-body > div:nth-child(2){ animation-delay:1.1s; }
+#group-chat.active .chatroom-body > div:nth-child(3){ animation-delay:1.75s; }
+#group-chat.active .chatroom-body > div:nth-child(4){ animation-delay:2.45s; }
+@keyframes msgIn{ from{opacity:0;transform:translateY(10px) scale(.98)} to{opacity:1;transform:none} }
+
+/* Count-up years (who-hire) */
+.count{ font-variant-numeric:tabular-nums; }
+
+/* Autocomplete suggestion ghost (kids): the gap gets filled for you */
+.ghost{ opacity:0; color:rgba(237,233,224,.34); font-style:italic; }
+.slide.active .ghost{ animation: ghostIn .55s ease 1.7s forwards; }
+@keyframes ghostIn{ to{opacity:1} }
 </style>
 </head>
 <body>
@@ -1839,8 +1873,8 @@ body.blacked-out::after {
 <!-- who-hire -->
 <section class="slide" data-world="light" id="who-hire">
   <div class="slide-inner slide-content full-center stagger gap-sm">
-    <div class="t-mega">Who do we hire in 2030?</div>
-    <div class="t-mega coral">In 2050?</div>
+    <div class="t-mega">Who do we hire in <span class="count" data-count="2030" data-from="1975">2030</span>?</div>
+    <div class="t-mega coral">In <span class="count" data-count="2050" data-from="1995">2050</span>?</div>
   </div>
   <aside class="notes">They ask it in different ways, but underneath, it's always the same question:<br><br>Who do we hire in 2030? Who do we hire in 2050?</aside>
 </section>
@@ -2092,6 +2126,7 @@ body.blacked-out::after {
 <section class="slide" data-world="void" id="kids">
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-huge" style="max-width:900px;">We are teaching our kids<br>the same move.</div>
+    <div class="t-medium muted mt-md">The second curiosity appears<span class="kcursor"></span> <span class="ghost">we autocomplete it.</span></div>
   </div>
   <aside class="notes">And the part that keeps me awake at night is this:<br><br>We are teaching our kids the same move. We are building them a world where no one ever has to sit in the quiet.<br><br>The second boredom appears, we fill it. The second sadness appears, we solve it. The second curiosity appears, we autocomplete it.</aside>
 </section>
@@ -2162,7 +2197,8 @@ body.blacked-out::after {
 
 <!-- exception : the final beat -->
 <section class="slide" data-world="void" id="exception">
-  <div class="slide-inner slide-content anim-scale full-center">
+  <div class="slide-inner slide-content full-center">
+    <div class="vwave revive" data-wave="48"></div>
     <div class="t-large muted">Because that's the only place you were ever</div>
     <div class="coral" style="font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,11vw,9rem);line-height:1;letter-spacing:-0.02em;margin-top:8px;">the exception of one.</div>
     <div class="t-large muted mt-sm">Not the average.</div>
@@ -2551,6 +2587,28 @@ window.addEventListener('hashchange', () => {
       w.appendChild(b);
     }
   });
+
+  /* Count-up: years race to the future on activation (who-hire) */
+  function runCount(slide){
+    slide.querySelectorAll('.count').forEach(function(el){
+      var to = +el.dataset.count, from = +(el.dataset.from || 0), start = null, dur = 1100;
+      function step(ts){
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(from + (to - from) * e);
+        if (p < 1) requestAnimationFrame(step); else el.textContent = to;
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  var mo = new MutationObserver(function(muts){
+    muts.forEach(function(m){
+      var s = m.target;
+      if (m.attributeName === 'class' && s.classList && s.classList.contains('active') && s.querySelector('.count')) runCount(s);
+    });
+  });
+  document.querySelectorAll('.slide').forEach(function(s){ mo.observe(s, {attributes:true, attributeFilter:['class']}); });
+  var act = document.querySelector('.slide.active'); if (act && act.querySelector('.count')) runCount(act);
 })();
 </script>
 
