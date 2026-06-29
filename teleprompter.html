@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teleprompter - The Exception of One</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0a0a0a;
+    --text:#e8e8e8;
+    --dim:#666;
+    --accent:#3b9eff;
+    --stage-dir:#ff9f43;
+    --pause-color:#ff6b6b;
+    --section-color:#3b9eff;
+    --plant-color:#4ade80;
+    --font-size:42px;
+    --line-height:1.7;
+    --scroll-speed:2;
+  }
+  html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif}
+
+  #app{height:100%;display:flex;flex-direction:column}
+
+  #toolbar{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:8px 20px;
+    background:linear-gradient(to bottom,rgba(10,10,10,0.95),rgba(10,10,10,0));
+    transition:opacity 0.4s;
+    direction:ltr;
+  }
+  #toolbar.hidden{opacity:0;pointer-events:none}
+  #toolbar:hover{opacity:1;pointer-events:all}
+
+  .toolbar-group{display:flex;align-items:center;gap:12px}
+  .toolbar-btn{
+    background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);
+    color:#ccc;border-radius:8px;padding:6px 14px;font-size:14px;cursor:pointer;
+    transition:all 0.2s;display:flex;align-items:center;gap:6px;
+  }
+  .toolbar-btn:hover{background:rgba(255,255,255,0.15);color:#fff}
+  .toolbar-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .toolbar-btn svg{width:16px;height:16px;fill:currentColor}
+
+  #timer{
+    font-family:'SF Mono','Fira Code',monospace;font-size:22px;color:var(--accent);
+    min-width:80px;text-align:center;letter-spacing:2px;
+  }
+
+  #progress-bar{
+    position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:101;
+    transition:width 0.1s linear;
+  }
+
+  #scroll-container{
+    flex:1;overflow:hidden;position:relative;
+    display:flex;justify-content:center;
+  }
+
+  #mirror-line{
+    position:fixed;top:35%;left:0;right:0;height:2px;
+    background:linear-gradient(to right,transparent,var(--accent),transparent);
+    opacity:0.3;z-index:50;pointer-events:none;
+  }
+
+  #content-wrapper{
+    width:100%;max-width:900px;
+    padding:35vh 30px 65vh 30px;
+    transition:transform 0.05s linear;
+  }
+
+  .line{
+    font-size:var(--font-size);line-height:var(--line-height);
+    direction:ltr;text-align:left;
+    padding:4px 0;
+    transition:opacity 0.3s;
+  }
+
+  .line.spoken{color:var(--text)}
+  .line.stage-direction{
+    color:var(--stage-dir);font-style:italic;
+    font-size:calc(var(--font-size) * 0.7);
+    opacity:0.85;
+    border-left:3px solid var(--stage-dir);
+    padding-left:12px;
+    margin:8px 0;
+  }
+  .line.pause{
+    color:var(--pause-color);font-weight:700;
+    font-size:calc(var(--font-size) * 0.65);
+    text-align:center;letter-spacing:2px;
+    padding:12px 0;
+  }
+  .line.section-header{
+    color:var(--section-color);font-weight:800;
+    font-size:calc(var(--font-size) * 1.1);
+    padding:30px 0 10px;
+    border-bottom:2px solid rgba(59,158,255,0.3);
+    margin-bottom:10px;
+  }
+  .line.plant{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    color:var(--plant-color);font-weight:700;letter-spacing:3px;
+    font-size:calc(var(--font-size) * 0.5);text-transform:uppercase;
+    padding:14px 0;
+  }
+  .line.plant svg{
+    width:calc(var(--font-size) * 0.95);height:calc(var(--font-size) * 0.95);
+    fill:var(--plant-color);flex-shrink:0;
+  }
+  .line.empty-line{height:calc(var(--font-size) * 0.8)}
+  .line.cue{height:0;padding:0;margin:0;overflow:hidden}
+  #slide-indicator{
+    position:fixed;bottom:12px;right:16px;z-index:60;
+    font-family:'SF Mono','Fira Code',monospace;font-size:12px;
+    color:rgba(255,255,255,0.35);direction:ltr;white-space:nowrap;
+  }
+  #slide-indicator b{color:var(--accent);font-weight:700}
+
+  #settings-panel{
+    position:fixed;top:50px;left:50%;transform:translateX(-50%);
+    background:rgba(20,20,20,0.97);border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px;padding:24px 32px;z-index:200;
+    display:none;min-width:340px;direction:ltr;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  #settings-panel.open{display:block}
+  .setting-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .setting-row:last-child{border:none}
+  .setting-label{color:#aaa;font-size:14px}
+  .setting-value{color:#fff;font-size:14px;font-family:monospace}
+  input[type="range"]{width:140px;accent-color:var(--accent)}
+
+  .kbd{
+    display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+    border-radius:4px;padding:2px 8px;font-size:12px;color:#aaa;font-family:monospace;
+    margin:0 2px;
+  }
+  #shortcuts-hint{
+    position:fixed;bottom:12px;left:50%;transform:translateX(-50%);
+    color:rgba(255,255,255,0.25);font-size:12px;z-index:50;
+    transition:opacity 0.4s;direction:ltr;white-space:nowrap;
+  }
+  #shortcuts-hint.hidden{opacity:0}
+
+  #fullscreen-start{
+    position:fixed;inset:0;z-index:300;
+    background:rgba(10,10,10,0.98);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:20px;cursor:pointer;
+  }
+  #fullscreen-start h1{color:var(--text);font-size:32px;font-weight:300;direction:ltr}
+  #fullscreen-start .sub{color:var(--dim);font-size:16px}
+  #fullscreen-start .start-btn{
+    margin-top:20px;padding:14px 48px;border-radius:12px;
+    background:var(--accent);color:#fff;font-size:18px;border:none;cursor:pointer;
+    transition:transform 0.2s;
+  }
+  #fullscreen-start .start-btn:hover{transform:scale(1.05)}
+  #fullscreen-start.hidden{display:none}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="fullscreen-start">
+    <h1>The Exception of One</h1>
+    <div class="sub">Teleprompter ready</div>
+    <button class="start-btn" onclick="startTeleprompter()">Start →</button>
+    <div class="sub" style="margin-top:12px">
+      <span class="kbd">Space</span> Play/Pause &nbsp;
+      <span class="kbd">↑↓</span> Speed &nbsp;
+      <span class="kbd">F</span> Fullscreen
+    </div>
+  </div>
+
+  <div id="progress-bar"></div>
+
+  <div id="toolbar" class="hidden">
+    <div class="toolbar-group">
+      <button class="toolbar-btn" id="btn-play" onclick="togglePlay()" title="Space">
+        <svg viewBox="0 0 24 24"><path id="play-icon" d="M8 5v14l11-7z"/></svg>
+        <span id="play-label">Play</span>
+      </button>
+      <button class="toolbar-btn" onclick="resetScroll()" title="R">
+        <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+      </button>
+      <div id="timer">00:00</div>
+    </div>
+    <div class="toolbar-group">
+      <button class="toolbar-btn" onclick="adjustSpeed(-0.5)">
+        <svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"/></svg>
+      </button>
+      <span style="color:#aaa;font-size:13px;min-width:60px;text-align:center" id="speed-display">Speed: 2x</span>
+      <button class="toolbar-btn" onclick="adjustSpeed(0.5)">
+        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+      </button>
+      <button class="toolbar-btn" onclick="adjustFontSize(-4)">A-</button>
+      <span style="color:#aaa;font-size:13px;min-width:50px;text-align:center" id="font-display">42px</span>
+      <button class="toolbar-btn" onclick="adjustFontSize(4)">A+</button>
+      <button class="toolbar-btn" id="btn-mirror" onclick="toggleMirror()" title="M">Mirror</button>
+      <button class="toolbar-btn" onclick="toggleFullscreen()" title="F">
+        <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mirror-line"></div>
+
+  <div id="scroll-container">
+    <div id="content-wrapper"></div>
+  </div>
+
+  <div id="shortcuts-hint">
+    <span class="kbd">Space</span> Play/Pause &nbsp;
+    <span class="kbd">↑↓</span> Speed &nbsp;
+    <span class="kbd">←→</span> Scroll &nbsp;
+    <span class="kbd">F</span> Fullscreen &nbsp;
+    <span class="kbd">M</span> Mirror &nbsp;
+    <span class="kbd">R</span> Reset
+  </div>
+  <div id="slide-indicator">▸ slide <b id="slide-id">—</b></div>
+</div>
+
+<script>
+const FEET_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.6 2.3c1.3 0 2.2 1.3 2.2 3.1 0 2.4-1.1 4.6-2.7 4.6-1.2 0-2.1-1.2-2.1-3 0-2.5 1.2-4.7 2.6-4.7zm-3.1 9.4c1.5 0 2.7 1 3.1 2.6.3 1.1.1 2.1-.2 3.2-.3 1.1-.7 2.2-1.9 2.4-1.4.2-2.5-.8-2.9-2.3-.5-1.9-.3-3.6.5-4.9.4-.6.9-1 1.4-1zM16.4 2.3c-1.3 0-2.2 1.3-2.2 3.1 0 2.4 1.1 4.6 2.7 4.6 1.2 0 2.1-1.2 2.1-3 0-2.5-1.2-4.7-2.6-4.7zm3.1 9.4c-1.5 0-2.7 1-3.1 2.6-.3 1.1-.1 2.1.2 3.2.3 1.1.7 2.2 1.9 2.4 1.4.2 2.5-.8 2.9-2.3.5-1.9.3-3.6-.5-4.9-.4-.6-.9-1-1.4-1z"/></svg>`;
+const SCRIPT_TEXT = `@@op-notif
+If you've ever opened an app to check a single notification, and looked up 40 minutes later with a numb thumb, a dead battery, and a vague sense of regret... there's a very good chance that that was my fault.
+For over a decade, I've built the apps that capture your attention. In my world, good design removes friction. It's why you use the apps that make your life better, and why you can't put down the ones that make it worse. We call what we do optimization.
+But a few months ago, looking at where AI is taking this next, the researchers I work with and I realized something much bigger is happening. And it scared me. I've started calling it something else. But to tell you why, I have to start at midnight, when I was 11.
+===
+The Fan Site|section
+@@mid
+So, I'm in my pink-wall bedroom. The only light is the heavy, bluish glare from my computer screen. I'm supposed to be asleep—middle school the day after—but I was wide awake building a website.
+@@shrine
+A fan site. actually, let's be honest, a digital shrine. to a witch from a TV show. Phoebe Halliwell from Charmed.
+And look, it looked bad. It was so, so broken. I think like half of the links didn't work, and the colors... you know what? I don't even want to talk about the colors. Or the cringe text I wrote there. Oh my god. And yeah—I spelled Phoebe F-I-B-I. Because when you're 11, spelling is strictly optional.
+Nobody asked me to build it. There was a real chance no one on earth would ever see it. It was pure, useless play, made for no one.
+@@group-chat
+And then I did something strange. None of my friends knew Charmed. So without a plan, I added a group chat and some interactive parts into that site—years before “social network” meant anything to any of us. And that ugly, glitter-soaked corner grew a whole community of misfits.
+Two of my best friends, the ones who've helped me through my worst moments—I met them on that terrible website 22 years ago. The most useless thing I ever made gave me the people I would die for today.
+===
+Loss of the Girl|section
+@@grew-up
+Let me tell you what happened to that girl.
+She grew up. Middle school turned into high school, high school into college.
+@@beige
+And somewhere along the line, those neon pink walls got painted over with professional beige. She was taught, very politely, that the daydream was just a distraction. That her gut was unprofessional. That play wasn't serious, and that getting lost in the wilderness to explore an idea was a waste of time.
+@@lost-her
+And little by little, without noticing, I lost her. Somewhere in the move into the professional world, the pointless wandering stopped and the managing took over.
+@@tired
+I became a checkbox ticker, and I was so, so tired.
+@@post-prompt
+One night, I was just way too tired to shape the thoughts I had, so I asked an AI to write a post for me.
+@@perfect
+It came back perfect. Polished, confident. So I posted it.
+@@two-posts
+Three days later, a friend posted something almost identical. The exact same metaphor, the exact same phrasing.
+@@algorithm
+I saw it and I realized: this isn't me. It's not my voice. I hadn't written this post. I just... I don't know, I ran an algorithm. And that algorithm wasn't mine. I had traded my voice to save 30 minutes of thinking.
+===
+The Kitchen Scene|section
+@@kitchen
+And then I started noticing it in other places. Real ones.
+Late one night in my kitchen, my husband and I were having one of those rare, vulnerable conversations. I said something incredibly deep about how I was feeling. He looked at me, his eyes shining, deeply touched.
+@@not-my-words
+And standing there... I realized I didn't think those words.
+Earlier that morning, I'd opened the chatbot and typed in some raw thoughts. It answered. We had this intimate conversation, maybe even deeper than the one in my kitchen. My lines were short; its lines were deep. It gave me these smart, smart answers, so I never had to sit in the ambiguity of my own feelings. I had pocketed its beautiful sentence, carried it home, and without ever noticing it wasn't mine, handed it to my husband as if it were a piece of my own heart.
+I stood there looking at the tears in his eyes, and I couldn't tell:
+
+Is this even my thought?
+
+Am I lying to him?
+
+@@inner-check
+And to be clear, the problem wasn't that AI helped me find language. Sometimes we need help finding language.
+
+The problem was that I never stopped to ask whether the sentence was actually true for me.
+
+I had skipped the inner check.
+
+I had taken something beautiful, something that sounded emotionally intelligent, and handed it over before it had passed, REALLY passed, through my own body.
+
+And this is not just personal.
+
+This is already becoming a professional problem.
+
+Because if we all start producing the same polished thoughts, the same smart metaphors, the same strategically optimized answers—then what exactly are we hiring for?
+@@factory
+I leaned on AI at work as well, of course. Automated almost everything. But the automation didn't stop at being efficient—I automated my decisions, my creativity, my thinking. My job got easier, but my life got harder. I felt like a vessel. A factory. Like a manufacturer of something ELSE that creates.
+@@flat
+Me? I wasn't creating anything anymore. I was just... reviewing, maybe? Things that weren't mine, although my name was written on them. My thinking, or creativity muscle got weaker, and it left me so, so flat.
+@@gave-her-away
+I told you I lost that girl who built the fan site. Let me be clear about that — nobody stole her. I gave her away — one easy answer at a time.
+===
+The Flattening|section
+@@flattening-title
+What I just described—that slow going-flat—I finally gave it a name:
+
+The Flattening.
+
+@@trains-you
+The Flattening is what happens when AI doesn't replace you all at once. It trains you, very gently, out of yourself.
+
+@@relief
+It doesn't feel dramatic. It doesn't feel like loss.
+
+It feels like relief.
+
+That is the trap.
+
+It's not burnout, just to be clear. Burnout is too much pressing in.
+
+The Flattening is the opposite: less and less of you coming out.
+@@found-her
+I'm not here to talk about AI. I'm here because I found that girl. My vitality again. By accident. And I'm here to tell you how.
+@@cure
+The cure is one thing, and it sounds far too small: Stay in the ambiguity.
+@@the-gap
+Here's the move. You're trying to write an email, or say a hard thing. You hit the spot where the words won't come. The screen sits blank. That spot is the gap.
+@@stop-hand
+In that exact moment, your hand is already moving toward the machine. The thing that hands you an answer in four seconds so you don't have to feel the discomfort.
+The move is: you don't. You stop your hand. You stay in the gap—one beat longer than is comfortable. That is the rep.
+Leave your mind alone in that gap, and it doesn't freeze. It wanders, and it comes back holding something that wasn't there before.
+Plant — feet still|plant
+@@certainty
+Certainty retrieves; ambiguity creates.
+Staying long enough for your weird, specific self to come back is a muscle. My own muscle atrophied. I practice this badly, daily, catching myself maybe one in five. But every rep makes the gap a little more bearable. Every single rep hands back exactly what the convenience took: The spark. The taste. The aliveness. You get them one held beat at a time.
+===
+The Explainer|section
+@@both-sides
+I sit on both sides of this. I help build this. I've worked with the labs behind the tools you opened this morning. And I coach the leaders trying to understand what kind of human still matters in a world like this.
+
+@@who-hire
+They ask it in different ways, but underneath, it's always the same question:
+
+Who do we hire in 2030?
+
+Who do we hire in 2050?
+@@web-dev
+Here's what I tell them. Every new technology took jobs, yeah, but it opened new ones throughout history. There was no web developer before we had a web. So the trick is to understand where AI is weak, and own that gap. And bring what the technology is missing.
+@@wall
+AI has a wall. I stood right by it. It's what brought back that eleven-year-old girl.
+@@likely
+Most AI systems are designed to predict what is likely.
+
+The likely next word. The likely answer. The likely version of a thought.
+
+@@floor
+And that is unbelievably powerful.
+
+But the likely answer is not always the right answer.
+
+The average is the floor, not the ceiling.
+
+@@two-advantages
+Because two things about you were never written down, and they can never be part of the dataset AI needs to operate. That is the gap AI has.
+What are your two advantages?
+@@adv1
+One: your inner world.
+@@mess-float
+Real ideas start with a mess. Seventeen balls in the air at once. A gut feeling, a memory, a tiny childhood detail. Your brain holds them, refusing to filter, until a spark catches.
+@@wild-association
+And your mind does this weird, weird thing where it filters out ideas by wild association—connecting three things with absolutely no business being together, because in your inner world, it makes sense. That's innovation, by the way. You have to sit in ambiguity for that to happen.
+@@creative-leap
+A creative leap is the exact opposite of the average.
+@@deviation
+In a world of autocompleted averages, your deviation is your leverage.
+@@adv2
+The other thing that's not in the data set is what's never said. We understand subtext. We have intuition. We have a nervous system. We know stuff that doesn't exist in the data set.
+@@know-more
+Think about it for a second.
+@@body-examples
+You can find one friend's face in a crowd of a thousand and never explain why. You can ride a bike and you don't really understand how—your body just remembers. You can walk into a room and know something's wrong before a single word is said. You just feel the room.
+@@in-your-body
+That knowing isn't in any data set. It's in your body, built over a whole life of paying attention, of being a person in the world, of having a nervous system programmed to survive. No one can fully write it down, not even you. And you cannot feed the AI what you cannot put into data.
+Plant — feet still|plant
+@@you-are-everything
+AI has read everything ever written, and never once stayed up past midnight building something nobody asked for. It knows everything that was written down. You are everything that wasn't.
+===
+The Warning|section
+@@back-to-bedroom
+Back to the bluish light of the bedroom, that broken website, the green text, the misspelled witch.
+
+That wasn't the warm-up before my career.
+
+@@most-alive
+In some ways, that was the purest version of my creativity.
+
+Not the most impressive. Not the most strategic. Definitely not the best designed.
+
+But the most alive.
+
+Because at 11, I wasn't optimizing. I wasn't performing expertise. I wasn't asking what will move the needle.
+
+I was just following a weird little spark far enough to see what is possible.
+
+@@because-bored
+And I could follow it that far because I was lonely. I was bored. There was no instant escape, so I had to stay. I had to stay in the room and sit in the friction of it. I had to build something to survive it.
+@@autocomplete-loneliness
+If someone had walked into my bedroom 22 years ago and handed me a screen to autocomplete my loneliness, that fan site would have never existed.
+@@let-it
+Technology is going to take some of what you do. Let it. It's welcome to them. That is not the scary part.
+@@becoming
+The scary part is what we are willingly becoming. We are actually becoming AI-average flattening machines.
+@@kids
+And the part that keeps me awake at night is this:
+
+We are teaching our kids the same move.
+
+We are building them a world where no one ever has to sit in the quiet. Where the second boredom appears, we fill it. The second sadness appears, we solve it. The second curiosity appears, we autocomplete it.
+
+@@friction
+But identity forms in friction.
+
+A child becomes someone by staying with the hard thing long enough to discover what rises inside them.
+
+@@autocomplete-self
+If we autocomplete every uncomfortable moment, we may also autocomplete the very place where a self is supposed to form.
+
+And when a person loses access to that place, of course they start to feel replaceable.
+===
+The Close|section
+@@cant-take
+But let me tell you this: the machine can never take who you are.
+@@they-hire-this
+Remember what every leader asks me? Who do we hire now? They hire this. Your weird associations, your gut, your clumsy way of seeing a problem. The deviation the average can never ever reach.
+Plant — feet still|plant
+@@dont-give-away
+Don't give that away.
+@@door
+You don't find who you are by reading about who you are. You find it by staying in the room when you don't know how to stay. By holding a beat. Ambiguity is the door; yourself is what walks through it.
+@@next-time
+Next time you're in the gap in front of a blank screen—writing an email, a message to your team—or next time you feel something towards someone you love that you have no words for yet, and your hand goes for the chatbot... don't. Stay. Write the first line yourself. Let it be bad, but let it come from your nervous system, not from a data set.
+@@wander
+Go waste an afternoon. Go wander. Go let the “not knowing” be a little bit longer than you can stand.
+@@exception
+Because that's the only place you were ever the exception of one, and not the average.
+
+
+
+@@signoff`;
+
+let lines = [];
+let scrollY = 0;
+let isPlaying = false;
+let speed = 2;
+let timerInterval = null;
+let startTime = null;
+let elapsedBeforePause = 0;
+let animFrame = null;
+let isMirrored = false;
+let fontSize = 42;
+
+/* ─── SLIDES SYNC — this teleprompter is the master; the deck follows ───
+   Position-based: each frame we find which embedded @@cue is at the reading
+   line and broadcast that slide id (id, not index → survives slide edits).
+   Dual transport (BroadcastChannel + localStorage) so it works whether the
+   two windows are served over http(localhost) or opened as files in Chrome. */
+let cueEls = [];
+let lastCueId = null;
+let cueCounter = 0;
+let syncChannel = null;
+try {
+  syncChannel = new BroadcastChannel('deck-sync');
+  syncChannel.addEventListener('message', (e) => {
+    // The slides window just opened and asked for state → re-send current cue.
+    if (e.data && e.data.type === 'init' && lastCueId) sendCue(lastCueId, true);
+  });
+} catch (_) {}
+
+function sendCue(slideId, force) {
+  if (!slideId) return;
+  if (!force && slideId === lastCueId) return;
+  lastCueId = slideId;
+  try { if (syncChannel) syncChannel.postMessage({ type: 'goto', slideId }); } catch (_) {}
+  try { localStorage.setItem('deck-sync-cue', JSON.stringify({ slideId, n: ++cueCounter })); } catch (_) {}
+  const ind = document.getElementById('slide-id');
+  if (ind) ind.textContent = slideId;
+}
+
+function syncSlides() {
+  if (!cueEls.length) return;
+  const lineY = window.innerHeight * 0.38;   // the reading line (#mirror-line sits at 35%)
+  let activeId = cueEls[0].getAttribute('data-slide');
+  for (let i = 0; i < cueEls.length; i++) {
+    if (cueEls[i].getBoundingClientRect().top <= lineY) activeId = cueEls[i].getAttribute('data-slide');
+    else break;   // cues are in document order, so the first one below the line ends the scan
+  }
+  if (activeId !== lastCueId) sendCue(activeId);
+}
+
+function parseScript(raw) {
+  const result = [];
+  const sections = raw.split('===');
+  for (const section of sections) {
+    const sectionLines = section.split('\n');
+    for (const line of sectionLines) {
+      const trimmed = line.trim();
+      if (!trimmed) {
+        result.push({ type: 'empty', text: '' });
+        continue;
+      }
+      if (trimmed.startsWith('@@')) {
+        result.push({ type: 'cue', slideId: trimmed.slice(2).trim() });
+        continue;
+      }
+      if (trimmed.endsWith('|section')) {
+        result.push({ type: 'section', text: trimmed.replace('|section', '') });
+      } else if (trimmed.endsWith('|stage')) {
+        result.push({ type: 'stage', text: trimmed.replace('|stage', '') });
+      } else if (trimmed.endsWith('|pause') || trimmed.startsWith('⏸')) {
+        result.push({ type: 'pause', text: trimmed.replace('|pause', '') });
+      } else if (trimmed.endsWith('|plant')) {
+        result.push({ type: 'plant', text: trimmed.replace('|plant', '').trim() || 'Plant' });
+      } else {
+        result.push({ type: 'spoken', text: trimmed });
+      }
+    }
+  }
+  return result;
+}
+
+function renderContent() {
+  const wrapper = document.getElementById('content-wrapper');
+  lines = parseScript(SCRIPT_TEXT);
+  let html = '';
+  for (let i = 0; i < lines.length; i++) {
+    const l = lines[i];
+    if (l.type === 'cue') {
+      html += `<div class="line cue" data-idx="${i}" data-slide="${l.slideId}" aria-hidden="true"></div>`;
+      continue;
+    }
+    let cls = 'line ';
+    switch (l.type) {
+      case 'section': cls += 'section-header'; break;
+      case 'stage': cls += 'stage-direction'; break;
+      case 'pause': cls += 'pause'; break;
+      case 'plant': cls += 'plant'; break;
+      case 'empty': cls += 'empty-line'; break;
+      default: cls += 'spoken';
+    }
+    if (l.type === 'plant') {
+      html += `<div class="${cls}" data-idx="${i}">${FEET_ICON}<span>${l.text}</span>${FEET_ICON}</div>`;
+    } else {
+      html += `<div class="${cls}" data-idx="${i}">${l.text}</div>`;
+    }
+  }
+  wrapper.innerHTML = html;
+  cueEls = Array.from(wrapper.querySelectorAll('.cue'));
+}
+
+function startTeleprompter() {
+  document.getElementById('fullscreen-start').classList.add('hidden');
+  document.getElementById('toolbar').classList.remove('hidden');
+  document.getElementById('shortcuts-hint').classList.remove('hidden');
+  renderContent();
+  updateProgress();
+  syncSlides();
+}
+
+function togglePlay() {
+  if (isPlaying) {
+    pauseScroll();
+  } else {
+    playScroll();
+  }
+}
+
+function playScroll() {
+  isPlaying = true;
+  startTime = Date.now();
+  updatePlayButton();
+  startTimer();
+  animate();
+}
+
+function pauseScroll() {
+  isPlaying = false;
+  elapsedBeforePause += Date.now() - (startTime || Date.now());
+  startTime = null;
+  updatePlayButton();
+  stopTimer();
+  if (animFrame) cancelAnimationFrame(animFrame);
+}
+
+function updatePlayButton() {
+  const icon = document.getElementById('play-icon');
+  const label = document.getElementById('play-label');
+  if (isPlaying) {
+    icon.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
+    label.textContent = 'Pause';
+  } else {
+    icon.setAttribute('d', 'M8 5v14l11-7z');
+    label.textContent = 'Play';
+  }
+}
+
+function animate() {
+  if (!isPlaying) return;
+  scrollY += speed * 0.25;
+  const wrapper = document.getElementById('content-wrapper');
+  const maxScroll = wrapper.scrollHeight - window.innerHeight * 0.35;
+  scrollY = Math.min(scrollY, maxScroll);
+  wrapper.style.transform = `translateY(${-scrollY}px)`;
+  updateProgress();
+  syncSlides();
+  animFrame = requestAnimationFrame(animate);
+}
+
+function updateProgress() {
+  const wrapper = document.getElementById('content-wrapper');
+  if (!wrapper) return;
+  const maxScroll = wrapper.scrollHeight - window.innerHeight * 0.35;
+  const pct = maxScroll > 0 ? Math.min((scrollY / maxScroll) * 100, 100) : 0;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+function adjustSpeed(delta) {
+  speed = Math.max(0.5, Math.min(8, speed + delta));
+  document.getElementById('speed-display').textContent = `Speed: ${speed}x`;
+}
+
+function adjustFontSize(delta) {
+  fontSize = Math.max(20, Math.min(80, fontSize + delta));
+  document.documentElement.style.setProperty('--font-size', fontSize + 'px');
+  document.getElementById('font-display').textContent = fontSize + 'px';
+}
+
+function resetScroll() {
+  scrollY = 0;
+  const wrapper = document.getElementById('content-wrapper');
+  if (wrapper) wrapper.style.transform = 'translateY(0)';
+  elapsedBeforePause = 0;
+  startTime = isPlaying ? Date.now() : null;
+  updateTimerDisplay(0);
+  updateProgress();
+  syncSlides();
+}
+
+function toggleMirror() {
+  isMirrored = !isMirrored;
+  const wrapper = document.getElementById('content-wrapper');
+  const btn = document.getElementById('btn-mirror');
+  if (isMirrored) {
+    wrapper.style.direction = 'ltr';
+    wrapper.style.transform = `scaleX(-1) translateY(${-scrollY}px)`;
+    btn.classList.add('active');
+  } else {
+    wrapper.style.direction = 'rtl';
+    wrapper.style.transform = `translateY(${-scrollY}px)`;
+    btn.classList.remove('active');
+  }
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+function startTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    const elapsed = elapsedBeforePause + (startTime ? Date.now() - startTime : 0);
+    updateTimerDisplay(elapsed);
+  }, 200);
+}
+
+function stopTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+}
+
+function updateTimerDisplay(ms) {
+  const totalSec = Math.floor(ms / 1000);
+  const min = Math.floor(totalSec / 60);
+  const sec = totalSec % 60;
+  document.getElementById('timer').textContent =
+    String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+}
+
+let manualScrollSpeed = 0;
+let manualScrollInterval = null;
+
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('fullscreen-start').classList.contains('hidden') === false) {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      startTeleprompter();
+    }
+    return;
+  }
+
+  switch (e.key) {
+    case ' ':
+      e.preventDefault();
+      togglePlay();
+      break;
+    case 'ArrowUp':
+      e.preventDefault();
+      adjustSpeed(0.5);
+      break;
+    case 'ArrowDown':
+      e.preventDefault();
+      adjustSpeed(-0.5);
+      break;
+    case 'ArrowRight':
+      e.preventDefault();
+      scrollY = Math.max(0, scrollY - 60);
+      applyScroll();
+      break;
+    case 'ArrowLeft':
+      e.preventDefault();
+      scrollY += 60;
+      applyScroll();
+      break;
+    case 'f':
+    case 'F':
+      toggleFullscreen();
+      break;
+    case 'm':
+    case 'M':
+      toggleMirror();
+      break;
+    case 'r':
+    case 'R':
+      resetScroll();
+      break;
+  }
+});
+
+function applyScroll() {
+  const wrapper = document.getElementById('content-wrapper');
+  if (!wrapper) return;
+  const maxScroll = wrapper.scrollHeight - window.innerHeight * 0.35;
+  scrollY = Math.max(0, Math.min(scrollY, maxScroll));
+  if (isMirrored) {
+    wrapper.style.transform = `scaleX(-1) translateY(${-scrollY}px)`;
+  } else {
+    wrapper.style.transform = `translateY(${-scrollY}px)`;
+  }
+  updateProgress();
+  syncSlides();
+}
+
+let touchStartY = 0;
+document.addEventListener('touchstart', (e) => {
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchmove', (e) => {
+  const delta = touchStartY - e.touches[0].clientY;
+  touchStartY = e.touches[0].clientY;
+  scrollY += delta;
+  applyScroll();
+}, { passive: true });
+
+document.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  scrollY += e.deltaY * 0.5;
+  applyScroll();
+}, { passive: false });
+
+let toolbarTimeout;
+document.addEventListener('mousemove', (e) => {
+  const toolbar = document.getElementById('toolbar');
+  const hint = document.getElementById('shortcuts-hint');
+  if (e.clientY < 80 || !isPlaying) {
+    toolbar.classList.remove('hidden');
+    hint.classList.remove('hidden');
+  }
+  clearTimeout(toolbarTimeout);
+  if (isPlaying) {
+    toolbarTimeout = setTimeout(() => {
+      toolbar.classList.add('hidden');
+      hint.classList.add('hidden');
+    }, 3000);
+  }
+});
+</script>
+</body>
+</html>
