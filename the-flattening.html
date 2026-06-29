@@ -128,7 +128,10 @@ body::after {
   opacity: 0;
   pointer-events: none;
   z-index: 1;
-  will-change: transform, opacity, filter;
+  /* Deliberately NO permanent will-change. Promoting all 56 fixed full-screen
+     slides to compositor layers made some GPUs leave a freshly un-hidden slide
+     stale/blank until a reflow (resize/refresh) — the "slides don't load while
+     navigating until I refresh" bug. Nav is a cheap opacity toggle; see goToSlide(). */
 }
 .slide.active {
   opacity: 1;
@@ -934,7 +937,6 @@ body::after {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out), filter 0.5s var(--ease-out);
-  will-change: transform, opacity;
 }
 .slide.visible .slide-content {
   opacity: 1;
@@ -1517,6 +1519,45 @@ body.blacked-out::after {
 .ctyping .dots span:nth-child(2){ animation-delay:0.15s; }
 .ctyping .dots span:nth-child(3){ animation-delay:0.30s; }
 @keyframes ctypeBounce { 0%,60%,100%{ transform:translateY(0); opacity:0.4; } 30%{ transform:translateY(-4px); opacity:1; } }
+
+/* ════════════ KINETIC LAYER — hero-slide motion ════════════ */
+/* 1 · Flatline waveform (flattening-title): her voice → dead line */
+.vwave{display:flex;align-items:center;justify-content:center;gap:4px;height:190px;width:min(740px,80vw);margin:0 auto 30px}
+.vbar{width:6px;border-radius:4px;background:var(--coral);transform-origin:center}
+.slide.active .vbar{animation:barLife 2.9s var(--ease-out) var(--d,0s) forwards}
+@keyframes barLife{
+  0%{transform:scaleY(.6);background:var(--coral)}
+  12%{transform:scaleY(1)}22%{transform:scaleY(.5)}32%{transform:scaleY(.92)}
+  44%{transform:scaleY(.58)}56%{transform:scaleY(.82)}66%{transform:scaleY(.5);background:var(--coral)}
+  100%{transform:scaleY(.04);background:#4a4642}
+}
+.flatten-reveal{opacity:0;transform:translateY(16px)}
+.slide.active .flatten-reveal{animation:kFadeUp 1s var(--ease-out) 2.3s forwards}
+@keyframes kFadeUp{to{opacity:1;transform:none}}
+
+/* 2 · Kinetic punch (you-are-everything): the last word lands */
+.kpunch{display:inline-block;opacity:0;transform:scale(2.1);filter:blur(8px)}
+.slide.active .kpunch{animation:kPunch .85s var(--ease-out) 1.5s forwards}
+@keyframes kPunch{55%{opacity:1}100%{opacity:1;transform:scale(1);filter:blur(0)}}
+
+/* 3 · Blinking cursor (the-gap): the blank screen, felt */
+.kcursor{display:inline-block;width:.5ch;height:1.05em;background:var(--coral);box-shadow:0 0 28px var(--coral-glow);vertical-align:-0.13em;animation:kBlink 1.05s step-end infinite}
+@keyframes kBlink{50%{opacity:0}}
+
+/* 4 · Bell-curve motion (likely: AI drops on the peak · floor: you fling to the tails) */
+.bc-ai{transform-box:fill-box;transform-origin:center;opacity:0;transform:translateY(-46px)}
+.slide.active .bc-ai{animation:bcDrop .65s var(--ease-out) 1.0s forwards}
+@keyframes bcDrop{to{opacity:1;transform:translateY(0)}}
+.bc-you{transform-box:fill-box;opacity:0}
+.bc-you.l{transform:translateX(150px)}
+.bc-you.r{transform:translateX(-150px)}
+.slide.active .bc-you{animation:bcFling 1s var(--ease-out) 1.3s forwards}
+@keyframes bcFling{55%{opacity:1}100%{opacity:1;transform:translateX(0)}}
+
+/* 5 · Physical flatten (flat): the words themselves squash down */
+.ksquash{transform-origin:center}
+.slide.active .ksquash{animation:kSquash 1.6s var(--ease-out) forwards}
+@keyframes kSquash{0%{transform:scaleY(1.05);opacity:.3}100%{transform:scaleY(.8);opacity:1}}
 </style>
 </head>
 <body>
@@ -1686,45 +1727,12 @@ body.blacked-out::after {
   <aside class="notes">I saw it and I realized: this isn't me. It's not my voice. I hadn't written this post.<br><br>I just… ran an algorithm. And that algorithm wasn't mine.<br><br>I had traded my voice to save 30 minutes of thinking.</aside>
 </section>
 
-<!-- ═══════════════ MOVEMENT 3 — THE KITCHEN SCENE ═══════════════ -->
-
-<!-- kitchen -->
-<section class="slide" data-world="void" id="kitchen">
-  <div class="slide-inner slide-content anim-fade full-center">
-    <div class="t-large muted">Late one night,<br>in my kitchen.</div>
-  </div>
-  <aside class="notes">And then I started noticing it in other places. Real ones.<br><br>Late one night in my kitchen, my husband and I were having one of those rare, vulnerable conversations. I said something incredibly deep about how I was feeling.<br><br>He looked at me, his eyes shining, deeply touched.</aside>
-</section>
-
-<!-- not-my-words -->
-<section class="slide" data-world="void" id="not-my-words">
-  <div class="slide-inner slide-content anim-scale full-center">
-    <div class="t-huge">I didn't think<br>those words.</div>
-  </div>
-  <aside class="notes">And standing there… I realized I didn't think those words.<br><br>Earlier that morning, I'd opened the chatbot and typed in some raw thoughts. It answered. We had this intimate conversation — maybe even deeper than the one in my kitchen. My lines were short; its lines were deep.<br><br>I had pocketed its beautiful sentence, carried it home, and — without ever noticing it wasn't mine — handed it to my husband as if it were a piece of my own heart.<br><br>I stood there looking at the tears in his eyes, and I couldn't tell: Is this even my thought? Am I lying to him?</aside>
-</section>
-
-<!-- inner-check -->
-<section class="slide" data-world="dark" id="inner-check">
-  <div class="slide-inner slide-content full-center">
-    <div class="t-mega">I skipped the<br><span class="coral">inner check.</span></div>
-  </div>
-  <aside class="notes">And to be clear — the problem wasn't that AI helped me find language. Sometimes we need help finding language.<br><br>The problem was that I never stopped to ask whether the sentence was actually true for me.<br><br>I had skipped the inner check. I had taken something beautiful, something that sounded emotionally intelligent, and handed it over before it had passed — <em>really</em> passed — through my own body.<br><br>And this is not just personal — it's already becoming a professional problem. If we all start producing the same polished thoughts, the same smart metaphors, the same optimized answers — then what exactly are we hiring for?</aside>
-</section>
-
-<!-- factory : (reuse s11) -->
-<section class="slide" data-world="beige" id="factory">
-  <div class="slide-inner slide-content pin-left">
-    <div class="t-mega">A factory.</div>
-    <div class="t-medium muted mt-sm" style="max-width:640px;">A manufacturer of something <em>else</em> that creates.</div>
-  </div>
-  <aside class="notes">I leaned on AI at work as well. Automated almost everything. But the automation didn't stop at being efficient — I automated my decisions, my creativity, my thinking.<br><br>My job got easier, but my life got harder. I felt like a vessel. A factory. Like a manufacturer of something <em>else</em> that creates.</aside>
-</section>
+<!-- ═══════════════ MOVEMENT 3 — GOING FLAT ═══════════════ -->
 
 <!-- flat -->
 <section class="slide" data-world="beige" id="flat">
-  <div class="slide-inner slide-content anim-fade full-center">
-    <div class="t-mega muted">It left me<br>so, so flat.</div>
+  <div class="slide-inner slide-content full-center">
+    <div class="t-mega muted ksquash">It left me<br>so, so flat.</div>
   </div>
   <aside class="notes">Me? I wasn't creating anything anymore. I was just… reviewing. Things that weren't mine, although my name was written on them.<br><br>My thinking — my creativity muscle — got weaker, and it left me so, so flat.</aside>
 </section>
@@ -1742,9 +1750,12 @@ body.blacked-out::after {
 
 <!-- flattening-title : THE reveal -->
 <section class="slide" data-world="void" id="flattening-title">
-  <div class="slide-inner slide-content anim-scale full-center">
-    <div class="t-large dim" style="letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;">I finally gave it a name</div>
-    <div class="coral" style="font-family:var(--font-display);font-weight:900;font-size:clamp(3.5rem,13vw,11rem);line-height:0.95;letter-spacing:-0.03em;">The Flattening.</div>
+  <div class="slide-inner slide-content full-center">
+    <div class="vwave" data-wave="56"></div>
+    <div class="flatten-reveal">
+      <div class="t-large dim" style="letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;">I finally gave it a name</div>
+      <div class="coral" style="font-family:var(--font-display);font-weight:900;font-size:clamp(3.5rem,13vw,11rem);line-height:0.95;letter-spacing:-0.03em;">The Flattening.</div>
+    </div>
   </div>
   <aside class="notes">What I just described — that slow going-flat — I finally gave it a name:<br><br><strong>The Flattening.</strong></aside>
 </section>
@@ -1789,8 +1800,9 @@ body.blacked-out::after {
 <!-- the-gap -->
 <section class="slide" data-world="dark" id="the-gap">
   <div class="slide-inner slide-content full-center">
-    <div class="t-medium muted" style="max-width:680px;">You're writing an email, or saying a hard thing. You hit the spot where the words won't come. The screen sits blank.</div>
+    <div style="font-family:var(--font-display);font-weight:900;font-size:clamp(2.4rem,7vw,5.5rem);line-height:1.1;min-height:1.2em;">&#8203;<span class="kcursor"></span></div>
     <div class="t-huge mt-md">That spot is <span class="coral">the gap.</span></div>
+    <div class="t-body muted mt-sm" style="max-width:600px;">Stay in it — one beat longer than is comfortable.</div>
   </div>
   <aside class="notes">Here's the move. You're trying to write an email, or say a hard thing. You hit the spot where the words won't come. The screen sits blank.<br><br>That spot is the gap.</aside>
 </section>
@@ -1869,9 +1881,11 @@ body.blacked-out::after {
       <path d="M 160 120 C 180 88, 190 38, 200 38 C 210 38, 220 88, 240 120"
             stroke="var(--coral)" stroke-width="3.5" fill="none" opacity="0.6" stroke-linecap="round"/>
       <line x1="200" y1="28" x2="200" y2="168" stroke="var(--coral)" stroke-width="2" stroke-dasharray="6 4" opacity="0.4"/>
-      <circle cx="200" cy="38" r="8" fill="var(--coral)" opacity="0.9"/>
-      <circle cx="200" cy="38" r="14" fill="var(--coral)" opacity="0.12"/>
-      <text x="200" y="18" text-anchor="middle" fill="var(--coral)" font-size="24" font-family="Heebo" font-weight="900">AI</text>
+      <g class="bc-ai">
+        <circle cx="200" cy="38" r="14" fill="var(--coral)" opacity="0.12"/>
+        <circle cx="200" cy="38" r="8" fill="var(--coral)" opacity="0.9"/>
+        <text x="200" y="18" text-anchor="middle" fill="var(--coral)" font-size="24" font-family="Heebo" font-weight="900">AI</text>
+      </g>
       <text x="200" y="192" text-anchor="middle" fill="var(--coral)" font-size="20" font-family="Heebo" font-weight="700" opacity="0.6">average</text>
     </svg>
   </div>
@@ -1893,12 +1907,16 @@ body.blacked-out::after {
       <path d="M 20 160 C 90 160, 130 160, 160 120 C 180 88, 190 38, 200 38 C 210 38, 220 88, 240 120 C 270 160, 310 160, 380 160 L 380 170 L 20 170 Z" fill="url(#bellFill2)"/>
       <path d="M 20 160 C 90 160, 130 160, 160 120 C 180 88, 190 38, 200 38 C 210 38, 220 88, 240 120 C 270 160, 310 160, 380 160" stroke="currentColor" stroke-width="2.5" fill="none" opacity="0.15" stroke-linecap="round"/>
       <line x1="200" y1="28" x2="200" y2="168" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4" opacity="0.1"/>
-      <circle class="bell-pulse" cx="55" cy="155" r="36" fill="var(--coral)" opacity="0.15" filter="url(#pulseGlow)"/>
-      <circle cx="55" cy="155" r="24" fill="var(--coral)" opacity="0.95"/>
-      <text x="55" y="162" text-anchor="middle" fill="white" font-size="17" font-family="Heebo" font-weight="900">you</text>
-      <circle class="bell-pulse delay" cx="345" cy="155" r="36" fill="var(--coral)" opacity="0.15" filter="url(#pulseGlow)"/>
-      <circle cx="345" cy="155" r="24" fill="var(--coral)" opacity="0.95"/>
-      <text x="345" y="162" text-anchor="middle" fill="white" font-size="17" font-family="Heebo" font-weight="900">you</text>
+      <g class="bc-you l">
+        <circle class="bell-pulse" cx="55" cy="155" r="36" fill="var(--coral)" opacity="0.15" filter="url(#pulseGlow)"/>
+        <circle cx="55" cy="155" r="24" fill="var(--coral)" opacity="0.95"/>
+        <text x="55" y="162" text-anchor="middle" fill="white" font-size="17" font-family="Heebo" font-weight="900">you</text>
+      </g>
+      <g class="bc-you r">
+        <circle class="bell-pulse delay" cx="345" cy="155" r="36" fill="var(--coral)" opacity="0.15" filter="url(#pulseGlow)"/>
+        <circle cx="345" cy="155" r="24" fill="var(--coral)" opacity="0.95"/>
+        <text x="345" y="162" text-anchor="middle" fill="white" font-size="17" font-family="Heebo" font-weight="900">you</text>
+      </g>
     </svg>
   </div>
   <aside class="notes">And that is unbelievably powerful. But the likely answer is not always the right answer.<br><br>The average is the floor, not the ceiling. Innovation, subtext, a great experience — that's the deviation. And the deviation is you.</aside>
@@ -2011,7 +2029,7 @@ body.blacked-out::after {
 <section class="slide" data-world="void" id="you-are-everything">
   <div class="slide-inner slide-content anim-scale full-center gap-md">
     <div class="t-large muted" style="max-width:860px;">AI has read everything ever written — and never once stayed up past midnight building something nobody asked for.</div>
-    <div class="t-huge" style="max-width:900px;">It knows everything that was written down.<br><span class="coral">You are everything that wasn't.</span></div>
+    <div class="t-huge" style="max-width:900px;">It knows everything that was written down.<br><span class="coral">You are everything that <span class="kpunch">wasn't.</span></span></div>
   </div>
   <aside class="notes"><em>[ Plant — feet still ]</em><br><br>AI has read everything ever written, and never once stayed up past midnight building something nobody asked for.<br><br>It knows everything that was written down. You are everything that wasn't.</aside>
 </section>
@@ -2120,16 +2138,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-viewport" style="color:#fff;font-size:clamp(3.5rem,14vw,12rem);">Don't give<br>that away.</div>
   </div>
-  <aside class="notes"><em>[ Plant — feet still ]</em><br><br>Don't give that away.</aside>
-</section>
-
-<!-- door : the aphorism -->
-<section class="slide" data-world="light-warm" id="door">
-  <div class="slide-inner slide-content anim-scale full-center stagger gap-sm">
-    <div class="t-huge">Ambiguity is the door.</div>
-    <div class="t-huge coral">Yourself is what walks through.</div>
-  </div>
-  <aside class="notes">You don't find who you are by reading about who you are. You find it by staying in the room when you don't know how to stay. By holding a beat.<br><br>Ambiguity is the door; yourself is what walks through it.</aside>
+  <aside class="notes"><em>[ Plant — feet still ]</em><br><br>Don't give that away.<br><br>You don't find who you are by reading about who you are. You find it by staying in the room when you don't know how to stay. By holding a beat.<br><br><em>Ambiguity is the door; yourself is what walks through it.</em></aside>
 </section>
 
 <!-- next-time -->
@@ -2328,6 +2337,12 @@ function goToSlide(index) {
   leaving.classList.remove('active', 'visible');
   entering.classList.add('active', 'visible');
 
+  // Force the just-activated slide to lay out + paint THIS frame. Some browsers
+  // otherwise keep a freshly un-hidden slide stale until the next reflow, which
+  // looked like "the next slide doesn't appear until I refresh". This guarantees
+  // navigation paints immediately, exactly like a refresh would.
+  void entering.offsetHeight;
+
   currentSlide = index;
   updateUI();
 
@@ -2514,8 +2529,28 @@ window.addEventListener('hashchange', () => {
   window.addEventListener('storage', function(e){
     if (e.key === 'deck-sync-cue' && e.newValue) { try { applyCue(JSON.parse(e.newValue)); } catch (_) {} }
   });
-  // If the prompter is already running when this window opens, jump to its last cue.
-  try { var last = localStorage.getItem('deck-sync-cue'); if (last) applyCue(JSON.parse(last)); } catch (_) {}
+  // NOTE: we deliberately do NOT read localStorage on load. A stale cue from an earlier
+  // teleprompter run must never hijack a deep-link (#id) or the natural start. Opening the
+  // slides window mid-talk still syncs: in audience mode the engine posts {type:'init'} and
+  // the prompter replies with its current cue; live moves arrive via storage/BroadcastChannel.
+})();
+</script>
+
+<script>
+/* Build the flatline waveform bars (kinetic layer). Heights are fixed (no RNG) so it's
+   stable run to run; the barLife CSS animation makes them dance, then flatline, on activate. */
+(function(){
+  document.querySelectorAll('.vwave').forEach(function(w){
+    var n = parseInt(w.dataset.wave) || 56, max = 168;
+    for (var k = 0; k < n; k++){
+      var b = document.createElement('span');
+      b.className = 'vbar';
+      var h = Math.round(max * (0.26 + 0.74 * Math.abs(Math.sin(k * 0.7)) * (0.45 + 0.55 * Math.abs(Math.sin(k * 2.3 + 1)))));
+      b.style.height = h + 'px';
+      b.style.setProperty('--d', (k * 0.022).toFixed(3) + 's');
+      w.appendChild(b);
+    }
+  });
 })();
 </script>
 
