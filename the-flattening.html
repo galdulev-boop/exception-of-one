@@ -1629,16 +1629,38 @@ body.blacked-out::after {
 
 /* 7 · The unwritten (you-are-everything): everything written, and the you-shaped void */
 .unwritten-field{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;
-  -webkit-mask-image:radial-gradient(ellipse 46% 60% at 50% 50%, transparent 0, transparent 34%, #000 80%);
-          mask-image:radial-gradient(ellipse 46% 60% at 50% 50%, transparent 0, transparent 34%, #000 80%);}
+  -webkit-mask-image:radial-gradient(ellipse 56% 66% at 50% 50%, transparent 0, transparent 46%, #000 90%);
+          mask-image:radial-gradient(ellipse 56% 66% at 50% 50%, transparent 0, transparent 46%, #000 90%);}
 .uf-stream{position:absolute;left:0;right:0;top:-32%;bottom:-32%;
   font-family:'Inter',sans-serif;font-size:13px;font-weight:400;line-height:2.05;
-  letter-spacing:0.16em;word-spacing:0.5em;text-align:justify;color:#fff;opacity:0.11;
+  letter-spacing:0.16em;word-spacing:0.5em;text-align:justify;color:#fff;opacity:0.10;
   padding:0 5vw;user-select:none;animation:ufDrift 78s linear infinite}
 @keyframes ufDrift{from{transform:translateY(0)}to{transform:translateY(-22%)}}
 .uf-glow{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(ellipse 38% 50% at 50% 50%, rgba(255,107,53,0.08) 0%, transparent 60%)}
+  background:radial-gradient(ellipse 44% 52% at 50% 52%, rgba(255,107,53,0.10) 0%, transparent 62%)}
 .you-line{text-shadow:0 0 34px rgba(255,107,53,0.28)}
+
+/* The plant, restructured: a quiet setup, then the antithesis lands in the void */
+.yae-wrap{max-width:1120px}
+.yae-kicker{font-family:var(--font-body);font-size:clamp(1.02rem,1.95vw,1.45rem);
+  font-weight:400;line-height:1.55;letter-spacing:.005em;color:rgba(237,233,224,.5);
+  max-width:640px;margin:0 auto;text-shadow:0 0 16px #000,0 1px 3px #000}
+.yae-anti{display:flex;flex-direction:column;align-items:center;
+  gap:clamp(8px,1.5vh,18px);margin-top:clamp(30px,5.4vh,60px)}
+.yae-known{font-family:var(--font-display);font-size:clamp(1.55rem,3.5vw,2.8rem);
+  font-weight:600;line-height:1.2;letter-spacing:-.01em;color:rgba(237,233,224,.58);
+  max-width:24em;text-shadow:0 0 22px #000}
+.yae-was{color:var(--dark-text);font-weight:800}
+.yae-you{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5.1rem);
+  font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--coral);
+  max-width:18em;text-shadow:0 0 42px rgba(255,107,53,.38),0 2px 16px #000}
+/* staged reveal — build to the line, then the last word punches in */
+.yae-kicker,.yae-known,.yae-you{opacity:0}
+.slide.active .yae-kicker{animation:yaeRise .85s var(--ease-out) .2s forwards}
+.slide.active .yae-known{animation:yaeRise .85s var(--ease-out) .9s forwards}
+.slide.active .yae-you{animation:yaeRise .85s var(--ease-out) 1.65s forwards}
+@keyframes yaeRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+#you-are-everything.slide.active .kpunch{animation-delay:2.35s}
 
 /* ════════════ KINETIC LAYER 3 — Batch 3 ════════════ */
 /* op-notif: the notification pings in and buzzes (second-zero dopamine) */
@@ -1663,6 +1685,11 @@ body.blacked-out::after {
 .slide.active .body-list .bex:nth-child(3), .slide.active .body-list .bex:nth-child(3) .bex-dot{ animation-delay:2.05s; }
 @keyframes bexIn{ to{opacity:1;transform:none} }
 @keyframes bexDot{ 0%{transform:scale(0)} 60%{transform:scale(1.5)} 100%{transform:scale(1)} }
+
+/* Convergence (converge — s25d port): on arrival, 14 ghost out, 3 connect and glow */
+#converge.active .to-ghost{ animation: toGhost 1.6s ease-out forwards; }
+#converge.active .to-ghost.sm{ animation: toGhostSm 1.6s ease-out forwards; }
+#converge.active .to-glow{ animation: toGlow 1.6s ease-out forwards; }
 </style>
 </head>
 <body>
@@ -1708,7 +1735,7 @@ body.blacked-out::after {
       <div class="notif-badge" style="position:absolute;top:-10px;right:-10px;min-width:40px;height:40px;border-radius:100px;background:var(--coral);color:#fff;font-weight:900;font-size:1.3rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px var(--coral-glow);">1</div>
     </div>
   </div>
-  <aside class="notes">If you've ever opened an app to check a single notification, and looked up 40 minutes later with a numb thumb, a dead battery, and a vague sense of regret… there's a very good chance that that was my fault.<br><br>For over a decade, I've built the apps that capture your attention. In my world, good design removes friction. It's why you use the apps that make your life better, and why you can't put down the ones that make it worse. We call what we do <strong>optimization.</strong><br><br>But a few months ago, looking at where AI is taking this next, the researchers I work with and I realized something much bigger is happening. And it scared me. I've started calling it <strong>something else.</strong><br><br><em>But to tell you why, I have to start at midnight, when I was 11.</em></aside>
+  <aside class="notes"><strong>CUE:</strong> Open cold, in the dark. Let the lit notification hang before you speak. Land "that was my fault" lightly, like a confession with a half smile.<br><br>If you've ever opened an app to check a single notification, and looked up 40 minutes later with a numb thumb, a dead battery, and a vague sense of regret, there's a very good chance that that was my fault.<br><br>For over a decade, I've built the apps that capture your attention. In my world, good design removes friction. It's why you use the apps that make your life better, and why you can't put down the ones that make it worse. We call what we do optimization.<br><br>But a few months ago, looking at where AI is taking this next, the researchers I work with and I realized something much bigger is happening. And it scared me. I've started calling it something else.<br><br>But to tell you why, I have to start at midnight, when I was 11.</aside>
 </section>
 
 <!-- [opening hook trimmed to op-notif only — full monologue lives in its notes] -->
@@ -1721,13 +1748,13 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-hand" style="color:var(--dark-text);font-size:clamp(5rem,20vw,16rem);line-height:0.85;">Midnight.</div>
   </div>
-  <aside class="notes"><em>A little smile — more to yourself than to the room.</em><br><br>So, I'm in my pink-wall bedroom. The only light is the heavy, bluish glare from my computer screen.<br><br>I'm supposed to be asleep — middle school the day after — but I was wide awake building a website.</aside>
+  <aside class="notes"><strong>CUE:</strong> Drop into the story. A small private smile, more to yourself than the room. Slow the pace right down.<br><br>So, I'm in my pink-wall bedroom. The only light is the heavy, bluish glare from my computer screen.<br><br>I'm supposed to be asleep, middle school the next day, but I was wide awake building a website.</aside>
 </section>
 
 <!-- shrine : the real screenshot, full bleed -->
 <section class="slide" data-world="dark" id="shrine" style="padding:0;">
   <img src="fibi.gif" alt="Fibi's Enchanted Home — the fan shrine" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;background:#000;" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#3a0a5a,#000080)';"/>
-  <aside class="notes">A fan site. Actually, let's be honest — a digital shrine. To a witch from a TV show. Phoebe Halliwell from <em>Charmed.</em><br><br>And look — it looked bad. It was so, so broken. Half the links didn't work, and the colors… I don't even want to talk about the colors. Or the cringe text I wrote there.<br><br>And yeah — I spelled Phoebe F-I-B-I. Because when you're 11, spelling is strictly optional.<br><br>Nobody asked me to build it. There was a real chance no one on earth would ever see it. It was pure, useless play. Made for no one.</aside>
+  <aside class="notes"><strong>CUE:</strong> Let the screenshot breathe before you talk. Affectionate and self-deprecating. Land "made for no one" softly.<br><br>A fan site. Actually, let's be honest, a digital shrine. To a witch from a TV show. Phoebe Halliwell from Charmed.<br><br>And look, it looked bad. It was so, so broken. Half the links didn't work, and the colors, I don't even want to talk about the colors. Or the cringe text I wrote there.<br><br>And yeah, I spelled Phoebe F-I-B-I. Because when you're 11, spelling is strictly optional.<br><br>Nobody asked me to build it. There was a real chance no one on earth would ever see it. It was pure, useless play. Made for no one.</aside>
 </section>
 
 <!-- group-chat : a community forms — live retro chatroom (engagement beat) -->
@@ -1749,7 +1776,7 @@ body.blacked-out::after {
     </div>
     <div class="t-medium muted mt-md center" style="max-width:600px;">Years before "social network" meant anything to any of us.</div>
   </div>
-  <aside class="notes">And then I did something strange. None of my friends knew <em>Charmed.</em><br><br>So without a plan, I added a group chat and some interactive parts into that site — years before "social network" meant anything to any of us.<br><br>And that ugly, glitter-soaked corner grew a whole community of misfits.<br><br>Two of my best friends — the ones who've helped me through my worst moments — I met them on that terrible website 22 years ago. The most useless thing I ever made gave me the people I would die for today.</aside>
+  <aside class="notes"><strong>CUE:</strong> Let the messages pop in before you speak. Warm, fond. Hit "the people I would die for today" with full weight.<br><br>And then I did something strange. None of my friends knew Charmed.<br><br>So without a plan, I added a group chat and some interactive parts into that site, years before "social network" meant anything to any of us.<br><br>And that ugly, glitter-soaked corner grew a whole community of misfits.<br><br>Two of my best friends, the ones who've helped me through my worst moments, I met them on that terrible website 22 years ago. The most useless thing I ever made gave me the people I would die for today.</aside>
 </section>
 
 <!-- ═══════════════ MOVEMENT 2 — LOSS OF THE GIRL ═══════════════ -->
@@ -1759,7 +1786,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-fade full-center">
     <div class="t-huge">She grew up.</div>
   </div>
-  <aside class="notes">Let me tell you what happened to that girl.<br><br>She grew up. Middle school turned into high school, high school into college.</aside>
+  <aside class="notes"><strong>CUE:</strong> Shift the tone. The warmth starts to drain here. Matter-of-fact, a little colder.<br><br>Let me tell you what happened to that girl.<br><br>She grew up. Middle school turned into high school, high school into college.</aside>
 </section>
 
 <!-- beige : painted over -->
@@ -1767,7 +1794,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content pin-left">
     <div class="t-large" style="max-width:820px;">The neon pink walls got painted over with <strong>professional beige.</strong></div>
   </div>
-  <aside class="notes">And somewhere along the line, those neon pink walls got painted over with professional beige.<br><br>She was taught, very politely, that the daydream was just a distraction. That her gut was unprofessional. That play wasn't serious — and that getting lost in the wilderness to explore an idea was a waste of time.</aside>
+  <aside class="notes"><strong>CUE:</strong> "Very politely" is the knife. Stay even and controlled. Lay out the three lessons cleanly.<br><br>And somewhere along the line, those neon pink walls got painted over with professional beige.<br><br>She was taught, very politely, that the daydream was just a distraction. That her gut was unprofessional. That play wasn't serious, and that getting lost in the wilderness to explore an idea was a waste of time.</aside>
 </section>
 
 <!-- lost-her -->
@@ -1775,7 +1802,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-fade full-center">
     <div class="t-huge">Little by little,<br>I lost her.</div>
   </div>
-  <aside class="notes">And little by little, without noticing, I lost her.<br><br>Somewhere in the move into the professional world, the pointless wandering stopped and the managing took over. I became a checkbox ticker.</aside>
+  <aside class="notes"><strong>CUE:</strong> Quiet and personal. Let "I lost her" sit in silence for a beat.<br><br>And little by little, without noticing, I lost her.<br><br>Somewhere in the move into the professional world, the pointless wandering stopped and the managing took over. I became a checkbox ticker.</aside>
 </section>
 
 <!-- tired -->
@@ -1783,7 +1810,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-fade full-center">
     <div class="t-mega muted">I was so,<br>so tired.</div>
   </div>
-  <aside class="notes">…and I was so, so tired.<br><br>One night, I was just way too tired to shape the thoughts I had, so I asked an AI to write a post for me.</aside>
+  <aside class="notes"><strong>CUE:</strong> Let the tiredness show in the delivery. This sets up the first easy answer.<br><br>And I was so, so tired.<br><br>One night, I was just way too tired to shape the thoughts I had, so I asked an AI to write a post for me.</aside>
 </section>
 
 <!-- post-prompt : the lazy prompt (reuse chat-bubble) -->
@@ -1791,7 +1818,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content full-center">
     <div class="chat-bubble">"Write me a strong post about this."</div>
   </div>
-  <aside class="notes">It came back perfect. Polished, confident.<br><br>So I posted it.</aside>
+  <aside class="notes"><strong>CUE:</strong> Show the prompt. Beat. Then "so I posted it" tossed off, like it was nothing.<br><br>It came back perfect. Polished, confident.<br><br>So I posted it.</aside>
 </section>
 
 <!-- perfect -->
@@ -1799,7 +1826,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content full-center">
     <div class="t-huge">Perfect. Polished.<br><span class="coral">Confident.</span></div>
   </div>
-  <aside class="notes">It came back perfect. Polished, confident. So I posted it.</aside>
+  <aside class="notes"><strong>CUE:</strong> Each word on its own. A flicker of pride, about to curdle.<br><br>It came back perfect. Polished. Confident. So I posted it.</aside>
 </section>
 
 <!-- two-posts : the feed (reuse li-post compare) -->
@@ -1819,7 +1846,7 @@ body.blacked-out::after {
     </div>
     <div class="t-body muted mt-md center" style="max-width:600px;">Same metaphor. Same phrasing. <span class="coral">Same voice.</span></div>
   </div>
-  <aside class="notes">Three days later, a friend posted something almost identical.<br><br>The exact same metaphor, the exact same phrasing.</aside>
+  <aside class="notes"><strong>CUE:</strong> Point to the two identical posts. Let the room notice the duplication before you name it.<br><br>Three days later, a friend posted something almost identical.<br><br>The exact same metaphor, the exact same phrasing.</aside>
 </section>
 
 <!-- algorithm : (reuse s14) -->
@@ -1829,7 +1856,7 @@ body.blacked-out::after {
     <div class="t-huge coral">I ran an algorithm.</div>
     <div class="t-medium muted mt-sm">And that algorithm wasn't mine.</div>
   </div>
-  <aside class="notes">I saw it and I realized: this isn't me. It's not my voice. I hadn't written this post.<br><br>I just… ran an algorithm. And that algorithm wasn't mine.<br><br>I had traded my voice to save 30 minutes of thinking.</aside>
+  <aside class="notes"><strong>CUE:</strong> The realization. Cooler and sharper. Isolate "that algorithm wasn't mine."<br><br>I saw it and I realized: this isn't me. It's not my voice. I hadn't written this post.<br><br>I just ran an algorithm. And that algorithm wasn't mine.<br><br>I had traded my voice to save 30 minutes of thinking.</aside>
 </section>
 
 <!-- ═══════════════ MOVEMENT 3 — GOING FLAT ═══════════════ -->
@@ -1839,7 +1866,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content full-center">
     <div class="t-mega muted ksquash">It left me<br>so, so flat.</div>
   </div>
-  <aside class="notes">Me? I wasn't creating anything anymore. I was just… reviewing. Things that weren't mine, although my name was written on them.<br><br>My thinking — my creativity muscle — got weaker, and it left me so, so flat.</aside>
+  <aside class="notes"><strong>CUE:</strong> Let the words squash down with the visual. Go flat on "so, so flat."<br><br>Me? I wasn't creating anything anymore. I was just reviewing. Things that weren't mine, although my name was written on them.<br><br>My thinking, my creativity muscle, got weaker, and it left me so, so flat.</aside>
 </section>
 
 <!-- gave-her-away : (reuse s19) -->
@@ -1848,7 +1875,7 @@ body.blacked-out::after {
     <div class="t-huge">Nobody stole her.<br><span class="coral">I gave her away.</span></div>
     <div class="t-medium muted mt-md">One easy answer at a time.</div>
   </div>
-  <aside class="notes">I told you I lost that girl who built the fan site.<br><br>Let me be clear about that — nobody stole her. I gave her away. One easy answer at a time.</aside>
+  <aside class="notes"><strong>CUE:</strong> Take ownership. No blame anywhere. "I gave her away" is the confession.<br><br>I told you I lost that girl who built the fan site.<br><br>Let me be clear about that. Nobody stole her. I gave her away. One easy answer at a time.</aside>
 </section>
 
 <!-- ═══════════════ MOVEMENT 4 — THE FLATTENING ═══════════════ -->
@@ -1862,7 +1889,7 @@ body.blacked-out::after {
       <div class="coral" style="font-family:var(--font-display);font-weight:900;font-size:clamp(3.5rem,13vw,11rem);line-height:0.95;letter-spacing:-0.03em;">The Flattening.</div>
     </div>
   </div>
-  <aside class="notes">What I just described — that slow going-flat — I finally gave it a name:<br><br><strong>The Flattening.</strong></aside>
+  <aside class="notes"><strong>CUE:</strong> Let the flatline die out fully first. Then name it slowly, like a diagnosis.<br><br>What I just described, that slow going-flat, I finally gave it a name:<br><br>The Flattening.</aside>
 </section>
 
 <!-- trains-you -->
@@ -1870,7 +1897,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content full-center">
     <div class="t-large" style="max-width:880px;">It doesn't replace you all at once.<br>It trains you, very gently, <span class="coral">out of yourself.</span></div>
   </div>
-  <aside class="notes">The Flattening is what happens when AI doesn't replace you all at once.<br><br>It trains you, very gently, out of yourself.</aside>
+  <aside class="notes"><strong>CUE:</strong> "Very gently" almost soothing, which is what makes it frightening.<br><br>The Flattening is what happens when AI doesn't replace you all at once.<br><br>It trains you, very gently, out of yourself.</aside>
 </section>
 
 <!-- relief : the trap -->
@@ -1879,7 +1906,7 @@ body.blacked-out::after {
     <div class="t-huge">It feels like relief.</div>
     <div class="t-huge coral">That is the trap.</div>
   </div>
-  <aside class="notes">It doesn't feel dramatic. It doesn't feel like loss.<br><br>It feels like relief.<br><br>That is the trap.<br><br>It's not burnout, just to be clear. Burnout is too much pressing in. The Flattening is the opposite: less and less of you coming out.</aside>
+  <aside class="notes"><strong>CUE:</strong> Warm on "it feels like relief," then a hard stop on "that is the trap."<br><br>It doesn't feel dramatic. It doesn't feel like loss.<br><br>It feels like relief.<br><br>That is the trap.<br><br>It's not burnout, just to be clear. Burnout is too much pressing in. The Flattening is the opposite: less and less of you coming out.</aside>
 </section>
 
 <!-- found-her : the turn back to warmth -->
@@ -1888,7 +1915,7 @@ body.blacked-out::after {
     <div class="t-huge">I found that girl again.</div>
     <div class="t-large coral mt-sm">By accident.</div>
   </div>
-  <aside class="notes">I'm not here to talk about AI. I'm here because I found that girl. My vitality again.<br><br>By accident.<br><br>And I'm here to tell you how.</aside>
+  <aside class="notes"><strong>CUE:</strong> Turn toward warmth and hope. The smile returns. "By accident" lighter, almost surprised.<br><br>I'm not here to talk about AI. I'm here because I found that girl, my vitality, again.<br><br>By accident.<br><br>And I'm here to tell you how.</aside>
 </section>
 
 <!-- cure : the hero line -->
@@ -1899,7 +1926,7 @@ body.blacked-out::after {
     <div class="t-tiny" style="letter-spacing:0.18em;text-transform:uppercase;opacity:0.5;margin-bottom:12px;">The cure — and it sounds far too small</div>
     <div class="t-mega coral">Stay in the<br>ambiguity.</div>
   </div>
-  <aside class="notes">The cure is one thing, and it sounds far too small:<br><br><strong>Stay in the ambiguity.</strong></aside>
+  <aside class="notes"><strong>CUE:</strong> This is the thesis. Say it plainly, like it is far too small to matter. Let it land.<br><br>The cure is one thing, and it sounds far too small:<br><br>Stay in the ambiguity.</aside>
 </section>
 
 <!-- the-gap -->
@@ -1909,7 +1936,7 @@ body.blacked-out::after {
     <div class="t-huge mt-md">That spot is <span class="coral">the gap.</span></div>
     <div class="t-body muted mt-sm" style="max-width:600px;">Stay in it — one beat longer than is comfortable.</div>
   </div>
-  <aside class="notes">Here's the move. You're trying to write an email, or say a hard thing. You hit the spot where the words won't come. The screen sits blank.<br><br>That spot is the gap.</aside>
+  <aside class="notes"><strong>CUE:</strong> Let the cursor blink in silence. Make the room feel the blank screen with you.<br><br>Here's the move. You're trying to write an email, or say a hard thing. You hit the spot where the words won't come. The screen sits blank.<br><br>That spot is the gap.</aside>
 </section>
 
 <!-- stop-hand -->
@@ -1918,7 +1945,7 @@ body.blacked-out::after {
     <div class="t-mega">Stop your hand.</div>
     <div class="t-medium muted mt-md" style="max-width:640px;">Stay in the gap — one beat longer than is comfortable. <span class="coral">That is the rep.</span></div>
   </div>
-  <aside class="notes">In that exact moment, your hand is already moving toward the machine — the thing that hands you an answer in four seconds so you don't have to feel the discomfort.<br><br>The move is: you don't. You stop your hand. You stay in the gap — one beat longer than is comfortable.<br><br>That is the rep.<br><br>Leave your mind alone in that gap, and it doesn't freeze. It wanders, and it comes back holding something that wasn't there before.</aside>
+  <aside class="notes"><strong>CUE:</strong> Gesture: stop your own hand mid-air. "That is the rep" is the takeaway, set it apart.<br><br>In that exact moment, your hand is already moving toward the machine, the thing that hands you an answer in four seconds so you don't have to feel the discomfort.<br><br>The move is: you don't. You stop your hand. You stay in the gap, one beat longer than is comfortable.<br><br>That is the rep.<br><br>Leave your mind alone in that gap, and it doesn't freeze. It wanders, and it comes back holding something that wasn't there before.</aside>
 </section>
 
 <!-- certainty : PLANT — aphorism, held -->
@@ -1927,7 +1954,7 @@ body.blacked-out::after {
     <div class="t-huge muted">Certainty retrieves.</div>
     <div class="t-huge coral">Ambiguity creates.</div>
   </div>
-  <aside class="notes"><em>[ Plant — feet still ]</em><br><br>Certainty retrieves; ambiguity creates.<br><br>Staying long enough for your weird, specific self to come back is a muscle. My own muscle atrophied. I practice this badly, daily — catching myself maybe one in five. But every rep makes the gap a little more bearable. Every single rep hands back exactly what the convenience took: the spark, the taste, the aliveness. You get them one held beat at a time.</aside>
+  <aside class="notes"><strong>CUE:</strong> Plant, feet still. Deliver the aphorism slowly. Be honest that you fail at this daily.<br><br>Certainty retrieves. Ambiguity creates.<br><br>Staying long enough for your weird, specific self to come back is a muscle. My own muscle atrophied. I practice this badly, daily, catching myself maybe one in five. But every rep makes the gap a little more bearable. Every single rep hands back exactly what the convenience took: the spark, the taste, the aliveness. You get them one held beat at a time.</aside>
 </section>
 
 <!-- ═══════════════ MOVEMENT 5 — THE EXPLAINER ═══════════════ -->
@@ -1938,7 +1965,7 @@ body.blacked-out::after {
     <div class="t-huge">I sit on both sides<br>of this.</div>
     <div class="t-medium muted mt-md" style="max-width:680px;">I help build it — with the labs behind the tools you opened this morning. And I coach the leaders trying to understand what kind of human still matters.</div>
   </div>
-  <aside class="notes">I sit on both sides of this. I help build this. I've worked with the labs behind the tools you opened this morning. And I coach the leaders trying to understand what kind of human still matters in a world like this.</aside>
+  <aside class="notes"><strong>CUE:</strong> Establish credibility, grounded and level. You help build it and you coach against it.<br><br>I sit on both sides of this. I help build this. I've worked with the labs behind the tools you opened this morning. And I coach the leaders trying to understand what kind of human still matters in a world like this.</aside>
 </section>
 
 <!-- who-hire -->
@@ -1947,7 +1974,7 @@ body.blacked-out::after {
     <div class="t-mega">Who do we hire in <span class="count" data-count="2030" data-from="1975">2030</span>?</div>
     <div class="t-mega coral">In <span class="count" data-count="2050" data-from="1995">2050</span>?</div>
   </div>
-  <aside class="notes">They ask it in different ways, but underneath, it's always the same question:<br><br>Who do we hire in 2030? Who do we hire in 2050?</aside>
+  <aside class="notes"><strong>CUE:</strong> Pose the question straight to the room. Let the years count up, then ask it.<br><br>They ask it in different ways, but underneath, it's always the same question:<br><br>Who do we hire in 2030? Who do we hire in 2050?</aside>
 </section>
 
 <!-- web-dev -->
@@ -1955,7 +1982,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-huge" style="max-width:900px;">There was no web developer<br>before we had a <span class="coral">web.</span></div>
   </div>
-  <aside class="notes">Here's what I tell them. Every new technology took jobs — but it opened new ones throughout history. There was no web developer before we had a web.<br><br>So the trick is to understand where AI is weak, and own that gap. Bring what the technology is missing.</aside>
+  <aside class="notes"><strong>CUE:</strong> Reassure first, then pivot to the strategy: find where AI is weak and own that gap.<br><br>Here's what I tell them. Every new technology took jobs, but throughout history it opened new ones. There was no web developer before we had a web.<br><br>So the trick is to understand where AI is weak, and own that gap. Bring what the technology is missing.</aside>
 </section>
 
 <!-- wall -->
@@ -1964,7 +1991,7 @@ body.blacked-out::after {
     <div class="t-mega">AI has a wall.</div>
     <div class="t-large muted mt-sm">I stood right by it.</div>
   </div>
-  <aside class="notes">AI has a wall. I stood right by it.<br><br>It's what brought back that eleven-year-old girl.</aside>
+  <aside class="notes"><strong>CUE:</strong> Intrigue, lower the voice. This sets up the bell-curve explanation.<br><br>AI has a wall. I stood right by it.<br><br>It's what brought back that eleven-year-old girl.</aside>
 </section>
 
 <!-- likely : "AI is king of the average" — bell curve (matches designaideck s22) -->
@@ -1994,7 +2021,7 @@ body.blacked-out::after {
       <text x="200" y="192" text-anchor="middle" fill="var(--coral)" font-size="20" font-family="Heebo" font-weight="700" opacity="0.6">average</text>
     </svg>
   </div>
-  <aside class="notes">The basis for everything is one understanding of how AI works.<br><br>Most AI systems are designed to predict what is likely — the likely next word, the likely answer, the likely version of a thought. It's built to hit the average.<br><br>And that is unbelievably powerful. But the likely answer is not always the right answer. Innovation, subtext, a great experience — that's not the average. That's the deviation.</aside>
+  <aside class="notes"><strong>CUE:</strong> Teach it simply. As you say "average," the AI marker drops onto the peak. Set up the deviation.<br><br>The basis for everything is one understanding of how AI works.<br><br>Most AI systems are designed to predict what is likely: the likely next word, the likely answer, the likely version of a thought. It's built to hit the average.<br><br>And that is unbelievably powerful. But the likely answer is not always the right answer. Innovation, subtext, a great experience, that is not the average. That is the deviation.</aside>
 </section>
 
 <!-- floor : "Innovation is standard deviation" — bell curve, you in the tails (matches designaideck s23) -->
@@ -2024,7 +2051,7 @@ body.blacked-out::after {
       </g>
     </svg>
   </div>
-  <aside class="notes">And that is unbelievably powerful. But the likely answer is not always the right answer.<br><br>The average is the floor, not the ceiling. Innovation, subtext, a great experience — that's the deviation. And the deviation is you.</aside>
+  <aside class="notes"><strong>CUE:</strong> Point to "you" pulsing out in the tails. Land "the deviation is you."<br><br>But the likely answer is not always the right answer.<br><br>The average is the floor, not the ceiling. Innovation, subtext, a great experience, that is the deviation. And the deviation is you.</aside>
 </section>
 
 <!-- two-advantages -->
@@ -2033,7 +2060,7 @@ body.blacked-out::after {
     <div class="t-huge" style="max-width:900px;">Two things about you were <span class="coral">never written down.</span></div>
     <div class="t-medium muted mt-md">They can never be part of the dataset. That is the gap AI has.</div>
   </div>
-  <aside class="notes">Because two things about you were never written down, and they can never be part of the dataset AI needs to operate.<br><br>That is the gap AI has. What are your two advantages?</aside>
+  <aside class="notes"><strong>CUE:</strong> Name the structure: two advantages are coming. "Never written down" is the key idea.<br><br>Because two things about you were never written down, and they can never be part of the dataset AI needs to operate.<br><br>That is the gap AI has. What are your two advantages?</aside>
 </section>
 
 <!-- adv1 -->
@@ -2042,39 +2069,119 @@ body.blacked-out::after {
     <span class="section-badge">Advantage One</span>
     <div class="t-mega">Your inner world.</div>
   </div>
-  <aside class="notes">One: your inner world.</aside>
+  <aside class="notes"><strong>CUE:</strong> Section marker. Crisp and clean. "Advantage one: your inner world."<br><br>One: your inner world.</aside>
 </section>
 
-<!-- mess-float : 17 balls word cloud (reuse fragments-float) -->
-<section class="slide" data-world="light-cool" id="mess-float">
-  <div class="slide-inner slide-content full-center">
-    <div class="fragments-float">
-      <div class="frag-pill lg" style="top:6%;left:8%;">a gut feeling</div>
-      <div class="frag-pill" style="top:2%;left:46%;">the data</div>
-      <div class="frag-pill sm" style="top:10%;left:74%;">a Figma frame</div>
-      <div class="frag-pill" style="top:26%;left:24%;">a childhood detail</div>
-      <div class="frag-pill lg" style="top:30%;left:58%;">this morning's fight</div>
-      <div class="frag-pill sm" style="top:24%;left:84%;">a dream</div>
-      <div class="frag-pill" style="top:46%;left:6%;">a user interview</div>
-      <div class="frag-pill sm" style="top:50%;left:40%;">intuition</div>
-      <div class="frag-pill lg" style="top:48%;left:66%;">something from 5 years ago</div>
-      <div class="frag-pill sm" style="top:68%;left:18%;">a line from a movie</div>
-      <div class="frag-pill" style="top:72%;left:48%;">your body</div>
-      <div class="frag-pill sm" style="top:66%;left:78%;">another product</div>
-      <div class="frag-pill" style="top:88%;left:34%;">an old insight</div>
+<!-- mess (s25a2 port) : it starts from a mess -->
+<section class="slide" data-world="light-cool" id="mess">
+  <span class="frag-pill sm" style="position:absolute;top:10%;right:18%;opacity:0.09;transform:rotate(-4deg);">the data</span>
+  <span class="frag-pill sm" style="position:absolute;top:20%;right:78%;opacity:0.07;transform:rotate(6deg);">another product</span>
+  <span class="frag-pill sm" style="position:absolute;top:74%;right:12%;opacity:0.06;transform:rotate(-8deg);">this morning's fight</span>
+  <span class="frag-pill sm" style="position:absolute;top:68%;right:72%;opacity:0.08;transform:rotate(3deg);">a Figma frame</span>
+  <span class="frag-pill sm" style="position:absolute;top:30%;right:80%;opacity:0.06;transform:rotate(-5deg);">an insight</span>
+  <span class="frag-pill sm" style="position:absolute;top:82%;right:50%;opacity:0.07;transform:rotate(7deg);">a dream</span>
+  <span class="frag-pill sm" style="position:absolute;top:16%;right:48%;opacity:0.05;transform:rotate(2deg);">a memory</span>
+  <span class="frag-pill sm" style="position:absolute;top:78%;right:76%;opacity:0.06;transform:rotate(-3deg);">your body</span>
+  <div class="slide-inner slide-content full-center anim-scale" style="gap:0;">
+    <div style="text-align:center;opacity:0.5;line-height:1.5;font-weight:400;margin-bottom:-4px;font-family:var(--font-body);font-size:clamp(1.3rem,3vw,2.1rem);">Real ideas don't start with one brilliant idea.<br>They start from</div>
+    <div class="t-hand coral" style="font-size:clamp(5rem,17vw,14rem);line-height:0.85;transform:rotate(-2.5deg);position:relative;">
+      a mess.
+      <div style="position:absolute;inset:-30%;background:radial-gradient(ellipse at center,rgba(255,107,53,0.18) 0%,transparent 65%);pointer-events:none;filter:blur(50px);z-index:-1;"></div>
     </div>
-    <div class="t-large center" style="margin-top:8px;">Real ideas start with a <span class="coral">mess.</span> &nbsp;Seventeen balls in the air at once.</div>
   </div>
-  <aside class="notes">Real ideas start with a mess. Seventeen balls in the air at once. A gut feeling, a memory, a tiny childhood detail.<br><br>Your brain holds them, refusing to filter, until a spark catches.</aside>
+  <aside class="notes"><strong>CUE:</strong> Warm, a little playful. Land on "a mess."<br><br>Real ideas don't start with one brilliant idea. They start from a mess.</aside>
 </section>
 
-<!-- wild-association -->
-<section class="slide" data-world="light-cool" id="wild-association">
-  <div class="slide-inner slide-content anim-scale full-center">
-    <div class="t-huge">Wild association.</div>
-    <div class="t-medium muted mt-md" style="max-width:720px;">Connecting three things with absolutely no business being together — because in your inner world, it makes sense. <span class="coral">That's innovation.</span></div>
+<!-- mess-float (s25b port) : 17 fragments floating -->
+<section class="slide" data-world="light-cool" id="mess-float">
+  <div class="slide-inner slide-content full-center" style="gap:0;position:relative;">
+    <div class="fragments-float">
+      <span class="frag-pill lg" style="top:4%;right:18%;">trauma</span>
+      <span class="frag-pill" style="top:8%;right:58%;">a gut feeling</span>
+      <span class="frag-pill sm" style="top:2%;right:82%;">the data</span>
+      <span class="frag-pill" style="top:18%;right:5%;">a hallway comment</span>
+      <span class="frag-pill lg" style="top:22%;right:38%;">a childhood memory</span>
+      <span class="frag-pill" style="top:16%;right:72%;">this morning's fight</span>
+      <span class="frag-pill sm" style="top:35%;right:8%;">a website you built when you were a kid</span>
+      <span class="frag-pill lg" style="top:38%;right:52%;">client asks</span>
+      <span class="frag-pill" style="top:32%;right:82%;">research</span>
+      <span class="frag-pill sm" style="top:50%;right:25%;">your personal life</span>
+      <span class="frag-pill" style="top:52%;right:60%;">an old wound</span>
+      <span class="frag-pill sm" style="top:48%;right:74%;">something from 5 years ago</span>
+      <span class="frag-pill" style="top:65%;right:8%;">a dream</span>
+      <span class="frag-pill lg" style="top:68%;right:42%;">another product</span>
+      <span class="frag-pill" style="top:62%;right:72%;">intuition</span>
+      <span class="frag-pill sm" style="top:78%;right:28%;">an insight</span>
+      <span class="frag-pill" style="top:80%;right:58%;">your nervous system</span>
+    </div>
   </div>
-  <aside class="notes">And your mind does this weird, weird thing where it filters out ideas by wild association — connecting three things with absolutely no business being together, because in your inner world, it makes sense.<br><br>That's innovation, by the way. You have to sit in ambiguity for that to happen.</aside>
+  <aside class="notes"><strong>CUE:</strong> Gesture wide at the floating mess.<br><br>Seventeen balls in the air at once. A gut feeling, a memory, a tiny childhood detail. Each one from a different world.</aside>
+</section>
+
+<!-- dmn (s25c port) : the brain holds unrelated things together -->
+<section class="slide" data-world="light-cool" id="dmn">
+  <div class="slide-inner slide-content full-center gap-md">
+    <div class="t-large" style="max-width:740px;">Your brain doesn't rest when you rest.<br><span class="coral">It holds unrelated things together in the air.</span></div>
+    <svg class="dmn-network" viewBox="0 0 600 300" style="width:100%;max-width:680px;margin-top:28px;">
+      <defs><filter id="nodeGlow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <g class="dmn-edges" stroke="var(--light-text)" stroke-width="1.5" opacity="0.5">
+        <line x1="90" y1="80" x2="220" y2="140"><animate attributeName="opacity" values="0.25;0.7;0.25" dur="3s" repeatCount="indefinite"/></line>
+        <line x1="220" y1="140" x2="380" y2="100"><animate attributeName="opacity" values="0.3;0.75;0.3" dur="3.5s" repeatCount="indefinite" begin="0.3s"/></line>
+        <line x1="380" y1="100" x2="510" y2="160"><animate attributeName="opacity" values="0.25;0.65;0.25" dur="2.8s" repeatCount="indefinite" begin="0.6s"/></line>
+        <line x1="90" y1="80" x2="160" y2="220"><animate attributeName="opacity" values="0.25;0.6;0.25" dur="4s" repeatCount="indefinite" begin="0.2s"/></line>
+        <line x1="160" y1="220" x2="300" y2="240"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.2s" repeatCount="indefinite" begin="0.5s"/></line>
+        <line x1="300" y1="240" x2="440" y2="200"><animate attributeName="opacity" values="0.25;0.65;0.25" dur="3.8s" repeatCount="indefinite" begin="0.8s"/></line>
+        <line x1="440" y1="200" x2="510" y2="160"><animate attributeName="opacity" values="0.25;0.6;0.25" dur="2.5s" repeatCount="indefinite" begin="1s"/></line>
+        <line x1="220" y1="140" x2="300" y2="240"><animate attributeName="opacity" values="0.25;0.6;0.25" dur="3.6s" repeatCount="indefinite" begin="0.4s"/></line>
+        <line x1="380" y1="100" x2="440" y2="200"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite" begin="0.7s"/></line>
+        <line x1="160" y1="220" x2="380" y2="100"><animate attributeName="opacity" values="0.2;0.55;0.2" dur="4.5s" repeatCount="indefinite" begin="1.2s"/></line>
+      </g>
+      <g filter="url(#nodeGlow)">
+        <circle cx="90" cy="80" r="10" fill="var(--coral)" opacity="0.7"><animate attributeName="r" values="8;12;8" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="220" cy="140" r="12" fill="var(--coral)" opacity="0.85"><animate attributeName="r" values="10;14;10" dur="2.6s" repeatCount="indefinite" begin="0.3s"/></circle>
+        <circle cx="380" cy="100" r="11" fill="var(--coral)" opacity="0.75"><animate attributeName="r" values="9;13;9" dur="3.2s" repeatCount="indefinite" begin="0.6s"/></circle>
+        <circle cx="510" cy="160" r="10" fill="var(--coral)" opacity="0.7"><animate attributeName="r" values="8;12;8" dur="2.8s" repeatCount="indefinite" begin="0.9s"/></circle>
+        <circle cx="160" cy="220" r="9" fill="var(--coral)" opacity="0.6"><animate attributeName="r" values="7;11;7" dur="3.5s" repeatCount="indefinite" begin="0.2s"/></circle>
+        <circle cx="300" cy="240" r="13" fill="var(--coral)" opacity="0.9"><animate attributeName="r" values="11;15;11" dur="2.4s" repeatCount="indefinite" begin="0.5s"/></circle>
+        <circle cx="440" cy="200" r="10" fill="var(--coral)" opacity="0.7"><animate attributeName="r" values="8;12;8" dur="3.1s" repeatCount="indefinite" begin="0.8s"/></circle>
+      </g>
+      <text x="90" y="54" text-anchor="middle" fill="var(--light-text)" font-size="20" font-weight="700" opacity="0.8">memory</text>
+      <text x="220" y="114" text-anchor="middle" fill="var(--light-text)" font-size="20" font-weight="700" opacity="0.8">emotion</text>
+      <text x="380" y="74" text-anchor="middle" fill="var(--light-text)" font-size="20" font-weight="700" opacity="0.8">a dream</text>
+      <text x="510" y="134" text-anchor="middle" fill="var(--light-text)" font-size="20" font-weight="700" opacity="0.8">an insight</text>
+      <text x="160" y="256" text-anchor="middle" fill="var(--light-text)" font-size="20" font-weight="700" opacity="0.8">your body</text>
+      <text x="300" y="278" text-anchor="middle" fill="var(--coral)" font-size="24" font-weight="700" opacity="1">DMN</text>
+      <text x="440" y="232" text-anchor="middle" fill="var(--light-text)" font-size="20" font-weight="700" opacity="0.8">intuition</text>
+    </svg>
+  </div>
+  <aside class="notes"><strong>CUE:</strong> Slow down. The brain isn't resting, it's connecting.<br><br>Your brain holds them, refusing to filter, until a spark catches.</aside>
+</section>
+
+<!-- converge (s25d port) : 14 ghost out, 3 connect and glow -->
+<section class="slide" data-world="light-cool" id="converge">
+  <div class="slide-inner slide-content full-center" style="gap:0;position:relative;">
+    <div class="fragments-float">
+      <span class="frag-pill to-ghost lg" style="top:4%;right:18%;animation-delay:0.3s;">a user interview</span>
+      <span class="frag-pill to-ghost" style="top:8%;right:58%;animation-delay:0.5s;">a gut feeling</span>
+      <span class="frag-pill to-ghost sm" style="top:2%;right:82%;animation-delay:0.2s;">the data</span>
+      <span class="frag-pill to-ghost" style="top:18%;right:5%;animation-delay:0.6s;">a hallway comment</span>
+      <span class="frag-pill to-glow lg" style="top:22%;right:38%;animation-delay:0.9s;">a childhood memory</span>
+      <span class="frag-pill to-ghost" style="top:16%;right:72%;animation-delay:0.4s;">this morning's fight</span>
+      <span class="frag-pill to-ghost sm" style="top:35%;right:12%;animation-delay:0.7s;">a Figma frame</span>
+      <span class="frag-pill to-glow lg" style="top:38%;right:52%;animation-delay:1.0s;">a line from an interview</span>
+      <span class="frag-pill to-ghost" style="top:32%;right:82%;animation-delay:0.35s;">research</span>
+      <span class="frag-pill to-ghost sm" style="top:50%;right:25%;animation-delay:0.55s;">your personal life</span>
+      <span class="frag-pill to-ghost" style="top:52%;right:60%;animation-delay:0.45s;">an old wound</span>
+      <span class="frag-pill to-ghost sm" style="top:48%;right:74%;animation-delay:0.65s;">something from 5 years ago</span>
+      <span class="frag-pill to-ghost" style="top:65%;right:8%;animation-delay:0.25s;">a dream</span>
+      <span class="frag-pill to-glow lg" style="top:68%;right:42%;animation-delay:1.1s;">another product</span>
+      <span class="frag-pill to-ghost" style="top:62%;right:72%;animation-delay:0.5s;">intuition</span>
+      <span class="frag-pill to-ghost sm" style="top:78%;right:28%;animation-delay:0.4s;">an insight</span>
+      <span class="frag-pill to-ghost" style="top:80%;right:58%;animation-delay:0.55s;">your nervous system</span>
+    </div>
+    <div class="t-large center" style="margin-top:10px;position:relative;z-index:5;max-width:780px;">Three distant things connect. <span class="coral">That's innovation.</span></div>
+  </div>
+  <aside class="notes"><strong>CUE:</strong> The three light up. Hold on the connection.<br><br>Wild association. Connecting three things with absolutely no business being together, because in your inner world it makes sense. That's innovation. You have to sit in the ambiguity for that to happen.</aside>
 </section>
 
 <!-- creative-leap -->
@@ -2082,7 +2189,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-huge" style="max-width:880px;">A creative leap is the exact opposite of <span class="coral">the average.</span></div>
   </div>
-  <aside class="notes">A creative leap is the exact opposite of the average.</aside>
+  <aside class="notes"><strong>CUE:</strong> One line. Let it ring out. A beat before you move on.<br><br>A creative leap is the exact opposite of the average.</aside>
 </section>
 
 <!-- deviation : the coral statement -->
@@ -2090,7 +2197,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-mega" style="color:#fff;">Your deviation<br>is your leverage.</div>
   </div>
-  <aside class="notes">In a world of autocompleted averages, your deviation is your leverage.</aside>
+  <aside class="notes"><strong>CUE:</strong> Coral slide, full conviction. This is a banner line, sell it to the room.<br><br>In a world of autocompleted averages, your deviation is your leverage.</aside>
 </section>
 
 <!-- adv2 -->
@@ -2100,7 +2207,7 @@ body.blacked-out::after {
     <div class="t-mega">What's never said.</div>
     <div class="t-medium muted mt-md">Subtext. Intuition. A nervous system.</div>
   </div>
-  <aside class="notes">The other thing that's not in the data set is what's never said.<br><br>We understand subtext. We have intuition. We have a nervous system. We know stuff that doesn't exist in the data set.</aside>
+  <aside class="notes"><strong>CUE:</strong> Section marker two. Then build the list: subtext, intuition, a nervous system.<br><br>The other thing that's not in the data set is what's never said.<br><br>We understand subtext. We have intuition. We have a nervous system. We know things that don't exist in the data set.</aside>
 </section>
 
 <!-- know-more : (reuse s43) -->
@@ -2108,7 +2215,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-mega">We know more<br>than we can say.</div>
   </div>
-  <aside class="notes">Think about it for a second.</aside>
+  <aside class="notes"><strong>CUE:</strong> Slow right down. Let the line breathe, then give the real examples.<br><br>We know more than we can say. Think about it for a second.</aside>
 </section>
 
 <!-- body-examples : (reuse s44, generalized) -->
@@ -2118,7 +2225,7 @@ body.blacked-out::after {
     <div class="bex"><span class="bex-dot"></span><span class="t-large">You ride a bike <span class="muted">— and can't explain how.</span></span></div>
     <div class="bex"><span class="bex-dot"></span><span class="t-large">You walk into a room and know something's wrong <span class="muted">— before a word is said.</span></span></div>
   </div>
-  <aside class="notes">You can find one friend's face in a crowd of a thousand and never explain why.<br><br>You can ride a bike and you don't really understand how — your body just remembers.<br><br>You can walk into a room and know something's wrong before a single word is said. You just feel the room.</aside>
+  <aside class="notes"><strong>CUE:</strong> Let each example land on its own. These are felt, not argued. Slight pause between them.<br><br>You can find one friend's face in a crowd of a thousand and never explain why.<br><br>You can ride a bike and not really understand how. Your body just remembers.<br><br>You can walk into a room and know something's wrong before a single word is said. You just feel the room.</aside>
 </section>
 
 <!-- in-your-body -->
@@ -2163,18 +2270,21 @@ body.blacked-out::after {
       </div>
     </div>
   </div>
-  <aside class="notes">That knowing isn't in any data set. It's in your body — built over a whole life of paying attention, of being a person in the world, of having a nervous system programmed to survive.<br><br>No one can fully write it down, not even you. And you cannot feed the AI what you cannot put into data.</aside>
+  <aside class="notes"><strong>CUE:</strong> Let the figure land, one beat, before you speak. Hand to your chest on "your body."<br><br>That knowing isn't in any data set. It's in your body, built over a whole life of paying attention, of being a person in the world, of having a nervous system wired to survive.<br><br>No one can fully write it down, not even you. And you cannot feed the AI what you cannot put into data.</aside>
 </section>
 
 <!-- you-are-everything : PLANT — the best line -->
 <section class="slide" data-world="void" id="you-are-everything">
   <div class="unwritten-field" aria-hidden="true"><div class="uf-stream" id="ufStream"></div></div>
   <div class="uf-glow" aria-hidden="true"></div>
-  <div class="slide-inner slide-content anim-scale full-center gap-md">
-    <div class="t-large muted" style="max-width:860px;">AI has read everything ever written — and never once stayed up past midnight building something nobody asked for.</div>
-    <div class="t-huge" style="max-width:900px;">It knows everything that was written down.<br><span class="coral you-line">You are everything that <span class="kpunch">wasn't.</span></span></div>
+  <div class="slide-inner slide-content full-center yae-wrap">
+    <p class="yae-kicker">AI has read everything ever written — and never once stayed up past midnight building something nobody asked for.</p>
+    <div class="yae-anti">
+      <p class="yae-known">It knows everything that <span class="yae-was">was</span> written down.</p>
+      <p class="yae-you">You are everything that <span class="kpunch">wasn't.</span></p>
+    </div>
   </div>
-  <aside class="notes"><em>[ Plant — feet still ]</em><br><br>AI has read everything ever written, and never once stayed up past midnight building something nobody asked for.<br><br>It knows everything that was written down. You are everything that wasn't.</aside>
+  <aside class="notes"><strong>CUE:</strong> Plant, feet still. This is the best line. Land "wasn't" as the word punches in, then hold the silence.<br><br>AI has read everything ever written, and never once stayed up past midnight building something nobody asked for.<br><br>It knows everything that was written down. You are everything that wasn't.</aside>
 </section>
 
 <!-- ═══════════════ MOVEMENT 6 — THE WARNING ═══════════════ -->
@@ -2185,7 +2295,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-fade full-center">
     <div class="t-medium muted" style="max-width:720px;">Back to the bluish light of the bedroom. The broken website. The green text. The misspelled witch.</div>
   </div>
-  <aside class="notes">Back to the bluish light of the bedroom, that broken website, the green text, the misspelled witch.<br><br>That wasn't the warm-up before my career.</aside>
+  <aside class="notes"><strong>CUE:</strong> Return to the opening image. Quieter, reflective. This sets up "the most alive."<br><br>Back to the bluish light of the bedroom, that broken website, the green text, the misspelled witch.<br><br>That wasn't the warm-up before my career.</aside>
 </section>
 
 <!-- most-alive -->
@@ -2194,7 +2304,7 @@ body.blacked-out::after {
     <div class="t-medium muted">Not the most impressive. Not the most strategic.</div>
     <div class="t-mega coral mt-sm">The most alive.</div>
   </div>
-  <aside class="notes">In some ways, that was the purest version of my creativity. Not the most impressive. Not the most strategic. Definitely not the best designed.<br><br>But the most alive.</aside>
+  <aside class="notes"><strong>CUE:</strong> Build the "not, not, not," then turn on "but the most alive." Let "alive" warm up.<br><br>In some ways, that was the purest version of my creativity. Not the most impressive. Not the most strategic. Definitely not the best designed.<br><br>But the most alive.</aside>
 </section>
 
 <!-- because-bored -->
@@ -2202,7 +2312,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-fade full-center">
     <div class="t-large" style="max-width:840px;">I could follow the spark that far<br>because I was lonely. I was bored.<br><span class="coral">There was no instant escape — so I had to stay.</span></div>
   </div>
-  <aside class="notes">I was just following a weird little spark far enough to see what is possible.<br><br>And I could follow it that far because I was lonely. I was bored. There was no instant escape, so I had to stay. I had to sit in the friction of it. I had to build something to survive it.</aside>
+  <aside class="notes"><strong>CUE:</strong> Reframe boredom and loneliness as the gift. Honest, not nostalgic.<br><br>I was just following a weird little spark far enough to see what is possible.<br><br>And I could follow it that far because I was lonely. I was bored. There was no instant escape, so I had to stay. I had to sit in the friction of it. I had to build something to survive it.</aside>
 </section>
 
 <!-- autocomplete-loneliness -->
@@ -2210,7 +2320,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-large" style="max-width:880px;">Hand that 11-year-old a screen to autocomplete her loneliness —<br><span class="coral">and the fan site never exists.</span></div>
   </div>
-  <aside class="notes">If someone had walked into my bedroom 22 years ago and handed me a screen to autocomplete my loneliness, that fan site would have never existed.</aside>
+  <aside class="notes"><strong>CUE:</strong> The counterfactual. Slow on "the fan site never exists." This is the hinge of the warning.<br><br>If someone had walked into my bedroom 22 years ago and handed me a screen to autocomplete my loneliness, that fan site would never have existed.</aside>
 </section>
 
 <!-- let-it -->
@@ -2219,7 +2329,7 @@ body.blacked-out::after {
     <div class="t-huge">Technology will take<br>some of what you do.</div>
     <div class="t-mega coral mt-sm">Let it.</div>
   </div>
-  <aside class="notes">Technology is going to take some of what you do. Let it. It's welcome to them.<br><br>That is not the scary part.</aside>
+  <aside class="notes"><strong>CUE:</strong> Generous and unafraid. "Let it" is permission. Then turn: "that is not the scary part."<br><br>Technology is going to take some of what you do. Let it. It's welcome to them.<br><br>That is not the scary part.</aside>
 </section>
 
 <!-- becoming -->
@@ -2228,7 +2338,7 @@ body.blacked-out::after {
     <div class="t-large muted">The scary part is what we are willingly becoming.</div>
     <div class="t-huge mt-md" style="max-width:880px;">AI-average<br><span class="coral">flattening machines.</span></div>
   </div>
-  <aside class="notes">The scary part is what we are willingly becoming.<br><br>We are actually becoming AI-average flattening machines.</aside>
+  <aside class="notes"><strong>CUE:</strong> "Willingly" carries the weight. Land the title phrase hard and clear.<br><br>The scary part is what we are willingly becoming.<br><br>We are actually becoming AI-average flattening machines.</aside>
 </section>
 
 <!-- kids : the gut-punch -->
@@ -2237,7 +2347,7 @@ body.blacked-out::after {
     <div class="t-huge" style="max-width:900px;">We are teaching our kids<br>the same move.</div>
     <div class="t-medium muted mt-md">The second curiosity appears<span class="kcursor"></span> <span class="ghost">we autocomplete it.</span></div>
   </div>
-  <aside class="notes">And the part that keeps me awake at night is this:<br><br>We are teaching our kids the same move. We are building them a world where no one ever has to sit in the quiet.<br><br>The second boredom appears, we fill it. The second sadness appears, we solve it. The second curiosity appears, we autocomplete it.</aside>
+  <aside class="notes"><strong>CUE:</strong> The most serious moment of the talk. Slow and low. Build the "the second X, we Y" list, do not rush it.<br><br>And the part that keeps me awake at night is this:<br><br>We are teaching our kids the same move. We are building them a world where no one ever has to sit in the quiet.<br><br>The second boredom appears, we fill it. The second sadness appears, we solve it. The second curiosity appears, we autocomplete it.</aside>
 </section>
 
 <!-- friction -->
@@ -2245,7 +2355,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-mega">Identity forms<br>in <span class="coral">friction.</span></div>
   </div>
-  <aside class="notes">But identity forms in friction.<br><br>A child becomes someone by staying with the hard thing long enough to discover what rises inside them.</aside>
+  <aside class="notes"><strong>CUE:</strong> State the principle clearly and firmly. "Friction" is the keyword, lean on it.<br><br>But identity forms in friction.<br><br>A child becomes someone by staying with the hard thing long enough to discover what rises inside them.</aside>
 </section>
 
 <!-- autocomplete-self -->
@@ -2253,7 +2363,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content full-center">
     <div class="t-large" style="max-width:880px;">Autocomplete every uncomfortable moment, and you may autocomplete the very place where <span class="coral">a self is supposed to form.</span></div>
   </div>
-  <aside class="notes">If we autocomplete every uncomfortable moment, we may also autocomplete the very place where a self is supposed to form.<br><br>And when a person loses access to that place, of course they start to feel replaceable.</aside>
+  <aside class="notes"><strong>CUE:</strong> Connect the dots to "replaceable." Compassion, not a lecture.<br><br>If we autocomplete every uncomfortable moment, we may also autocomplete the very place where a self is supposed to form.<br><br>And when a person loses access to that place, of course they start to feel replaceable.</aside>
 </section>
 
 <!-- ═══════════════ MOVEMENT 7 — THE CLOSE ═══════════════ -->
@@ -2263,7 +2373,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-huge" style="max-width:900px;">The machine can never take<br><span class="coral">who you are.</span></div>
   </div>
-  <aside class="notes">But let me tell you this: the machine can never take who you are.</aside>
+  <aside class="notes"><strong>CUE:</strong> Turn back to hope and warmth. Speak directly to the room. Reassuring.<br><br>But let me tell you this: the machine can never take who you are.</aside>
 </section>
 
 <!-- they-hire-this : (reuse s65) -->
@@ -2274,7 +2384,7 @@ body.blacked-out::after {
     <div class="t-mega coral mt-sm">They hire this.</div>
     <div class="t-medium mt-md" style="max-width:760px;">Your weird associations. Your gut. Your clumsy way of seeing a problem. The deviation the average can never reach.</div>
   </div>
-  <aside class="notes">Remember what every leader asks me? Who do we hire now?<br><br>They hire this. Your weird associations, your gut, your clumsy way of seeing a problem. The deviation the average can never ever reach.</aside>
+  <aside class="notes"><strong>CUE:</strong> Callback to the hiring question. Build energy. On "they hire this," point out at them.<br><br>Remember what every leader asks me? Who do we hire now?<br><br>They hire this. Your weird associations, your gut, your clumsy way of seeing a problem. The deviation the average can never reach.</aside>
 </section>
 
 <!-- dont-give-away : PLANT — coral, held -->
@@ -2282,7 +2392,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-viewport" style="color:#fff;font-size:clamp(3.5rem,14vw,12rem);">Don't give<br>that away.</div>
   </div>
-  <aside class="notes"><em>[ Plant — feet still ]</em><br><br>Don't give that away.<br><br>You don't find who you are by reading about who you are. You find it by staying in the room when you don't know how to stay. By holding a beat.<br><br><em>Ambiguity is the door; yourself is what walks through it.</em></aside>
+  <aside class="notes"><strong>CUE:</strong> Plant, feet still. A direct command. Slow the closing image: the door, walking through it.<br><br>Don't give that away.<br><br>You don't find who you are by reading about who you are. You find it by staying in the room when you don't know how to stay. By holding a beat.<br><br>Ambiguity is the door. Yourself is what walks through it.</aside>
 </section>
 
 <!-- next-time -->
@@ -2292,7 +2402,7 @@ body.blacked-out::after {
     <div class="t-mega coral mt-sm">don't. Stay.</div>
     <div class="t-medium mt-md" style="max-width:680px;">Write the first line yourself. Let it be bad — but let it come from your nervous system, not from a data set.</div>
   </div>
-  <aside class="notes">Next time you're in the gap in front of a blank screen — writing an email, a message to your team — or next time you feel something towards someone you love that you have no words for yet, and your hand goes for the chatbot…<br><br>don't. Stay. Write the first line yourself. Let it be bad, but let it come from your nervous system, not from a data set.</aside>
+  <aside class="notes"><strong>CUE:</strong> The practical takeaway. Make it concrete and personal. "Don't. Stay." very deliberate.<br><br>Next time you're in the gap in front of a blank screen, writing an email, a message to your team, or next time you feel something toward someone you love that you have no words for yet, and your hand goes for the chatbot,<br><br>don't. Stay. Write the first line yourself. Let it be bad, but let it come from your nervous system, not from a data set.</aside>
 </section>
 
 <!-- wander -->
@@ -2301,7 +2411,7 @@ body.blacked-out::after {
     <div class="t-huge">Go waste an afternoon.<br>Go wander.</div>
     <div class="t-medium muted mt-md" style="max-width:720px;">Let the "not knowing" be a little longer than you can stand.</div>
   </div>
-  <aside class="notes">Go waste an afternoon. Go wander. Go let the "not knowing" be a little bit longer than you can stand.</aside>
+  <aside class="notes"><strong>CUE:</strong> Lighten, almost playful permission. Smile. A breath before the close.<br><br>Go waste an afternoon. Go wander. Let the "not knowing" be a little longer than you can stand.</aside>
 </section>
 
 <!-- exception : the final beat -->
@@ -2312,7 +2422,7 @@ body.blacked-out::after {
     <div class="coral" style="font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,11vw,9rem);line-height:1;letter-spacing:-0.02em;margin-top:8px;">the exception of one.</div>
     <div class="t-large muted mt-sm">Not the average.</div>
   </div>
-  <aside class="notes">Because that's the only place you were ever the exception of one, and not the average.<br><br><em>[ hold — then thank you ]</em></aside>
+  <aside class="notes"><strong>CUE:</strong> The landing line. Slow, full stop on "the exception of one." Then hold the silence.<br><br>Because that's the only place you were ever the exception of one, and not the average.</aside>
 </section>
 
 <!-- signoff -->
@@ -2320,7 +2430,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content anim-fade full-center">
     <div class="t-hand" style="font-size:clamp(3rem,9vw,7rem);line-height:0.9;">Gal Dulev</div>
   </div>
-  <aside class="notes"><em>Thank you.</em></aside>
+  <aside class="notes"><strong>CUE:</strong> Hold the moment. Then, simply: thank you.<br><br>Thank you.</aside>
 </section>
 
 
