@@ -1725,6 +1725,17 @@ body.blacked-out::after {
   .bs-seam{flex-direction:row;padding:8px 0}
   .bs-seam::before{top:auto;bottom:auto;left:16%;right:16%;width:auto;height:1px;background:linear-gradient(90deg,transparent,rgba(0,0,0,0.14),transparent)}
 }
+/* both-sides: redacted app-name labels make "the tools you opened this morning" unmistakable, with nothing named */
+.bs-app{display:flex;flex-direction:column;align-items:center;gap:10px}
+.bs-app:nth-child(2){transform:translateY(-14px) scale(1.05)}
+.bs-app:nth-child(1) .bs-tile{background:linear-gradient(160deg,#eef6f1,#d8ebe0)}
+.bs-app:nth-child(2) .bs-tile{background:linear-gradient(160deg,#eaecfb,#d6dbf3);box-shadow:0 16px 30px rgba(40,60,100,0.18)}
+.bs-app:nth-child(3) .bs-tile{background:linear-gradient(160deg,#fdefe7,#f8dccc)}
+.bs-name{height:11px;border-radius:3px;background:#2b3140;opacity:0.82}
+.bs-app:nth-child(1) .bs-name{width:56px}
+.bs-app:nth-child(2) .bs-name{width:44px}
+.bs-app:nth-child(3) .bs-name{width:62px}
+.bs-more{align-self:center;font-size:1rem;font-weight:700;color:rgba(40,60,100,0.5)}
 </style>
 </head>
 <body>
@@ -1992,9 +2003,10 @@ body.blacked-out::after {
     <div class="bothsides">
       <div class="bs-panel bs-build">
         <div class="bs-art">
-          <div class="bs-tile"><span class="bs-spark">&#10022;</span><span class="bs-input"></span></div>
-          <div class="bs-tile"><span class="bs-spark">&#10022;</span><span class="bs-input"></span></div>
-          <div class="bs-tile"><span class="bs-spark">&#10022;</span><span class="bs-input"></span></div>
+          <div class="bs-app"><div class="bs-tile"><span class="bs-spark">&#10022;</span><span class="bs-input"></span></div><span class="bs-name"></span></div>
+          <div class="bs-app"><div class="bs-tile"><span class="bs-spark">&#10022;</span><span class="bs-input"></span></div><span class="bs-name"></span></div>
+          <div class="bs-app"><div class="bs-tile"><span class="bs-spark">&#10022;</span><span class="bs-input"></span></div><span class="bs-name"></span></div>
+          <span class="bs-more">+ more</span>
         </div>
         <div class="bs-label">I help build them</div>
         <div class="bs-sub">the tools you opened this morning</div>
