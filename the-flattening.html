@@ -1690,6 +1690,11 @@ body.blacked-out::after {
 #converge.active .to-ghost{ animation: toGhost 1.6s ease-out forwards; }
 #converge.active .to-ghost.sm{ animation: toGhostSm 1.6s ease-out forwards; }
 #converge.active .to-glow{ animation: toGlow 1.6s ease-out forwards; }
+
+/* the-gap: hold on "the gap", then reveal the instruction a beat later (it makes the room wait) */
+#the-gap .gap-hold{ opacity:0; }
+#the-gap.active .gap-hold{ animation: gapHold 0.9s ease 3.2s forwards; }
+@keyframes gapHold{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
 </style>
 </head>
 <body>
@@ -1934,7 +1939,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content full-center">
     <div style="font-family:var(--font-display);font-weight:900;font-size:clamp(2.4rem,7vw,5.5rem);line-height:1.1;min-height:1.2em;">&#8203;<span class="kcursor"></span></div>
     <div class="t-huge mt-md">That spot is <span class="coral">the gap.</span></div>
-    <div class="t-body muted mt-sm" style="max-width:600px;">Stay in it, one beat longer than is comfortable.</div>
+    <div class="t-body muted mt-sm gap-hold" style="max-width:600px;">Stay in it, one beat longer than is comfortable.</div>
   </div>
   <aside class="notes"><strong>CUE:</strong> Let the cursor blink in silence. Make the room feel the blank screen with you.<br><br>Here's the move. You're trying to write an email, or say a hard thing. You hit the spot where the words won't come. The screen sits blank.<br><br>That spot is the gap.</aside>
 </section>
@@ -2180,9 +2185,18 @@ body.blacked-out::after {
       <span class="frag-pill to-ghost sm" style="top:78%;right:28%;animation-delay:0.4s;">an insight</span>
       <span class="frag-pill to-ghost" style="top:80%;right:58%;animation-delay:0.55s;">your nervous system</span>
     </div>
-    <div class="t-large center" style="margin-top:10px;position:relative;z-index:5;max-width:780px;">Three distant things connect. <span class="coral">That's innovation.</span></div>
+    <div class="t-large center" style="margin-top:10px;position:relative;z-index:5;max-width:780px;">Three distant things connect.</div>
   </div>
-  <aside class="notes"><strong>CUE:</strong> The three light up. Hold on the connection.<br><br>Wild association. Connecting three things with absolutely no business being together, because in your inner world it makes sense. That's innovation. You have to sit in the ambiguity for that to happen.</aside>
+  <aside class="notes"><strong>CUE:</strong> The three pills connect as the rest fade. Hold on that connection, then move into the next slide.<br><br>Watch the unrelated ones connect. Three things with no business being together, suddenly linked.</aside>
+</section>
+
+<!-- wild-association (s26 port) : not logic, but wild association -->
+<section class="slide" data-world="light-cool" id="wild-association">
+  <div class="slide-inner slide-content anim-scale full-center">
+    <div class="t-huge"><span class="strike">Logic.</span></div>
+    <div class="t-mega t-hand coral mt-sm">Wild association.</div>
+  </div>
+  <aside class="notes"><strong>CUE:</strong> "Logic" sits struck out; "wild association" is the answer. Use Einstein and Jobs as the proof. End on the real point: this is where AI is weak.<br><br>The biggest creative leaps, Einstein, Steve Jobs, were never logic. They were wild association. Three things with no business being together, suddenly connected. That is what innovation runs on, and it is exactly where AI is weak. Very weak.</aside>
 </section>
 
 <!-- creative-leap -->
