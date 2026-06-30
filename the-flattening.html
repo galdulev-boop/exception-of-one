@@ -1695,6 +1695,36 @@ body.blacked-out::after {
 #the-gap .gap-hold{ opacity:0; }
 #the-gap.active .gap-hold{ animation: gapHold 0.9s ease 3.2s forwards; }
 @keyframes gapHold{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+/* both-sides : two worlds (generic AI tools, no logos | the people), with "me" between */
+.bothsides{display:flex;align-items:stretch;justify-content:center;width:100%;max-width:960px;margin:0 auto;
+  border-radius:24px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);box-shadow:0 22px 60px rgba(40,50,80,0.12)}
+.bs-panel{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:18px;
+  padding:clamp(24px,3.6vw,42px) clamp(14px,2.6vw,30px)}
+.bs-build{background:linear-gradient(165deg,#f4f6fa,#e6eaf2)}
+.bs-human{background:linear-gradient(165deg,#fff4ed,#ffe1d0)}
+.bs-art{display:flex;gap:12px;align-items:flex-end;justify-content:center;min-height:96px}
+.bs-tile{width:78px;height:78px;border-radius:19px;background:#fff;border:1px solid rgba(40,60,100,0.10);
+  box-shadow:0 8px 18px rgba(40,60,100,0.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.bs-tile:nth-child(2){transform:translateY(-14px) scale(1.06);box-shadow:0 16px 30px rgba(40,60,100,0.18)}
+.bs-spark{font-size:26px;color:var(--coral);line-height:1;filter:drop-shadow(0 0 10px var(--coral-glow))}
+.bs-input{width:46px;height:9px;border-radius:6px;background:rgba(40,60,100,0.10);border:1px solid rgba(40,60,100,0.07)}
+.bs-person{display:flex;flex-direction:column;align-items:center}
+.bs-person .head{width:24px;height:24px;border-radius:50%;background:var(--coral);opacity:0.82}
+.bs-person .body{width:42px;height:30px;border-radius:21px 21px 7px 7px;margin-top:5px;background:var(--coral);opacity:0.82}
+.bs-person:nth-child(2){transform:translateY(-14px) scale(1.12)}
+.bs-person:nth-child(2) .head,.bs-person:nth-child(2) .body{opacity:1}
+.bs-label{font-family:var(--font-display);font-weight:900;font-size:clamp(1.05rem,2.1vw,1.55rem);line-height:1.15;text-align:center;color:var(--light-text)}
+.bs-sub{font-size:clamp(.8rem,1.4vw,1rem);opacity:0.58;text-align:center;max-width:230px;line-height:1.4;color:var(--light-text)}
+.bs-seam{display:flex;align-items:center;justify-content:center;background:#fff;padding:0 6px;position:relative}
+.bs-seam::before{content:'';position:absolute;top:16%;bottom:16%;width:1px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.14),transparent)}
+.bs-me{font-family:var(--font-display);font-weight:900;font-size:clamp(.95rem,1.7vw,1.25rem);color:#fff;background:var(--coral);
+  border-radius:100px;padding:9px 17px;box-shadow:0 8px 22px var(--coral-glow);position:relative;z-index:1}
+@media (max-width:760px){
+  .bothsides{flex-direction:column}
+  .bs-seam{flex-direction:row;padding:8px 0}
+  .bs-seam::before{top:auto;bottom:auto;left:16%;right:16%;width:auto;height:1px;background:linear-gradient(90deg,transparent,rgba(0,0,0,0.14),transparent)}
+}
 </style>
 </head>
 <body>
@@ -1944,15 +1974,6 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> Let the cursor blink in silence. Make the room feel the blank screen with you.<br><br>Here's the move. You're trying to write an email, or say a hard thing. You hit the spot where the words won't come. The screen sits blank.<br><br>That spot is the gap.</aside>
 </section>
 
-<!-- stop-hand -->
-<section class="slide" data-world="dark" id="stop-hand">
-  <div class="slide-inner slide-content full-center">
-    <div class="t-mega">Stop your hand.</div>
-    <div class="t-medium muted mt-md" style="max-width:640px;">Stay in the gap, one beat longer than is comfortable. <span class="coral">That is the rep.</span></div>
-  </div>
-  <aside class="notes"><strong>CUE:</strong> Gesture: stop your own hand mid-air. "That is the rep" is the takeaway, set it apart.<br><br>In that exact moment, your hand is already moving toward the machine, the thing that hands you an answer in four seconds so you don't have to feel the discomfort.<br><br>The move is: you don't. You stop your hand. You stay in the gap, one beat longer than is comfortable.<br><br>That is the rep.<br><br>Leave your mind alone in that gap, and it doesn't freeze. It wanders, and it comes back holding something that wasn't there before.</aside>
-</section>
-
 <!-- certainty : PLANT - aphorism, held -->
 <section class="slide" data-world="void" id="certainty">
   <div class="slide-inner slide-content anim-scale full-center gap-md">
@@ -1966,11 +1987,31 @@ body.blacked-out::after {
 
 <!-- both-sides -->
 <section class="slide" data-world="light" id="both-sides">
-  <div class="slide-inner slide-content anim-fade full-center">
-    <div class="t-huge">I sit on both sides<br>of this.</div>
-    <div class="t-medium muted mt-md" style="max-width:680px;">I help build it, with the labs behind the tools you opened this morning. And I coach the leaders trying to understand what kind of human still matters.</div>
+  <div class="slide-inner slide-content full-center" style="gap:0;">
+    <div class="t-huge center" style="margin-bottom:clamp(24px,4.5vh,46px);">I sit on <span class="coral">both sides.</span></div>
+    <div class="bothsides">
+      <div class="bs-panel bs-build">
+        <div class="bs-art">
+          <div class="bs-tile"><span class="bs-spark">&#10022;</span><span class="bs-input"></span></div>
+          <div class="bs-tile"><span class="bs-spark">&#10022;</span><span class="bs-input"></span></div>
+          <div class="bs-tile"><span class="bs-spark">&#10022;</span><span class="bs-input"></span></div>
+        </div>
+        <div class="bs-label">I help build them</div>
+        <div class="bs-sub">the tools you opened this morning</div>
+      </div>
+      <div class="bs-seam"><span class="bs-me">me</span></div>
+      <div class="bs-panel bs-human">
+        <div class="bs-art">
+          <div class="bs-person"><span class="head"></span><span class="body"></span></div>
+          <div class="bs-person"><span class="head"></span><span class="body"></span></div>
+          <div class="bs-person"><span class="head"></span><span class="body"></span></div>
+        </div>
+        <div class="bs-label">I coach the people<br>using them</div>
+        <div class="bs-sub">leaders asking what kind of human still matters</div>
+      </div>
+    </div>
   </div>
-  <aside class="notes"><strong>CUE:</strong> Establish credibility, grounded and level. You help build it and you coach against it.<br><br>I sit on both sides of this. I help build this. I've worked with the labs behind the tools you opened this morning. And I coach the leaders trying to understand what kind of human still matters in a world like this.</aside>
+  <aside class="notes"><strong>CUE:</strong> Gesture left at the tools, right at the people; "me" sits between them. Don't name any brand, let the audience fill in their own.<br><br>I sit on both sides of this. I help build it, I've worked with the labs behind the tools you opened this morning. And I coach the leaders trying to understand what kind of human still matters.</aside>
 </section>
 
 <!-- who-hire -->
@@ -2119,15 +2160,15 @@ body.blacked-out::after {
       <span class="frag-pill sm" style="top:78%;right:28%;">an insight</span>
       <span class="frag-pill" style="top:80%;right:58%;">your nervous system</span>
     </div>
-    <div class="t-large center" style="margin-top:10px;position:relative;z-index:5;max-width:860px;">When you're in <span class="coral">ambiguity</span>, your brain holds unrelated things together in the air.</div>
+    <div class="t-huge center" style="margin-top:6px;position:relative;z-index:5;">All <span class="coral">at once.</span></div>
   </div>
-  <aside class="notes"><strong>CUE:</strong> Gesture wide at the floating mess.<br><br>When you're in ambiguity, your brain holds unrelated things together in the air. A gut feeling, a website you built as a kid, this morning's fight, all held at once.</aside>
+  <aside class="notes"><strong>CUE:</strong> Gesture wide at the floating mess.<br><br>Seventeen things in the air at once, each from a different world. A gut feeling, a website you built as a kid, this morning's fight, all held at the same time.</aside>
 </section>
 
 <!-- dmn (s25c port) : the brain holds unrelated things together -->
 <section class="slide" data-world="light-cool" id="dmn">
   <div class="slide-inner slide-content full-center gap-md">
-    <div class="t-large" style="max-width:740px;">Your brain doesn't rest when you rest.<br><span class="coral">It holds unrelated things together in the air.</span></div>
+    <div class="t-large">Your brain doesn't rest.<br><span class="coral">It connects.</span></div>
     <svg class="dmn-network" viewBox="0 0 600 300" style="width:100%;max-width:680px;margin-top:28px;">
       <defs><filter id="nodeGlow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
       <g class="dmn-edges" stroke="var(--light-text)" stroke-width="1.5" opacity="0.5">
