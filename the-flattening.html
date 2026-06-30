@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Flattening — Gal Dulev</title>
+<title>The Flattening · Gal Dulev</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;700;900&family=Karantina:wght@300;400;700&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
@@ -130,7 +130,7 @@ body::after {
   z-index: 1;
   /* Deliberately NO permanent will-change. Promoting all 56 fixed full-screen
      slides to compositor layers made some GPUs leave a freshly un-hidden slide
-     stale/blank until a reflow (resize/refresh) — the "slides don't load while
+     stale/blank until a reflow (resize/refresh) - the "slides don't load while
      navigating until I refresh" bug. Nav is a cheap opacity toggle; see goToSlide(). */
 }
 .slide.active {
@@ -1480,7 +1480,7 @@ body.blacked-out::after {
 .li-post { text-align: left; }
 .quote-mark { right: auto; left: 60px; }
 
-/* ─── BEIGE WORLD — the professional flattening ─── */
+/* ─── BEIGE WORLD - the professional flattening ─── */
 .slide[data-world="beige"] {
   background: linear-gradient(165deg, #E4DDCF 0%, #D3CBBA 55%, #DCD5C7 100%);
   color: #4a4640;
@@ -1520,7 +1520,7 @@ body.blacked-out::after {
 .ctyping .dots span:nth-child(3){ animation-delay:0.30s; }
 @keyframes ctypeBounce { 0%,60%,100%{ transform:translateY(0); opacity:0.4; } 30%{ transform:translateY(-4px); opacity:1; } }
 
-/* ════════════ KINETIC LAYER — hero-slide motion ════════════ */
+/* ════════════ KINETIC LAYER - hero-slide motion ════════════ */
 /* 1 · Flatline waveform (flattening-title): her voice → dead line */
 .vwave{display:flex;align-items:center;justify-content:center;gap:4px;height:190px;width:min(740px,80vw);margin:0 auto 30px}
 .vbar{width:6px;border-radius:4px;background:var(--coral);transform-origin:center}
@@ -1559,7 +1559,7 @@ body.blacked-out::after {
 .slide.active .ksquash{animation:kSquash 1.6s var(--ease-out) forwards}
 @keyframes kSquash{0%{transform:scaleY(1.05);opacity:.3}100%{transform:scaleY(.8);opacity:1}}
 
-/* ════════════ KINETIC LAYER 2 — Batch 2 ════════════ */
+/* ════════════ KINETIC LAYER 2 - Batch 2 ════════════ */
 /* Revival waveform (exception): the dead flatline springs back to a living signal */
 .vwave.revive{ height:140px; margin-bottom:24px; }
 .vwave.revive .vbar{ background:#4a4642; transform:scaleY(.04); }
@@ -1570,7 +1570,7 @@ body.blacked-out::after {
 @keyframes barRise{ 0%{transform:scaleY(.04);background:#4a4642} 55%{background:var(--coral)} 100%{transform:scaleY(1);background:var(--coral)} }
 @keyframes barEq{ 0%{transform:scaleY(.8)} 100%{transform:scaleY(1.05)} }
 
-/* Drain the flat stretch — the light goes out, slide by slide */
+/* Drain the flat stretch - the light goes out, slide by slide */
 #grew-up{ filter:brightness(.99) saturate(.9); }
 #beige{ filter:brightness(.95) saturate(.8); }
 #lost-her{ filter:brightness(.9) saturate(.72); }
@@ -1593,8 +1593,8 @@ body.blacked-out::after {
 .slide.active .ghost{ animation: ghostIn .55s ease 1.7s forwards; }
 @keyframes ghostIn{ to{opacity:1} }
 
-/* ════════════ KINETIC LAYER 3 — embodied knowing + the unwritten ════════════ */
-/* 6 · Embodied knowing (in-your-body): the outline is all data can trace — the life is inside */
+/* ════════════ KINETIC LAYER 3 - embodied knowing + the unwritten ════════════ */
+/* 6 · Embodied knowing (in-your-body): the outline is all data can trace - the life is inside */
 .bodywrap{display:flex;align-items:center;justify-content:center;gap:clamp(24px,6vw,90px);width:100%}
 .bodyfig{height:clamp(320px,58vh,540px);width:auto;overflow:visible;flex:none}
 .bodytext{max-width:min(600px,48vw);text-align:left}
@@ -1654,7 +1654,7 @@ body.blacked-out::after {
 .yae-you{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5.1rem);
   font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--coral);
   max-width:18em;text-shadow:0 0 42px rgba(255,107,53,.38),0 2px 16px #000}
-/* staged reveal — build to the line, then the last word punches in */
+/* staged reveal - build to the line, then the last word punches in */
 .yae-kicker,.yae-known,.yae-you{opacity:0}
 .slide.active .yae-kicker{animation:yaeRise .85s var(--ease-out) .2s forwards}
 .slide.active .yae-known{animation:yaeRise .85s var(--ease-out) .9s forwards}
@@ -1662,7 +1662,7 @@ body.blacked-out::after {
 @keyframes yaeRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 #you-are-everything.slide.active .kpunch{animation-delay:2.35s}
 
-/* ════════════ KINETIC LAYER 3 — Batch 3 ════════════ */
+/* ════════════ KINETIC LAYER 3 - Batch 3 ════════════ */
 /* op-notif: the notification pings in and buzzes (second-zero dopamine) */
 .notif-badge{ transform-origin:center; }
 .slide.active .notif-badge{ animation: notifPing 1.15s var(--ease-out) .35s both; }
@@ -1686,7 +1686,7 @@ body.blacked-out::after {
 @keyframes bexIn{ to{opacity:1;transform:none} }
 @keyframes bexDot{ 0%{transform:scale(0)} 60%{transform:scale(1.5)} 100%{transform:scale(1)} }
 
-/* Convergence (converge — s25d port): on arrival, 14 ghost out, 3 connect and glow */
+/* Convergence (converge - s25d port): on arrival, 14 ghost out, 3 connect and glow */
 #converge.active .to-ghost{ animation: toGhost 1.6s ease-out forwards; }
 #converge.active .to-ghost.sm{ animation: toGhostSm 1.6s ease-out forwards; }
 #converge.active .to-glow{ animation: toGlow 1.6s ease-out forwards; }
@@ -1721,11 +1721,11 @@ body.blacked-out::after {
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- THE FLATTENING — TED — Gal Dulev                              -->
+<!-- THE FLATTENING - TED - Gal Dulev                              -->
 <!-- Engine + design reused from designaideck.html (Hebrew talk)   -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
-<!-- ═══════════════ MOVEMENT 0 — THE HOOK ═══════════════ -->
+<!-- ═══════════════ MOVEMENT 0 - THE HOOK ═══════════════ -->
 
 <!-- op-notif : a single notification, glowing in the dark -->
 <section class="slide" data-world="void" id="op-notif">
@@ -1738,9 +1738,9 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> Open cold, in the dark. Let the lit notification hang before you speak. Land "that was my fault" lightly, like a confession with a half smile.<br><br>If you've ever opened an app to check a single notification, and looked up 40 minutes later with a numb thumb, a dead battery, and a vague sense of regret, there's a very good chance that that was my fault.<br><br>For over a decade, I've built the apps that capture your attention. In my world, good design removes friction. It's why you use the apps that make your life better, and why you can't put down the ones that make it worse. We call what we do optimization.<br><br>But a few months ago, looking at where AI is taking this next, the researchers I work with and I realized something much bigger is happening. And it scared me. I've started calling it something else.<br><br>But to tell you why, I have to start at midnight, when I was 11.</aside>
 </section>
 
-<!-- [opening hook trimmed to op-notif only — full monologue lives in its notes] -->
+<!-- [opening hook trimmed to op-notif only - full monologue lives in its notes] -->
 
-<!-- ═══════════════ MOVEMENT 1 — THE FAN SITE ═══════════════ -->
+<!-- ═══════════════ MOVEMENT 1 - THE FAN SITE ═══════════════ -->
 
 <!-- mid : Midnight. (reuse of s3) -->
 <section class="slide blue-glow" data-world="dark" id="mid">
@@ -1753,11 +1753,11 @@ body.blacked-out::after {
 
 <!-- shrine : the real screenshot, full bleed -->
 <section class="slide" data-world="dark" id="shrine" style="padding:0;">
-  <img src="fibi.gif" alt="Fibi's Enchanted Home — the fan shrine" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;background:#000;" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#3a0a5a,#000080)';"/>
+  <img src="fibi.gif" alt="Fibi's Enchanted Home, the fan shrine" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;background:#000;" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#3a0a5a,#000080)';"/>
   <aside class="notes"><strong>CUE:</strong> Let the screenshot breathe before you talk. Affectionate and self-deprecating. Land "made for no one" softly.<br><br>A fan site. Actually, let's be honest, a digital shrine. To a witch from a TV show. Phoebe Halliwell from Charmed.<br><br>And look, it looked bad. It was so, so broken. Half the links didn't work, and the colors, I don't even want to talk about the colors. Or the cringe text I wrote there.<br><br>And yeah, I spelled Phoebe F-I-B-I. Because when you're 11, spelling is strictly optional.<br><br>Nobody asked me to build it. There was a real chance no one on earth would ever see it. It was pure, useless play. Made for no one.</aside>
 </section>
 
-<!-- group-chat : a community forms — live retro chatroom (engagement beat) -->
+<!-- group-chat : a community forms - live retro chatroom (engagement beat) -->
 <section class="slide" data-world="dark" id="group-chat">
   <div class="deco-orb blue-center"></div>
   <div class="slide-inner slide-content full-center">
@@ -1779,7 +1779,7 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> Let the messages pop in before you speak. Warm, fond. Hit "the people I would die for today" with full weight.<br><br>And then I did something strange. None of my friends knew Charmed.<br><br>So without a plan, I added a group chat and some interactive parts into that site, years before "social network" meant anything to any of us.<br><br>And that ugly, glitter-soaked corner grew a whole community of misfits.<br><br>Two of my best friends, the ones who've helped me through my worst moments, I met them on that terrible website 22 years ago. The most useless thing I ever made gave me the people I would die for today.</aside>
 </section>
 
-<!-- ═══════════════ MOVEMENT 2 — LOSS OF THE GIRL ═══════════════ -->
+<!-- ═══════════════ MOVEMENT 2 - LOSS OF THE GIRL ═══════════════ -->
 
 <!-- grew-up : world flattens to beige -->
 <section class="slide" data-world="beige" id="grew-up">
@@ -1859,7 +1859,7 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> The realization. Cooler and sharper. Isolate "that algorithm wasn't mine."<br><br>I saw it and I realized: this isn't me. It's not my voice. I hadn't written this post.<br><br>I just ran an algorithm. And that algorithm wasn't mine.<br><br>I had traded my voice to save 30 minutes of thinking.</aside>
 </section>
 
-<!-- ═══════════════ MOVEMENT 3 — GOING FLAT ═══════════════ -->
+<!-- ═══════════════ MOVEMENT 3 - GOING FLAT ═══════════════ -->
 
 <!-- flat -->
 <section class="slide" data-world="beige" id="flat">
@@ -1878,7 +1878,7 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> Take ownership. No blame anywhere. "I gave her away" is the confession.<br><br>I told you I lost that girl who built the fan site.<br><br>Let me be clear about that. Nobody stole her. I gave her away. One easy answer at a time.</aside>
 </section>
 
-<!-- ═══════════════ MOVEMENT 4 — THE FLATTENING ═══════════════ -->
+<!-- ═══════════════ MOVEMENT 4 - THE FLATTENING ═══════════════ -->
 
 <!-- flattening-title : THE reveal -->
 <section class="slide" data-world="void" id="flattening-title">
@@ -1923,7 +1923,7 @@ body.blacked-out::after {
   <div class="deco-orb coral-tl"></div>
   <div class="deco-orb coral-br"></div>
   <div class="slide-inner slide-content anim-scale full-center">
-    <div class="t-tiny" style="letter-spacing:0.18em;text-transform:uppercase;opacity:0.5;margin-bottom:12px;">The cure — and it sounds far too small</div>
+    <div class="t-tiny" style="letter-spacing:0.18em;text-transform:uppercase;opacity:0.5;margin-bottom:12px;">The cure. It sounds far too small</div>
     <div class="t-mega coral">Stay in the<br>ambiguity.</div>
   </div>
   <aside class="notes"><strong>CUE:</strong> This is the thesis. Say it plainly, like it is far too small to matter. Let it land.<br><br>The cure is one thing, and it sounds far too small:<br><br>Stay in the ambiguity.</aside>
@@ -1934,7 +1934,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content full-center">
     <div style="font-family:var(--font-display);font-weight:900;font-size:clamp(2.4rem,7vw,5.5rem);line-height:1.1;min-height:1.2em;">&#8203;<span class="kcursor"></span></div>
     <div class="t-huge mt-md">That spot is <span class="coral">the gap.</span></div>
-    <div class="t-body muted mt-sm" style="max-width:600px;">Stay in it — one beat longer than is comfortable.</div>
+    <div class="t-body muted mt-sm" style="max-width:600px;">Stay in it, one beat longer than is comfortable.</div>
   </div>
   <aside class="notes"><strong>CUE:</strong> Let the cursor blink in silence. Make the room feel the blank screen with you.<br><br>Here's the move. You're trying to write an email, or say a hard thing. You hit the spot where the words won't come. The screen sits blank.<br><br>That spot is the gap.</aside>
 </section>
@@ -1943,12 +1943,12 @@ body.blacked-out::after {
 <section class="slide" data-world="dark" id="stop-hand">
   <div class="slide-inner slide-content full-center">
     <div class="t-mega">Stop your hand.</div>
-    <div class="t-medium muted mt-md" style="max-width:640px;">Stay in the gap — one beat longer than is comfortable. <span class="coral">That is the rep.</span></div>
+    <div class="t-medium muted mt-md" style="max-width:640px;">Stay in the gap, one beat longer than is comfortable. <span class="coral">That is the rep.</span></div>
   </div>
   <aside class="notes"><strong>CUE:</strong> Gesture: stop your own hand mid-air. "That is the rep" is the takeaway, set it apart.<br><br>In that exact moment, your hand is already moving toward the machine, the thing that hands you an answer in four seconds so you don't have to feel the discomfort.<br><br>The move is: you don't. You stop your hand. You stay in the gap, one beat longer than is comfortable.<br><br>That is the rep.<br><br>Leave your mind alone in that gap, and it doesn't freeze. It wanders, and it comes back holding something that wasn't there before.</aside>
 </section>
 
-<!-- certainty : PLANT — aphorism, held -->
+<!-- certainty : PLANT - aphorism, held -->
 <section class="slide" data-world="void" id="certainty">
   <div class="slide-inner slide-content anim-scale full-center gap-md">
     <div class="t-huge muted">Certainty retrieves.</div>
@@ -1957,13 +1957,13 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> Plant, feet still. Deliver the aphorism slowly. Be honest that you fail at this daily.<br><br>Certainty retrieves. Ambiguity creates.<br><br>Staying long enough for your weird, specific self to come back is a muscle. My own muscle atrophied. I practice this badly, daily, catching myself maybe one in five. But every rep makes the gap a little more bearable. Every single rep hands back exactly what the convenience took: the spark, the taste, the aliveness. You get them one held beat at a time.</aside>
 </section>
 
-<!-- ═══════════════ MOVEMENT 5 — THE EXPLAINER ═══════════════ -->
+<!-- ═══════════════ MOVEMENT 5 - THE EXPLAINER ═══════════════ -->
 
 <!-- both-sides -->
 <section class="slide" data-world="light" id="both-sides">
   <div class="slide-inner slide-content anim-fade full-center">
     <div class="t-huge">I sit on both sides<br>of this.</div>
-    <div class="t-medium muted mt-md" style="max-width:680px;">I help build it — with the labs behind the tools you opened this morning. And I coach the leaders trying to understand what kind of human still matters.</div>
+    <div class="t-medium muted mt-md" style="max-width:680px;">I help build it, with the labs behind the tools you opened this morning. And I coach the leaders trying to understand what kind of human still matters.</div>
   </div>
   <aside class="notes"><strong>CUE:</strong> Establish credibility, grounded and level. You help build it and you coach against it.<br><br>I sit on both sides of this. I help build this. I've worked with the labs behind the tools you opened this morning. And I coach the leaders trying to understand what kind of human still matters in a world like this.</aside>
 </section>
@@ -1994,7 +1994,7 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> Intrigue, lower the voice. This sets up the bell-curve explanation.<br><br>AI has a wall. I stood right by it.<br><br>It's what brought back that eleven-year-old girl.</aside>
 </section>
 
-<!-- likely : "AI is king of the average" — bell curve (matches designaideck s22) -->
+<!-- likely : "AI is king of the average" - bell curve (matches designaideck s22) -->
 <section class="slide" data-world="light" id="likely">
   <div class="slide-inner slide-content full-center gap-lg">
     <div class="t-body muted" style="margin-bottom:-16px;">What I learned from the people who build these models:</div>
@@ -2024,7 +2024,7 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> Teach it simply. As you say "average," the AI marker drops onto the peak. Set up the deviation.<br><br>The basis for everything is one understanding of how AI works.<br><br>Most AI systems are designed to predict what is likely: the likely next word, the likely answer, the likely version of a thought. It's built to hit the average.<br><br>And that is unbelievably powerful. But the likely answer is not always the right answer. Innovation, subtext, a great experience, that is not the average. That is the deviation.</aside>
 </section>
 
-<!-- floor : "Innovation is standard deviation" — bell curve, you in the tails (matches designaideck s23) -->
+<!-- floor : "Innovation is standard deviation" - bell curve, you in the tails (matches designaideck s23) -->
 <section class="slide" data-world="light" id="floor">
   <div class="slide-inner slide-content full-center gap-lg">
     <div class="t-huge">Innovation is<br><span class="coral">standard deviation.</span></div>
@@ -2077,7 +2077,7 @@ body.blacked-out::after {
   <span class="frag-pill sm" style="position:absolute;top:10%;right:18%;opacity:0.09;transform:rotate(-4deg);">the data</span>
   <span class="frag-pill sm" style="position:absolute;top:20%;right:78%;opacity:0.07;transform:rotate(6deg);">another product</span>
   <span class="frag-pill sm" style="position:absolute;top:74%;right:12%;opacity:0.06;transform:rotate(-8deg);">this morning's fight</span>
-  <span class="frag-pill sm" style="position:absolute;top:68%;right:72%;opacity:0.08;transform:rotate(3deg);">a Figma frame</span>
+  <span class="frag-pill sm" style="position:absolute;top:68%;right:72%;opacity:0.08;transform:rotate(3deg);">client asks</span>
   <span class="frag-pill sm" style="position:absolute;top:30%;right:80%;opacity:0.06;transform:rotate(-5deg);">an insight</span>
   <span class="frag-pill sm" style="position:absolute;top:82%;right:50%;opacity:0.07;transform:rotate(7deg);">a dream</span>
   <span class="frag-pill sm" style="position:absolute;top:16%;right:48%;opacity:0.05;transform:rotate(2deg);">a memory</span>
@@ -2114,8 +2114,9 @@ body.blacked-out::after {
       <span class="frag-pill sm" style="top:78%;right:28%;">an insight</span>
       <span class="frag-pill" style="top:80%;right:58%;">your nervous system</span>
     </div>
+    <div class="t-large center" style="margin-top:10px;position:relative;z-index:5;max-width:860px;">When you're in <span class="coral">ambiguity</span>, your brain holds unrelated things together in the air.</div>
   </div>
-  <aside class="notes"><strong>CUE:</strong> Gesture wide at the floating mess.<br><br>Seventeen balls in the air at once. A gut feeling, a memory, a tiny childhood detail. Each one from a different world.</aside>
+  <aside class="notes"><strong>CUE:</strong> Gesture wide at the floating mess.<br><br>When you're in ambiguity, your brain holds unrelated things together in the air. A gut feeling, a website you built as a kid, this morning's fight, all held at once.</aside>
 </section>
 
 <!-- dmn (s25c port) : the brain holds unrelated things together -->
@@ -2161,14 +2162,14 @@ body.blacked-out::after {
 <section class="slide" data-world="light-cool" id="converge">
   <div class="slide-inner slide-content full-center" style="gap:0;position:relative;">
     <div class="fragments-float">
-      <span class="frag-pill to-ghost lg" style="top:4%;right:18%;animation-delay:0.3s;">a user interview</span>
+      <span class="frag-pill to-ghost lg" style="top:4%;right:18%;animation-delay:0.3s;">trauma</span>
       <span class="frag-pill to-ghost" style="top:8%;right:58%;animation-delay:0.5s;">a gut feeling</span>
       <span class="frag-pill to-ghost sm" style="top:2%;right:82%;animation-delay:0.2s;">the data</span>
       <span class="frag-pill to-ghost" style="top:18%;right:5%;animation-delay:0.6s;">a hallway comment</span>
       <span class="frag-pill to-glow lg" style="top:22%;right:38%;animation-delay:0.9s;">a childhood memory</span>
       <span class="frag-pill to-ghost" style="top:16%;right:72%;animation-delay:0.4s;">this morning's fight</span>
-      <span class="frag-pill to-ghost sm" style="top:35%;right:12%;animation-delay:0.7s;">a Figma frame</span>
-      <span class="frag-pill to-glow lg" style="top:38%;right:52%;animation-delay:1.0s;">a line from an interview</span>
+      <span class="frag-pill to-ghost sm" style="top:35%;right:8%;animation-delay:0.7s;">a website you built when you were a kid</span>
+      <span class="frag-pill to-glow lg" style="top:38%;right:52%;animation-delay:1.0s;">client asks</span>
       <span class="frag-pill to-ghost" style="top:32%;right:82%;animation-delay:0.35s;">research</span>
       <span class="frag-pill to-ghost sm" style="top:50%;right:25%;animation-delay:0.55s;">your personal life</span>
       <span class="frag-pill to-ghost" style="top:52%;right:60%;animation-delay:0.45s;">an old wound</span>
@@ -2221,9 +2222,9 @@ body.blacked-out::after {
 <!-- body-examples : (reuse s44, generalized) -->
 <section class="slide" data-world="light" id="body-examples">
   <div class="slide-inner slide-content full-center body-list gap-md" style="max-width:940px;">
-    <div class="bex"><span class="bex-dot"></span><span class="t-large">You find one face in a crowd of a thousand <span class="muted">— and can't explain how.</span></span></div>
-    <div class="bex"><span class="bex-dot"></span><span class="t-large">You ride a bike <span class="muted">— and can't explain how.</span></span></div>
-    <div class="bex"><span class="bex-dot"></span><span class="t-large">You walk into a room and know something's wrong <span class="muted">— before a word is said.</span></span></div>
+    <div class="bex"><span class="bex-dot"></span><span class="t-large">You find one face in a crowd of a thousand. <span class="muted">Can't explain how.</span></span></div>
+    <div class="bex"><span class="bex-dot"></span><span class="t-large">You ride a bike. <span class="muted">Can't explain how.</span></span></div>
+    <div class="bex"><span class="bex-dot"></span><span class="t-large">You walk into a room and know something's wrong. <span class="muted">Before a word is said.</span></span></div>
   </div>
   <aside class="notes"><strong>CUE:</strong> Let each example land on its own. These are felt, not argued. Slight pause between them.<br><br>You can find one friend's face in a crowd of a thousand and never explain why.<br><br>You can ride a bike and not really understand how. Your body just remembers.<br><br>You can walk into a room and know something's wrong before a single word is said. You just feel the room.</aside>
 </section>
@@ -2266,19 +2267,19 @@ body.blacked-out::after {
       </svg>
       <div class="bodytext">
         <div class="t-large">That knowing isn't in any data set.<br>It's in <span class="coral">your body.</span></div>
-        <div class="t-medium muted mt-md">No one can write it down — not even you. And you cannot feed the AI what you cannot put into data.</div>
+        <div class="t-medium muted mt-md">No one can write it down, not even you. And you cannot feed the AI what you cannot put into data.</div>
       </div>
     </div>
   </div>
   <aside class="notes"><strong>CUE:</strong> Let the figure land, one beat, before you speak. Hand to your chest on "your body."<br><br>That knowing isn't in any data set. It's in your body, built over a whole life of paying attention, of being a person in the world, of having a nervous system wired to survive.<br><br>No one can fully write it down, not even you. And you cannot feed the AI what you cannot put into data.</aside>
 </section>
 
-<!-- you-are-everything : PLANT — the best line -->
+<!-- you-are-everything : PLANT - the best line -->
 <section class="slide" data-world="void" id="you-are-everything">
   <div class="unwritten-field" aria-hidden="true"><div class="uf-stream" id="ufStream"></div></div>
   <div class="uf-glow" aria-hidden="true"></div>
   <div class="slide-inner slide-content full-center yae-wrap">
-    <p class="yae-kicker">AI has read everything ever written — and never once stayed up past midnight building something nobody asked for.</p>
+    <p class="yae-kicker">AI has read everything ever written, and never once stayed up past midnight building something nobody asked for.</p>
     <div class="yae-anti">
       <p class="yae-known">It knows everything that <span class="yae-was">was</span> written down.</p>
       <p class="yae-you">You are everything that <span class="kpunch">wasn't.</span></p>
@@ -2287,7 +2288,7 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> Plant, feet still. This is the best line. Land "wasn't" as the word punches in, then hold the silence.<br><br>AI has read everything ever written, and never once stayed up past midnight building something nobody asked for.<br><br>It knows everything that was written down. You are everything that wasn't.</aside>
 </section>
 
-<!-- ═══════════════ MOVEMENT 6 — THE WARNING ═══════════════ -->
+<!-- ═══════════════ MOVEMENT 6 - THE WARNING ═══════════════ -->
 
 <!-- back-to-bedroom -->
 <section class="slide blue-glow" data-world="dark" id="back-to-bedroom">
@@ -2310,7 +2311,7 @@ body.blacked-out::after {
 <!-- because-bored -->
 <section class="slide" data-world="dark" id="because-bored">
   <div class="slide-inner slide-content anim-fade full-center">
-    <div class="t-large" style="max-width:840px;">I could follow the spark that far<br>because I was lonely. I was bored.<br><span class="coral">There was no instant escape — so I had to stay.</span></div>
+    <div class="t-large" style="max-width:840px;">I could follow the spark that far<br>because I was lonely. I was bored.<br><span class="coral">There was no instant escape, so I had to stay.</span></div>
   </div>
   <aside class="notes"><strong>CUE:</strong> Reframe boredom and loneliness as the gift. Honest, not nostalgic.<br><br>I was just following a weird little spark far enough to see what is possible.<br><br>And I could follow it that far because I was lonely. I was bored. There was no instant escape, so I had to stay. I had to sit in the friction of it. I had to build something to survive it.</aside>
 </section>
@@ -2318,7 +2319,7 @@ body.blacked-out::after {
 <!-- autocomplete-loneliness -->
 <section class="slide" data-world="dark" id="autocomplete-loneliness">
   <div class="slide-inner slide-content anim-scale full-center">
-    <div class="t-large" style="max-width:880px;">Hand that 11-year-old a screen to autocomplete her loneliness —<br><span class="coral">and the fan site never exists.</span></div>
+    <div class="t-large" style="max-width:880px;">Hand that 11-year-old a screen to autocomplete her loneliness,<br><span class="coral">and the fan site never exists.</span></div>
   </div>
   <aside class="notes"><strong>CUE:</strong> The counterfactual. Slow on "the fan site never exists." This is the hinge of the warning.<br><br>If someone had walked into my bedroom 22 years ago and handed me a screen to autocomplete my loneliness, that fan site would never have existed.</aside>
 </section>
@@ -2366,7 +2367,7 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> Connect the dots to "replaceable." Compassion, not a lecture.<br><br>If we autocomplete every uncomfortable moment, we may also autocomplete the very place where a self is supposed to form.<br><br>And when a person loses access to that place, of course they start to feel replaceable.</aside>
 </section>
 
-<!-- ═══════════════ MOVEMENT 7 — THE CLOSE ═══════════════ -->
+<!-- ═══════════════ MOVEMENT 7 - THE CLOSE ═══════════════ -->
 
 <!-- cant-take -->
 <section class="slide" data-world="light-warm" id="cant-take">
@@ -2387,7 +2388,7 @@ body.blacked-out::after {
   <aside class="notes"><strong>CUE:</strong> Callback to the hiring question. Build energy. On "they hire this," point out at them.<br><br>Remember what every leader asks me? Who do we hire now?<br><br>They hire this. Your weird associations, your gut, your clumsy way of seeing a problem. The deviation the average can never reach.</aside>
 </section>
 
-<!-- dont-give-away : PLANT — coral, held -->
+<!-- dont-give-away : PLANT - coral, held -->
 <section class="slide" data-world="coral" id="dont-give-away">
   <div class="slide-inner slide-content anim-scale full-center">
     <div class="t-viewport" style="color:#fff;font-size:clamp(3.5rem,14vw,12rem);">Don't give<br>that away.</div>
@@ -2400,7 +2401,7 @@ body.blacked-out::after {
   <div class="slide-inner slide-content full-center">
     <div class="t-medium muted" style="max-width:720px;">Next time your hand goes for the chatbot…</div>
     <div class="t-mega coral mt-sm">don't. Stay.</div>
-    <div class="t-medium mt-md" style="max-width:680px;">Write the first line yourself. Let it be bad — but let it come from your nervous system, not from a data set.</div>
+    <div class="t-medium mt-md" style="max-width:680px;">Write the first line yourself. Let it be bad, but let it come from your nervous system, not from a data set.</div>
   </div>
   <aside class="notes"><strong>CUE:</strong> The practical takeaway. Make it concrete and personal. "Don't. Stay." very deliberate.<br><br>Next time you're in the gap in front of a blank screen, writing an email, a message to your team, or next time you feel something toward someone you love that you have no words for yet, and your hand goes for the chatbot,<br><br>don't. Stay. Write the first line yourself. Let it be bad, but let it come from your nervous system, not from a data set.</aside>
 </section>
@@ -2833,7 +2834,7 @@ window.addEventListener('hashchange', () => {
 
 <script>
 /* Fill the "everything written" field (you-are-everything): a dense, faint, deterministic
-   token field — no RNG, stable run to run. The you-shaped void (CSS radial mask) carves the
+   token field - no RNG, stable run to run. The you-shaped void (CSS radial mask) carves the
    center clear so the line lands in the absence. */
 (function(){
   var el = document.getElementById('ufStream'); if (!el) return;
